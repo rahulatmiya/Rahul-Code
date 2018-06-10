@@ -1,0 +1,115 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace System;
+using namespace std;
+using namespace System::Threading;
+struct Sprite{
+    int x;
+    int y;
+    char sym;
+};
+
+enum Bounds { MINX = 2, MAXX = 80, MINY = 2, MAXY = 40 };
+void print(Sprite* p);
+void read(Sprite *p);
+void init(Sprite *p);
+void init(Sprite *p, int v1, int v2, char c);
+void move(Sprite *p, int v1, int v2);
+void show(Sprite *s);
+void hide(Sprite *s);
+void printStatus(char *str);
+
+int main(array<System::String ^> ^args)
+{
+    Sprite s1, s2;
+    cout << "Welcome to the world of Sprites" << endl;
+    cout << "Initializing sprites" << endl;
+    init(&s1);
+    init(&s2, 3, 4, '$');
+    cout << "Printing initial values of sprites" << endl;
+    print(&s1);
+    print(&s2);
+    cout << "Reading values for sprite s1" << endl;
+    read(&s1);
+    cout << "Reading values for sprite s2" << endl;
+    read(&s2);
+    Console::Clear();
+    printStatus("Showing s1 and s2");
+    show(&s1);
+    show(&s2);
+    Thread::Sleep(2000);
+    printStatus("Moving Sprite s1 and s2");
+    Thread::Sleep(2000);
+    hide(&s1);
+    hide(&s2);
+    move(&s1, 3, 3);
+    move(&s2, 12, 12);
+    Thread::Sleep(500);
+    show(&s1);
+    show(&s2);
+    printStatus("Sprites moved.... Good Bye");
+    Thread::Sleep(2000);
+    return 0;
+}
+
+void printStatus(char *str)
+{
+    int x = Console::CursorLeft;
+    int y = Console::CursorTop;
+    Console::SetCursorPosition(1, 1);
+    cout << str;
+    Console::SetCursorPosition(x, y);
+}
+
+void print(Sprite*  p)
+{
+    cout << "x = " << p->x << endl;
+    cout << "y = " << p->y << endl;
+    cout << "sym = " << p->sym << endl;
+}
+
+void read(Sprite *p)
+{
+    cout << "Enter x " << endl;
+    cin >> p->x;
+    cout << "Enter y " << endl;
+    cin >> p->y;
+    cout << "Enter sym" << endl;
+    cin >> p->sym;
+}
+
+void init(Sprite *p, int v1, int v2, char c)
+{
+    if (v1 >= MINX && v1 <= MAXX && v2 >= MINY && v2 <= MAXY)
+    {
+        p->x = v1;
+        p->y = v2;
+        p->sym = c;
+    }
+}
+
+void init(Sprite *p)
+{
+    p->x = 0;
+    p->y = 0;
+    p->sym = '*';
+}
+
+void move(Sprite *p, int v1, int v2)
+{
+    if (v1 >= MINX && v1 <= MAXX && v2 >= MINY && v2 <= MAXY)
+    {
+        p->x = v1;
+        p->y = v2;
+    }
+}
+
+void show(Sprite *s){
+    Console::SetCursorPosition(s->x, s->y);
+    cout << s->sym;
+}
+
+void hide(Sprite *s){
+    Console::SetCursorPosition(s->x, s->y);
+    putchar(' ');
+}

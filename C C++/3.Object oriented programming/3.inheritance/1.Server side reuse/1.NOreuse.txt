@@ -1,0 +1,56 @@
+#include <iostream>
+
+using namespace std;
+
+class c1
+{
+public:
+    int a;
+    int b;
+};
+
+class c2
+{
+public:
+    int a;
+    int b;
+    int c;
+    int d;
+};
+
+void printc1(c1 *p)
+{
+    cout << "Entering print c1" << endl;
+    cout << "a = " << p->a << endl;
+    cout << "b = " << p->b << endl;
+    cout << "Leaving print c1" << endl;
+}
+
+void printc2(c2 *p)
+{
+    cout << "Entering print c2" << endl;
+    cout << "a = " << p->a << endl;
+    cout << "b = " << p->b << endl;
+    cout << "c = " << p->c << endl;
+    cout << "d = " << p->d << endl;
+    cout << "Leaving print c2" << endl;
+}
+
+int main(int argc, char** argv)
+{
+    cout << "Welcome to Inheritance- No Reuse" << endl << endl;
+   
+    c1 obj1;
+    obj1.a = 1;
+    obj1.b = 2;
+    printc1(&obj1);
+
+    c2 obj2;
+    obj2.a = 10;
+    obj2.b = 20;
+    obj2.c = 30;
+    obj2.d = 40;
+    printc2(&obj2);
+
+    return 0;
+}

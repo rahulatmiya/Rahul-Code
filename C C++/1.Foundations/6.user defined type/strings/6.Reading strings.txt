@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include "iostream"
+using namespace std;
+
+char name[30];
+
+int main(int argc, char** argv) {
+    printf("Entering main\n");
+    printf("Enter your name ...\n");
+    scanf("%s",name);
+    printf("Thank you %s\n",name);
+    cout << "Enter your name ... "<< endl;
+    cin >> name;
+    cout << "Thank you " << name << endl;
+    printf("Leaving main\n");
+    return 0;
+}

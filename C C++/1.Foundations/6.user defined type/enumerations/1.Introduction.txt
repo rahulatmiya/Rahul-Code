@@ -1,0 +1,24 @@
+#include <iostream>
+
+
+using namespace std;
+
+/* Creating type Weekdays */
+
+enum Weekdays  { SUN, MON, TUE, WED, THU, FRI, SAT };
+
+
+int main(int argc, char ** argv)
+{
+    printf("Welcome to Enumerations\n");
+
+    /* Creating,initializing and printing Weekdays variables*/
+
+    Weekdays d1 = SUN;
+    cout << "Value of d1 is ... " << d1 << endl;
+
+    Weekdays d2 = MON;
+    printf("Value of d2 is ... %d",d2);
+
+    return 0;
+}

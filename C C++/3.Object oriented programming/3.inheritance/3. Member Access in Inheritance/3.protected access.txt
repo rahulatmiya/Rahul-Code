@@ -1,0 +1,64 @@
+#include <iostream>
+
+using namespace std;
+bool debug=false;
+class Sprite
+{
+  protected:
+    int x;
+    int y;
+    char sym;
+  public:
+    void init(int x, int y, char sym)
+    {
+        if(debug)cout << "Entering init of Sprite" << endl;
+        this->x = x;
+        this->y = y;
+        this->sym = sym;
+        if(debug)cout << "Leaving init of Sprite" << endl;
+    }
+    void print()
+    {
+        if(debug)cout << "Entering print of Sprite" << endl;
+        cout << "x= " << x << endl;
+        cout << "y= " << y << endl;
+        cout << "sym= " << sym << endl << endl;
+        if(debug)cout << "Leaving print of Sprite" << endl;
+    }
+};
+
+
+class VLine : public Sprite
+{
+  protected:
+    int size;
+  public:
+    void init(int x, int y, char sym, int size)
+    {
+        if(debug)cout << "Entering init of VLine" << endl;
+        this->x = x;
+        this->y = y;
+        this->sym = sym;
+        this->size = size;
+        if(debug)cout << "Leaving init of VLine" << endl;
+    }
+    void print()
+    {
+        if(debug)cout << "Entering print of VLine" << endl;
+        Sprite::print(); //parent function is masked
+        cout << "size= " << size << endl << endl;
+        if(debug)cout << "Leaving print of VLine" << endl;
+    }
+};
+
+
+int main(int argc, char** argv)
+{
+    Sprite s1;
+    VLine v1;
+    s1.init(1, 2, '*');
+    v1.init(10, 20, '$', 30);
+    s1.print();
+    v1.print();
+    return 0;
+}

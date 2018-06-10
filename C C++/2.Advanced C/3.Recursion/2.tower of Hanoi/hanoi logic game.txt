@@ -1,0 +1,41 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+void tof(int s,int d,int v);
+
+int main(array<System::String ^> ^args)
+{
+    cout << "Welcome to the TowerOfHanoi Program" << endl;
+    cout << "We will call function tof to print the steps required to complete the game" << endl;
+    cout << "Our function uses recursion to find the steps" << endl;
+    cout << "Please Enter the number on of disks" << endl;
+    int n;
+    cin >> n;
+    cout << "Please Enter the source peg" << endl;
+    int s;
+    cin >> s;
+    cout << "Please Enter the destination peg" << endl;
+    int d;
+    cin >> d;
+
+    cout << "Invoking factorial" << endl;
+    Console::WriteLine("Time = "+DateTime::Now+ " millisecond = "+DateTime::Now.Millisecond);
+    tof(s,d,n);
+    Console::WriteLine("Time = " + DateTime::Now + " millisecond = " + DateTime::Now.Millisecond);
+    return 0;
+}
+
+void tof(int s,int d,int n){
+    int t = 6 - s - d;
+    if (n == 1){
+        cout << "Moving Disk From " << s << " To " << d << endl;
+    }
+    else{
+        tof(s, t, n - 1);
+        tof(s, d, 1);
+        tof(t, d, n - 1);
+    }
+}

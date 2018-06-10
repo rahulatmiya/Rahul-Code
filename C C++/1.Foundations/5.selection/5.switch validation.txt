@@ -1,0 +1,46 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+int main(array<System::String ^> ^args)
+{
+    char direction = ' ';
+    while (direction != 'q'){
+        cout << "Please give me Direction..." << endl;
+        cout << " a for West  " << endl
+             << " w for North " << endl
+             << " d for East  " << endl
+             << " s for South " << endl
+             << " q for Quit  " << endl << endl;
+        direction = Console::ReadKey(true).KeyChar;
+        switch (direction)
+        {
+            case 'a': cout << endl
+                           << "Thankyou You suggested West"
+                           << endl << endl;
+                           break;
+            case 'w': cout << endl
+                           << "Thankyou You suggested North"
+                     << endl << endl;
+                           break;
+            case 'd': cout << endl
+                           << "Thankyou You suggested East"
+                           << endl << endl;
+                           break;
+            case 's': cout << endl
+                           << "Thankyou You suggested South"
+                           << endl << endl;
+                           break;
+            case 'q': cout << "Thanks"
+                           << endl
+                           << endl;
+                           break;
+            default: cout << endl
+                          << "Wrong Direction"
+                          << endl << endl;
+                          break;
+        }// end switch case
+    }// end while loop
+}// end main

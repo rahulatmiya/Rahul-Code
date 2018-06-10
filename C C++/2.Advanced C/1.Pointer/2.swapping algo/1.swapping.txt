@@ -1,0 +1,19 @@
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char** argv)
+{
+    int i = 10;
+    int j = 20;
+    cout << "i = " << i << endl;
+    cout << "j = " << j << endl;
+    cout << "Swapping ..." << endl;
+    int temp = i;
+    i = j;
+    j = temp;
+    cout << "i = " << i << endl;
+    cout << "j = " << j << endl;
+    Console::ReadLine();
+    return 0;
+}

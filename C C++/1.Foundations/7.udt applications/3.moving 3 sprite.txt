@@ -1,0 +1,75 @@
+#include "stdafx.h"
+#include <iostream>
+#include "stdio.h"
+using namespace System::Threading;
+using namespace std;
+using namespace System;
+ 
+// Reading paths for three sprites
+ 
+struct Position
+{
+ int x;
+ int y;
+};
+ 
+const int MAX = 5;
+ 
+struct Sprite
+{
+ int x;
+ int y;
+ char sym;
+ Position path[MAX];
+};
+ Sprite s1,s2,s3;
+ 
+void Show(Sprite s)
+{
+ Console::SetCursorPosition(s.x,s.y);
+ putchar(s.sym);
+}
+void Hide(Sprite s)
+{
+ Console::SetCursorPosition(s.x,s.y);
+ putchar(' ');
+}
+ 
+void ReadPath(Sprite& s)
+{
+ Console::Clear();
+ cout<<"Enter Positions"<<endl;
+    for(int i=0 ; i < MAX ; i++)
+    {
+  cout << "Position "<< i << endl;
+  cout << "Enter x coordinate "<<endl;
+  cin >> s.path[i].x;
+cout << "Enter y coordinate "<<endl;
+  cin >> s.path[i].y;
+    }
+ Console::Clear();
+}
+ 
+void WalkPath(Sprite& s)
+{
+ s.sym = '*';
+ for(int i=0;i<MAX;i++)
+    {
+    s.x = s.path[i].x;
+    s.y = s.path[i].y;
+    Show(s);
+    Thread::Sleep(1000);
+    Hide(s);
+    }
+}
+int main(array<System::String ^> ^args)
+{
+ ReadPath(s1);
+ ReadPath(s2);
+ ReadPath(s3);
+ WalkPath(s1);
+ WalkPath(s2);
+ WalkPath(s3);
+ Console::ReadLine();
+ return 0;
+}

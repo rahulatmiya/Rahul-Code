@@ -1,0 +1,9 @@
+Recursion is a property or a characteristic of a system wherein a component of the given system exhibits the property or characteristic of the system.  We refer to such systems as a recursive systems
+
+There are several systems that exhibit this characteristic. The solar system has sun at the center an planets moving around it. Earth a component of solar system has a similar characteristic with Earth itself at center and moon revolving around it. Atom which is the component of earth has nucleus at the center and electrons moving around it. 
+
+Another example being Directory which can have files as its components but it can also have a sub-directory as its component. The sub-directory has all the characteristics of a directory.
+
+In programming parlance if a function calls another function. The callee from execution view perspective is a component of the caller. So if the Caller calls itself the system becomes a recursive system.
+
+In simple terms if a function calls itself the function is said to use recursion.

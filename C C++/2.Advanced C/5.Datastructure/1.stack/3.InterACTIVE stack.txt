@@ -1,0 +1,144 @@
+#include <iostream>
+using namespace std;
+
+int stk[10];
+int sp = 10;
+
+void push(int v);
+int pop();
+void print();
+void flush();
+int peek();
+
+int test1();
+int test2();
+int menu();
+void stack();
+
+int main(array<System::String ^> ^args)
+{
+    stack();
+    return 0;
+}
+void push(int v)
+{
+    if (sp == 0)
+    {
+        cout << "\nStack overflow.";
+    }
+    else
+    {
+        sp = sp - 1;
+        stk[sp] = v;
+        cout << "Value pushed successfully" << endl;
+    }
+}
+int pop()
+{
+    if (sp == 10)
+    {
+        cout << "\nStack underflow";
+        return -1;
+    }
+    else
+    {
+        sp = sp + 1;
+        return stk[sp - 1];
+        cout << "\nValue popped successfully" << endl;
+    }
+}
+void print()
+{
+    cout << "\nPrinting Stack." << endl;
+    if (sp == 10)
+    {
+        cout << "Nothing to Print." << endl;
+    }
+    else
+    {
+        for (int i = sp; i<10; i++)
+        {
+            cout << stk[i] << endl;
+        }
+    }
+}
+void flush()
+{
+    sp = 10;
+}
+
+int peek()
+{
+    return stk[sp];
+}
+
+int test1()
+{
+    flush();
+    push(20);
+    int v = pop();
+    return (v == 20);
+}
+
+int test2()
+{
+    flush();
+    int y = pop();
+    if (y == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void stack()
+{
+    int v;
+    int val = menu();
+    while (val != 4)
+    {
+
+        switch (val)
+        {
+        case 1:cout << "Enter value to be pushed" << endl;
+            cin >> v;
+            push(v);
+            cout << "Press Enter to continue.." << endl;
+            cin>>v;
+            break;
+        case 2:
+            cout << "Enter value to be popped" << endl;
+            int p;
+            p = pop();
+            cout << "Value popped is..: " << p << endl;;
+            cout << "Press Enter to continue.." << endl;
+            cin>>v;
+            break;
+        case 3:
+            print();
+            cout << "Press Enter to continue.." << endl;
+            cin>>v;
+            break;
+        default:
+            cout << "Invalid Input." << endl;
+            cout << "Press Enter to continue.." << endl;
+            cin>>v;
+            break;
+        }
+        val = menu();
+    }
+}
+int menu()
+{
+    int x;
+    cout << "Welcome to Interactive Stack." << endl;
+    cout << "Enter 1 to push" << endl;
+    cout << "Enter 2 to pop" << endl;
+    cout << "Enter 3 to print" << endl;
+    cout << "Enter 4 to exit" << endl;
+
+    cin >> x;
+    return x;
+}

@@ -1,0 +1,106 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+
+// Step 1 - Create Structure Definition
+
+struct Sprite{
+    int x;
+    int y;
+    char sym;
+};
+
+// Step 2 - Create Structure Pointer
+
+Sprite *p;
+
+void printSprite(Sprite *s);
+
+int main(int argc, char** argv)
+{
+    /* Step 3 --Allocating memory on heap and 
+                     storing address in structure pointer */
+
+    p = (Sprite *)malloc(sizeof(Sprite));
+
+    // Step 4 - Initializing the structure variable through pointer 
+
+    (*p).x = 10;
+    (*p).y = 20;
+    (*p).sym = '*';
+
+    // Step 5 - Printing structure variable using pointer
+
+    cout << (*p).x << endl;
+    cout << (*p).y << endl;
+    cout << (*p).sym << endl;
+
+    // Step 6 - Printing structure variables using a more elegant notation
+
+    cout << p->x << endl;
+    cout << p->y << endl;
+    cout << p->sym << endl;
+
+    // Step 7 -- See the padding effect
+
+    cout << "Size of int " << sizeof(int) << endl;
+    cout << "Size of char " << sizeof(char) << endl;
+    cout << "Size of Sprite " << sizeof(Sprite) << endl;
+
+    // Step 8 - More pointers and structures
+
+    Sprite *q, *r=NULL;
+
+    q = (Sprite *)malloc(sizeof(Sprite));
+
+    r = p;
+
+    *q = *p;
+
+    p->x = q->x + 1;
+    p->y = p->x + q->y;
+
+    r = q;
+    q = p;
+    p = r;
+
+    p->x = q->x + 1;
+    p->y = p->x + q->y;
+
+
+    cout << "Printing target of Pointer p" << endl;
+    cout << p->x << endl;
+    cout << p->y << endl;
+    cout << p->sym << endl;
+
+    cout << "Printing target of Pointer q" << endl;
+    cout << q->x << endl;
+    cout << q->y << endl;
+    cout << q->sym << endl;
+
+    cout << "Printing target of Pointer r" << endl;
+    cout << r->x << endl;
+    cout << r->y << endl;
+    cout << r->sym << endl;
+
+
+    // Step 9 Introducting printSprite. Structure Pointer as parameter
+
+    printSprite(p);
+    printSprite(q);
+    printSprite(r);
+
+    Sprite s1 = { 22, 33, '$' };
+
+    printSprite(&s1);
+
+    return 0;
+}
+
+void printSprite(Sprite *s){
+    cout << "Entering printSprite" << endl;
+    cout << "x = " << s->x << endl;
+    cout << "y = " << s->y << endl;
+    cout << "sym = " << s->sym << endl;
+    cout << "Leaving printSprite" << endl;
+}

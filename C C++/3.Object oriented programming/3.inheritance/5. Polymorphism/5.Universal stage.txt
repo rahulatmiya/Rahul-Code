@@ -1,0 +1,103 @@
+#include<iostream>
+using namespace std;
+
+
+class Musician{
+	char *name;
+	int age;
+	int rate;
+public:
+	Musician(char*name, int size,int age,int rate)
+    {
+	   this->name= new char[size];
+	   strcpy(this->name,name);
+	   this->age = age;
+	   this->rate = rate;
+    }
+	void bio(){
+		cout << "My name is "<<name<<endl;
+		cout << "My age is "<<age<<endl;
+		cout << "My rate is "<<rate<<endl;
+    }
+	void play(){
+		cout << "My name is "<<name<<endl;
+		cout << "Presenting..."<<"By the River of Babylon"<<endl;
+		cout << "By..."<<"Boney M"<<endl;
+	}
+	~Musician(){
+		delete(name);
+	}
+
+};
+
+
+
+class SaxophonePlayer : public Musician{
+	char *type;
+public:
+	SaxophonePlayer(char *type,int tsize,char*name, int size,int age,int rate):
+		Musician(name,size,age,rate)
+	{
+		this->type = new char[tsize];
+		strcpy(this->type,type);
+	}
+	void bio(){
+			Musician::bio();
+			cout << "I Play... " << type << " Saxophone"<<endl;
+		}
+	void play(){
+			cout << "Presenting..."<<"The Moments.."<<endl;
+			cout << "By..."<<"Kenny G."<<endl;
+    }
+	~SaxophonePlayer(){
+		delete(type);
+	}
+
+};
+
+class PianoPlayer : public Musician{
+	char *style;
+public:
+	PianoPlayer(char *style,int tsize,char*name, int size,int age,int rate):
+		Musician(name,size,age,rate)
+	{
+		this->style = new char[tsize];
+		strcpy(this->style,style);
+	}
+	void bio(){
+			Musician::bio();
+			cout << "I Play... " << " Piano"<<endl;
+			cout << "I play "<< style << " style"<<endl;
+		}
+	void play(){
+			cout << "Presenting..."<<"Turkish March.."<<endl;
+			cout << "By..."<<"Mozart"<<endl;
+    }
+	~PianoPlayer(){
+		delete(style);
+	}
+
+};
+
+void stage(Musician *m);
+
+int main(int argc, char **argv){
+	cout << endl<< "Creating a musician"<<endl;
+    char * n= "Shawn";
+    Musician m(n,6,45,2000);
+    cout << endl<< "Sending a musician on stage1"<<endl;
+    stage(&m);
+    cout<<endl<<"Creating a Saxophone Player"<<endl;
+    SaxophonePlayer s("Soprano",7,"Tom",4,50,3000);
+    cout << endl<< "Sending a SaxophonePlayer on stage2"<<endl;
+    stage(&s);
+    cout<<endl<<"Creating a Piano Player"<<endl;
+    PianoPlayer p("Classic",8,"Beth",5,20,4000);
+    cout << endl<< "Sending a PianoPlayer on stage3"<<endl;
+    stage(&p);
+}
+
+void stage(Musician *m){
+	m->bio();
+	m->play();
+}

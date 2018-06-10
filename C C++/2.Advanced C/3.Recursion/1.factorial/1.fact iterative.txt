@@ -1,0 +1,38 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+unsigned long factorial(int v);
+
+int main(array<System::String ^> ^args)
+{
+    cout << "Welcome to Factorial Program" << endl;
+    cout << "We will call function factorial to calculate factorial of a number you provide" << endl;
+    cout << "Our function uses iteration to calculate factorial" << endl;
+    cout << "Please Enter the number for which you want to know the factorial" << endl;
+    unsigned short v;
+    cin >> v;
+    cout << "Thanks for entering the number " << endl;
+    cout << "To capture the result supplied by factorial I will use 'result'  variable" << endl;
+    cout << "Invoking factorial" << endl;
+    Console::WriteLine("Time = " + DateTime::Now + " millisecond = " + DateTime::Now.Millisecond);
+    unsigned long result;
+    result = factorial(v);
+    cout << "Result Collected " << endl;
+    Console::WriteLine("Time = " + DateTime::Now + " millisecond = " + DateTime::Now.Millisecond);
+    cout << "The Factorial of " << v << " is " << " " << result << endl;
+    return 0;
+}
+
+unsigned long factorial(int v){
+    cout << "Hello, I am factorial" << endl;
+    cout << "I will calculate factorial for the number " << v << " that you have passed" << endl;
+    cout << "To store the result I will use variable 'product'";
+    unsigned long product = 1;
+    for (int i = 1; i <= v; i++){
+        product = product * i;
+    }
+    return product;
+}

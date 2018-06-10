@@ -1,0 +1,80 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+struct Point{
+    int x;
+    int y;
+    struct Point *next;
+};
+
+void printList();
+struct Point* createNode(int x, int y);
+int wantToContinue();
+void insertNode(struct Point* n);
+
+struct Point *head = NULL;
+
+int main(void) {
+	printf("Welcome to Linked List \n");
+	int keepgoing = wantToContinue();
+
+	while (keepgoing){
+		printf("Enter x \n");
+		int x;
+		scanf("%d",&x);
+		printf("Enter y \n");
+		int y;
+		scanf("%d",&y);
+		insertNode(createNode(x, y));
+		fflush(stdin);
+		keepgoing = wantToContinue();
+	}
+	printf("Final Status of the Linked List");
+	printList();
+	return 0;
+}
+
+int wantToContinue()
+{
+	printf("Do you want to Continue ? \n");
+	printf("press -1 to quit and 1 to continue\n");
+	int permission;
+	scanf("%d",&permission);
+	return (permission == 1);
+}
+
+void printList()
+{
+	if (head == NULL){
+		printf("Linked List is Empty");return;
+	}
+	else{
+		struct Point *traveller = head;
+		for (int i = 1; traveller != NULL; i++)
+		{
+		   printf("Node %d ::  x = %d y = %d\n",
+				   i,traveller->x,traveller->y);
+		   traveller = traveller->next;
+		}
+	}
+}
+
+struct Point* createNode(int x, int y){
+	struct Point* node = (struct Point *)malloc(sizeof(struct Point));
+	node->x = x;
+	node->y = y;
+	node->next = NULL;
+	return node;
+}
+
+void insertNode(struct Point *n){
+	if (head == NULL){
+		head = n;
+		return;
+	}
+	struct Point *traveller = head;
+	while (traveller->next != NULL){
+		traveller = traveller->next;
+	}
+	traveller->next = n;
+}

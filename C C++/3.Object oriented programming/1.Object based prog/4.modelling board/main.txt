@@ -1,0 +1,25 @@
+#include <iostream>
+#include "Tile.h"
+#include "Board.h"
+#include "Tile.h"
+
+char boardView[8][8] = 
+{
+  {'r','n','b','k','q','b','n','r'},
+  {'@','@','@','@','@','@','@','@'},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {'*','*','*','*','*','*','*','*'},
+  {'R','N','B','K','Q','B','N','R'}
+};
+
+using namespace std;
+int main(int argc, char ** argv)
+{
+	cout << "Welcome to the world of Chess" << endl;
+	cout << "Creating Board"<<endl;
+	Board b(boardView);
+ 	b.show();
+}

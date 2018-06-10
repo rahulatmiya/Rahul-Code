@@ -1,0 +1,119 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+struct Node{
+    int v;
+    Node * next;
+    Node * prev;
+};
+Node *head=NULL;
+void PrintList();
+Node *CreateNode(int v);
+void InsertNode(Node *n);
+int DeleteNode(int v);
+void freeList(Node *n);
+
+int main(array<System::String ^> ^args)
+{
+    DeleteNode(23);
+    InsertNode(CreateNode(10));
+    InsertNode(CreateNode(20));
+    InsertNode(CreateNode(30));
+    InsertNode(CreateNode(40));
+    PrintList();
+    DeleteNode(30); // deleting a node in between
+    PrintList();
+    InsertNode(CreateNode(40));
+    InsertNode(CreateNode(50));
+    DeleteNode(10); // deleting the first node
+    PrintList();
+    DeleteNode(50); // deleting the last node
+    DeleteNode(150);
+    PrintList();
+    freeList(head);
+}
+Node *CreateNode(int v)
+{
+    Node * temp= (Node*)malloc(sizeof(Node));
+    temp->v=v;
+    temp->next=temp->prev=NULL;
+    return temp;
+}    
+
+void InsertNode(Node *n)
+{
+    cout<<"Inserting node..."<<endl;
+    if (head==NULL)
+    {
+        head=n;
+        n->prev=head;
+        return;
+    }
+    Node *temp=head;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=n;
+    n->prev=temp;
+}
+
+void PrintList()
+{
+    if (head==NULL)
+    {
+        cout<<"List Empty"<<endl;
+        return;
+    }
+    cout<<"Printing List ..."<<endl;
+    Node *temp=head;
+    while(temp!=NULL)
+    {
+        cout<<temp->v<<endl;
+        temp=temp->next;
+    }
+}
+
+int DeleteNode(int val)
+{
+    cout<<"Deleting node ..."<<val<<endl;
+    if (head==NULL)
+    {
+        cout<<"List Empty"<<endl;
+        return -1;
+    }
+    Node *leader = head;
+    Node *follower = head;
+    while(leader!=NULL && leader->v!=val)
+    {
+        follower=leader;
+        leader=leader->next;
+    }
+    if (leader==NULL)
+    {
+        cout<<"Node "<<val<<" not found"<<endl;
+        return -2;
+    }
+    if(leader==head)
+    {
+        head=head->next;
+        head->prev=head;
+    }
+    else
+    {
+        follower->next=leader->next;
+        if (follower->next!=NULL) follower->next->prev=follower;
+    }
+    free(leader);
+    return 1;
+}
+
+void freeList(Node *n)
+{
+    (n!=NULL)? free(n->next):free(n);
+}
+ 
+   

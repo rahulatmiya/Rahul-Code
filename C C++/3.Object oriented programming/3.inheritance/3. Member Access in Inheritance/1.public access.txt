@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+class Sprite
+{
+  public:
+    int x;
+    int y;
+    char sym;
+    void printSprite()
+    {
+        cout << "x= " << x << endl;
+        cout << "y= " << y << endl;
+        cout << "sym= " << sym << endl << endl;
+    }
+};
+
+class VLine : public Sprite
+{
+  public:
+    int size;
+    void printVLine()
+    {
+        printSprite(); // functional reuse
+        cout << "size= " << size << endl << endl;
+    }
+};
+
+
+int main(int argc, char** argv)
+{
+    Sprite s1;
+    VLine v1;
+    s1.x = 1; s1.y = 2, s1.sym = '*';
+    v1.x = 10; v1.y = 20; v1.sym = '$'; v1.size = 30;
+    s1.printSprite();
+    v1.printVLine();
+    v1.printSprite();
+    return 0;
+}

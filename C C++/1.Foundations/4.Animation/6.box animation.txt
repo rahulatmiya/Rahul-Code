@@ -1,0 +1,110 @@
+#include "stdafx.h"
+#include "stdio.h"
+#include "iostream"
+
+using namespace std;
+using namespace System::Threading;
+using namespace System;
+
+void horizontalAnimation(int x, int y, int s, char ch);
+void verticalAnimation(int x, int y, int s, char ch);
+void car(int x, int y, char ch);
+void horizontalLine(int x, int y, char ch);
+void verticalLine(int x, int y, char ch);
+int main(array<System::String ^> ^args)
+{
+    Console::Clear();
+    int m, n, s;
+ char ch;
+    cout << "Enter x coordinate for H anim-->";
+    cin >> m;
+    cout << "Enter y coordinate for H anim-->";
+    cin >> n;
+    cout << "Enter steps-->";
+    cin >> s;
+    cout << "Enter Symbol-->";
+    cin >> ch;
+    Console::Clear();
+    cout << "Starting Horizontal Animation...";
+    Thread::Sleep(1000);
+    Console::Clear();
+    horizontalAnimation(m, n, s, ch);
+    Console::Clear();
+    cout << "Enter x coordinate for V anim-->";
+    cin >> m;
+    cout << "Enter y coordinate for V anim-->";
+    cin >> n;
+    cout << "Enter steps-->";
+    cin >> s;
+    cout << "Enter Symbol-->";
+ cin >> ch;
+    Console::Clear();
+    cout << "Starting Vertical Animation...";
+    Thread::Sleep(1000);
+    Console::Clear();
+    verticalAnimation(m, n, s, ch);
+    Console::Clear();
+    cout << " Thankyou, for using this animation program..." << endl;
+    Thread::Sleep(1000);
+}
+
+void car(int x, int y, char ch)
+{
+    horizontalLine(x, y, ch);
+    horizontalLine(x, y + 3, ch);
+    verticalLine(x, y, ch);
+    verticalLine(x + 3, y, ch);
+}
+
+void horizontalLine(int x, int y, char ch)
+{
+    int i = 0;
+    do
+    {
+        Console::SetCursorPosition(x, y);
+        putchar(ch);
+        x++;
+        i++;
+    } while (i<4);
+}
+void verticalLine(int x, int y, char ch)
+{
+    int i = 0;
+    do
+    {
+        Console::SetCursorPosition(x, y);
+        putchar(ch);
+        y++;
+        i++;
+    } while (i<4);
+}
+
+void horizontalAnimation(int x, int y, int s, char ch)
+{
+
+    do
+    {
+        Console::SetCursorPosition(x, y);
+        car(x, y, ch);
+        Thread::Sleep(500);
+        Console::SetCursorPosition(x, y);
+        car(x, y, ' ');
+        x++;
+        s--;
+    } while (s>0);
+}
+
+void verticalAnimation(int x, int y, int s, char ch)
+{
+    int i = 0;
+    do
+    {
+        Console::SetCursorPosition(x, y);
+        car(x, y, ch);
+        Thread::Sleep(500);
+        Console::SetCursorPosition(x, y);
+        car(x, y, ' ');
+        y++;
+        i++;
+    } while (i<s);
+}

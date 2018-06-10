@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+
+struct Tile{
+  private:
+	char file;
+	int row;
+  public:
+	void print();
+	void read();
+	void init();
+	void init(char file, int row);
+  private:
+	bool validFile(char file);
+	bool validRow(int row);
+};
+
+void Tile::print()
+{
+	cout << "file = " << this->file << endl;
+	cout << "row = " << this->row << endl;
+}
+
+void Tile::read()
+{
+	do
+	{
+		cout << "Enter file " << endl;
+		cin  >> file;
+	} while ( !validFile(file) );  
+	do
+	{
+		cout << "Enter row " << endl;
+		cin  >> row;
+	} while ( !validRow(row) );
+}
+
+void Tile::init()
+{
+   	this->file = 'a';
+   	this->row = 1;
+}
+
+void Tile::init(char file, int row)
+{
+	if( validFile(file) && validRow(row) ){
+		this->file = file;
+		this->row = row;
+	} 
+	else init();
+}
+
+bool Tile::validFile(char file)
+{
+	return ( file >= 'a' && file <= 'h' );
+}
+
+bool Tile::validRow(int row)
+{
+	return ( row >= 1 && row <= 8 );
+}
+
+int main(int argc, char ** argv)
+{
+    Tile t1, t2;
+	cout << "Welcome to the world of Chess" << endl;
+	cout << "Initializing values for tile t1" << endl;
+	t1.init();
+	cout << "Printing values of tile t1" << endl;
+	t1.print();
+	cout << "Initializing values for tile t2" << endl;
+	t2.init();
+	cout << "Printing values of tile t2" << endl;
+	t2.print();
+   	cout << "Reading values for tile t1" << endl;
+	t1.read();
+	cout << "Reading values for tile t2" << endl;
+	t2.read();
+	cout << "Printing values of tile t1" << endl;
+	t1.print();
+	cout << "Printing values of tile t2" << endl;
+	t2.print();
+  	return 0;
+}

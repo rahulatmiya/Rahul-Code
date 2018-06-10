@@ -1,0 +1,70 @@
+#include <iostream>
+
+using namespace std;
+
+struct Sprite
+{
+    int x;
+    int y;
+    char sym;
+};
+
+void printSprite(Sprite  s);
+void printSprite(Sprite* q);
+Sprite readSprite();
+void readSprite(Sprite* q);
+
+int main(int argc, char** argv)
+{
+    Sprite s1 = { 1, 2, '*' };
+    Sprite s2 = { 5, 6, '$' };
+    
+    printSprite(s1);
+    printSprite(&s2);
+    
+    s1 = readSprite();
+    readSprite(&s2);
+        
+    printSprite(s1);
+    printSprite(&s2);
+ Console::ReadLine();
+    return 0;
+}
+
+void printSprite(Sprite s)
+{
+    cout << "Printing Sprite --  pass by value" << endl;
+    cout << "x = " << s.x << endl;
+    cout << "y = " << s.y << endl;
+    cout << "sym = " << s.sym << endl;
+}
+
+void printSprite(Sprite *q)
+{
+    cout << "Printing Sprite --  pass by address" << endl;
+    cout << "x = " << q->x << endl;
+    cout << "y = " << q->y << endl;
+    cout << "sym = " << q->sym << endl;
+}
+
+Sprite readSprite(){
+    Sprite s;
+    cout << "Reading Sprite" << endl;
+    cout << "Enter value for x position" << endl;
+    cin >> s.x;
+    cout << "Enter value for y position" << endl;
+    cin >> s.y;
+    cout << "Enter value for symbol" << endl;
+    cin >> s.sym;
+    cout << "Returning local structure by value" << endl;
+    return s;
+}
+void readSprite(Sprite *q){
+    cout << "Reading Sprite" << endl;
+    cout << "Enter value for x position" << endl;
+    cin >> q->x;
+    cout << "Enter value for y position" << endl;
+    cin >> q->y;
+    cout << "Enter value for symbol" << endl;
+    cin >> q->sym;
+}

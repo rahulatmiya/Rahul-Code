@@ -1,0 +1,18 @@
+# Exploring case
+
+echo "Enter the word you want to know about > "
+
+read text
+
+case "$text" in
+
+   sql) echo "Language Frequently used in RDBMS";;
+
+   linux) echo "Very popular Open Source OS";;
+  
+   Scala) echo "Very Powerful Modern Object Functional Language";;
+   
+   *) echo "Sorry, not aware of what you typed...";;
+
+esac
+

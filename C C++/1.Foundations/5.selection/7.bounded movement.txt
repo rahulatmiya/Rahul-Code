@@ -1,0 +1,40 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+int main(array<System::String ^> ^args)
+{
+    int x = 5;
+    int y = 5;
+    Console::SetCursorPosition(x, y);
+    putchar('*');
+
+    char direction = ' ';
+
+    while (!(direction == 'q' || direction == 'Q')){
+
+        direction = Console::ReadKey(true).KeyChar;
+
+        Console::SetCursorPosition(x, y);
+        putchar(' ');
+
+        switch (direction)
+        {
+           case 'A':
+           case 'a': if (x > 0) x = x - 1;  break;
+           case 'W':
+           case 'w': if (y > 0) y = y - 1;  break;
+           case 'D':
+   case 'd': if (x < 79) x = x + 1;  break;
+           case 'S':
+           case 's': if (y < 40) y = y + 1;  break;
+        }// end switch case
+
+        Console::SetCursorPosition(x, y);
+        putchar('*');
+
+    }// end while loop
+
+}// end main

@@ -1,0 +1,18 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace System;
+using namespace std;
+
+int main(array<System::String ^> ^args)
+{
+         int a, b, c, d;
+         a = 1;
+         b = 2;
+         c = 3;
+         d = 4;
+         cout << "a=" << a << endl;
+         cout << "b=" << b << endl;
+         cout << "c=" << c << endl;
+         cout << "d=" << d << endl;
+         return 0;
+}

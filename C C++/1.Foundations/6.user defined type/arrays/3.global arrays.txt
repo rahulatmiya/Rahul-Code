@@ -1,0 +1,24 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace System;
+using namespace std;
+
+int a[4] = { 11, 22, 33, 44 };
+
+int main(array<System::String ^> ^args)
+{
+
+        int b[4];
+        for (int i = 0; i < 4; i++){
+                 cout << "Enter value for b[" << i << "] = ";
+                 cin >> b[i];
+        }
+        for (int i = 0; i < 4; i++){
+                 cout << "b[" << i << "]=" << b[i] << endl;
+        }
+        for (int i = 0; i < 4; i++){
+                 cout << "a[" << i << "]=" << a[i] << endl;
+        }   
+
+        return 0;
+}

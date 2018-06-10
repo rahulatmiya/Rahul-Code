@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+
+int main(int argc, char** argv)
+{
+    cout << "Entering Main" << endl;
+    class Point
+    {
+        int x;
+        int y;
+        char *name;
+    public:
+        Point(){
+            x = 0;
+            y = 0;
+            name = "";
+        }
+        Point(int x, int y, char *n){
+            this->x = x;
+            this->y = y;
+            this->name = n;
+            cout << "Constructor for " << name << " completed it's job" << endl;
+        }
+        void move(int x, int y){
+            this->x = x;
+            this->y = y;
+        }
+        void print(){
+
+            cout << "name = " << name << endl;
+            cout << "x = " << x << endl;
+            cout << "y = " << y << endl;
+        }
+        ~Point(){
+            cout << "Destructor for " << name << " called" << endl;
+        }
+    };
+
+    Point p1(9,9,"p1");
+    Point p2(1,2,"p2");
+    Point *p;
+    p = &p1;
+    Point *q = &p2;
+    p->print();
+    p->move(3, 4);
+    q->print();
+    q->move(33,44);
+    p->print();
+    q->print();
+    cout << "Leaving Main" << endl;
+}

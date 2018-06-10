@@ -1,0 +1,29 @@
+// FindHighest.cpp : main project file.
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+int main(array<System::String ^> ^args)
+{
+    Console::WriteLine("Finding Highest form N numbers entered by User. Ask the user for  N");
+    cout << "Enter N" << endl;
+    int n;
+    cin >> n;
+    int * a= (int *) malloc(n*sizeof(int));
+    for (int i = 0; i < n; i++){
+        cout << "Enter Number " << i << endl;
+        cin >> a[i];
+    }
+    int max = a[0];
+    for (int j = 1; j < n; j++){
+        if (max < a[j]){
+            max = a[j];
+        }
+    }
+    cout << "Highest number is " << max << endl;
+    Console::ReadLine();
+    return 0;
+}

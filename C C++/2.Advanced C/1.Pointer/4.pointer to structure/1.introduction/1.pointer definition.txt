@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+struct Sprite
+{
+    int x;
+    int y;
+    char sym;
+};
+
+int main(int argc, char** argv)
+{
+    Sprite s1 = { 1, 2, '*' };
+    Sprite *p;
+    
+    p = &s1;
+    
+    cout << "Accessing state through structure variable" << endl;
+    cout << "x = " << s1.x << endl;
+    cout << "y = " << s1.y << endl;
+    cout << "sym = " << s1.sym << endl;
+    
+    cout << "Accessing state through pointer variable" << endl;
+    cout << "x = " << (*p).x << endl;
+    cout << "y = " << (*p).y << endl;
+    cout << "sym = " << (*p).sym << endl;
+
+cout << "Modifying state through pointer variable" << endl;
+    (*p).x = 11;
+    (*p).y = 22;
+    (*p).sym = '#';
+
+    cout << "Accessing state through structure variable" << endl;
+    cout << "x = " << s1.x << endl;
+    cout << "y = " << s1.y << endl;
+    cout << "sym = " << s1.sym << endl;
+
+    Console::ReadLine();
+    return 0;
+}

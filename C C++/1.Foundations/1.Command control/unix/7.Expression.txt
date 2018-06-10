@@ -1,0 +1,12 @@
+
+listing variable
+#Stage7
+ echo "Welcome to the World of Bash Script"
+ echo "Please enter list values
+ for Loop1" read list 
+for i in $list
+ do 
+sum=$(expr $sum + $i) 
+done
+ echo "The sum is $sum" 
+echo "Thank you for using Bash Script" 

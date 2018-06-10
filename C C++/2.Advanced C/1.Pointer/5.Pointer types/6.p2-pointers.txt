@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+
+int main(int argc, char** argv)
+{
+    cout << "Entering Main" << endl;
+    int i = 10;
+    int j = 20;
+    int *p = &i;
+    int *q = &j;
+    int **r = &p;
+    cout << i << endl;
+    cout << *p << endl;
+    cout << **r << endl;
+    r = &q;
+    cout << **r << endl;
+    int ***s = &r;
+    cout << ***s << endl;
+    cout << "Leaving Main" << endl;
+}

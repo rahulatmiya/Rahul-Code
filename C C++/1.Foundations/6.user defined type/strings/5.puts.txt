@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include "iostream"
+using namespace std;
+
+char ch[] = "Hello World";
+
+int main(int argc, char** argv) {
+    printf("Entering main\n");
+    printf("%s\n",ch);
+    puts(ch);
+    cout << ch << endl;
+    printf("Leaving main\n");
+    return 0;
+}

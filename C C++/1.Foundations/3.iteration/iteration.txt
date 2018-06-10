@@ -1,0 +1,94 @@
+Wanderer : 
+What is a loop?
+
+StoryTeller :
+In a program there are several coding sites where we find statements whose execution must be repeated. Instead of writing the statements multiple times , a programmer can put those statements in a container called loop. This container is configured by the programmer telling it how many times the statements are to be executed. Usually a count or a terminating condition is given as a signal to stop the repetition. Loop container itself is also a statement, enabling nesting of loops.
+
+Wanderer : 
+What are the different types of loops supported in C/C++ programming?
+
+StoryTeller :
+
+    do while
+    while
+    for
+
+
+
+
+Wanderer : 
+What is a do while loop?
+
+StoryTeller :
+do-while is a loop container that is made up of four part sequence
+
+    do ( keyword )
+    body ( one statement , simple or compound )
+    while ( keyword )
+    condition ( expression ) 
+
+do-while itself being a statement ends with a semicolon.
+Wanderer : 
+Can you show an example using do while loop?
+
+StoryTeller :
+Let us write a program that prints "hello" 5 times using do-while loop. Check Codeparatus below.
+
+
+
+
+
+
+
+Wanderer : 
+What is a while loop?
+
+StoryTeller :
+while is a loop container that is made up of three part sequence
+
+ while ( keyword )
+    condition ( expression ) 
+    body ( one statement , simple or compound )
+
+Wanderer : 
+Can you show an example using while loop?
+
+StoryTeller :
+Let us write a program that prints "hello" 5 times using while loop
+
+
+
+Wanderer : 
+What is a for loop?
+
+StoryTeller :
+
+
+for is a loop container that is made up of three part sequence
+
+    for ( keyword ) 
+    parameter-list(initialization,expression,statements) 
+    body ( one statement , simple or compound ) 
+
+
+Wanderer :
+Can you show an example using for loop?
+
+StoryTeller : 
+Let us write a program that prints "hello" 5 times using for loop
+
+
+
+
+Wanderer : 
+If there are three loops, how do I decide which one to use?
+
+StoryTeller :
+For that we will need to understand a few characteristics of each loop
+
+    In do-while loop the the condition for repetition is checked after the body is executed
+    In while loop the condition for repetition is checked before the body is executed.  This makes while loop slightly slower than do while loop. However, when we want the scenario of zero repetition, do-while cannot directly support it. 
+    In while and do-while loop the loop counter variable management is mingled with the code that is to be repeated. In for loop all aspects of loop variable management are shifted outside the body. This makes the code more readable , manageable and less error prone.Like while loop, for loop checks the condition for repetition before executing the body.
+
+
+

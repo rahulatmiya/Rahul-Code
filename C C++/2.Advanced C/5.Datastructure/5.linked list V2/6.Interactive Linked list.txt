@@ -1,0 +1,181 @@
+    /* Implementing Interactive Linked List in C++
+    * copyright ©  Rajesh Patkar, All rights reserved
+    * Rajesh Patkar Institute Of Software Engineering.
+    */
+#include "stdafx.h"
+#include "iostream"
+    using namespace System;
+    using namespace std;
+
+    struct Node{
+        int v;
+        Node *next;
+    };
+
+    Node *head = NULL;
+
+
+
+    /* Model API */
+    Node * createNode(int v);
+    void insertNode(Node *n);
+    int deleteNode(int  v);
+    void print();
+    void freeList();
+
+    /* Controller API */
+    ConsoleKey menu();
+    void handleInsert();
+    void handleDelete();
+    void handlePrint();
+    bool isValidKey(ConsoleKey k);
+
+    int main(array<System::String ^> ^args)
+    {
+        ConsoleKey k;
+        while ((k = menu()) != ConsoleKey::D4)
+        {
+            switch (k)
+            {
+            case ConsoleKey::D1: handleInsert(); break;
+            case ConsoleKey::D2: handleDelete(); break;
+            case ConsoleKey::D3: handlePrint(); break;
+            default: cout << "Error Aborting Program" << endl;
+                exit(-1);
+                break;
+            }
+        }
+        freeList();
+    }
+
+    Node * createNode(int v)
+    {
+        Node *temp = (Node *)malloc(sizeof(Node));
+        temp->v = v;
+        temp->next = NULL;
+        return temp;
+    }
+
+    void insertNode(Node *n)
+    {
+        if (head == NULL)
+        {
+            head = n;
+        }
+        else
+        {
+            Node *temp = head;
+            while (temp->next != NULL) temp = temp->next;
+            temp->next = n;
+        }
+    }
+
+    int deleteNode(int v)
+    {
+        if (head == NULL) return -1;
+        Node *leader = head, *follower = head;
+        while (leader != NULL && leader->v != v) {
+            follower = leader;
+            leader = leader->next;
+        }
+        if (leader == NULL) return -2;
+        leader == head ? head = head->next : follower->next = leader->next;
+        free(leader);
+        return 1;
+    }
+
+    void print()
+    {
+        if (head == NULL){
+            cout << "List Empty..." << endl;
+            return;
+        }
+        cout << "Listing Numbers" << endl;
+        Node *temp = head;
+        while (temp != NULL){
+            cout << temp->v << endl;
+            temp = temp->next;
+        }
+    }
+
+    void freeList(){
+        Node *temp = head;
+        while (temp != NULL){
+            head = head->next;
+            free(temp);
+            temp = head;
+        }
+    }
+
+    ConsoleKey menu()
+    {
+        Console::Clear();
+        cout << " Welcome to LinkedList" << endl;
+        cout << " Press 1 to Insert value" << endl;
+        cout << " Press 2 to Delete value" << endl;
+        cout << " Press 3 to Print Queue" << endl;
+        cout << " Press 4 to Quit" << endl;
+        ConsoleKey k = Console::ReadKey(true).Key;
+        while (!isValidKey(k))
+        {
+            cout << "Please Enter Valid Key" << endl;
+            k = Console::ReadKey(true).Key;
+        }
+        return k;
+    }
+
+    void handleInsert()
+    {
+        int v;
+        Console::Clear();
+        cout << "Enter the value to Insert" << endl;
+        cin >> v;
+        insertNode(createNode(v));
+        cout << "Successfully Inserted value " << v << " in the list" << endl;
+        cout << "Please Enter to Continue..." << endl;
+        Console::ReadLine();
+    }
+
+    void handleDelete()
+    {
+        int v, r;
+        Console::Clear();
+        cout << "Enter the value to Delete" << endl;
+        cin >> v;
+        r = deleteNode(v);
+        if (r != 1)
+        {
+            switch (r){
+            case -1: cout << "Cannot delete from an Empty List" << endl; break;
+            case -2: cout << "Value not found in List" << endl; break;
+            }
+        }
+        else
+        {
+            cout << "The value deleted is " << v << endl;
+        }
+        cout << "Please Enter to Continue..." << endl;
+        Console::ReadLine();
+    }
+
+    void handlePrint()
+    {
+        Console::Clear();
+        cout << "Printing List" << endl;
+        print();
+        cout << "Please Enter to Continue..." << endl;
+        Console::ReadLine();
+    }
+
+    bool isValidKey(ConsoleKey k)
+    {
+        switch (k)
+        {
+        case ConsoleKey::D1: return true;
+        case ConsoleKey::D2: return true;
+        case ConsoleKey::D3: return true;
+        case ConsoleKey::D4: return true;
+        default:return false;
+        }
+    }
+

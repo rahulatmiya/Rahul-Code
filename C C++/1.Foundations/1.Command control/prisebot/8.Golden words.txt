@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char** argv) {
+      
+    puts("This is Prisebot at your service :)");
+    puts("Master, Please give me your 5 letter golden word");
+    char goldenword[6];
+    gets(goldenword);
+    puts("Master you just said !!!");
+    puts(goldenword);
+    puts("Let me spell it out ...");
+    for(int i=0 ; i < 5; i++){
+        putchar(goldenword[i]);
+        putchar('\n');
+    }
+    puts("All Clear... I am blessed...");
+    
+}

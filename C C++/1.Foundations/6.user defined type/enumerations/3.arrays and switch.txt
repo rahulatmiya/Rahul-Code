@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+/* Creating type Weekdays and initializing it's elements*/
+enum Weekdays { MON, TUE, WED, THU, FRI, SAT, SUN };
+
+char a[7][10] = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
+
+int operator += (Weekdays& w, int i){
+    return  w =  Weekdays( w + i );
+}
+
+void f1(Weekdays w);
+
+
+int main(int argc,char** argv)
+{
+    printf("Welcome to Enumerations\n");
+    int z = MON;
+    for (Weekdays d = MON; d <= SUN;  z = (d += 1) ){
+        cout << "Iteration Number :: " << z << endl;
+        cout << a[d] << endl;
+        f1(d);
+    }
+    return 0;
+}
+void f1(Weekdays w){
+    switch (w){
+    case MON: cout << "Knowing variables, operators,"
+        << "loops and conditions"
+        << endl;
+        break;
+    case TUE: cout << "Mastering Functions" << endl;
+        break;
+    case WED: cout << "Designing Arrays,Strings"
+        << ",Enums an Structures"
+        << endl;
+        break;
+    case THU: cout << "Taming DataStructures" << endl;
+        break;
+    case FRI: cout << "Visualizing Class and Objects" << endl;
+        break;
+    case SAT: cout << "Modelling with"
+        << " Object Oriented Principles"
+        << endl;
+        break;
+    case SUN: cout << "Library Acquaintance"
+        << "and Project Initiation"
+        << endl;
+        break;
+    }
+}

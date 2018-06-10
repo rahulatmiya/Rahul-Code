@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+struct Sprite
+{
+    int x;
+    int y;
+    char sym;
+};
+
+int main(int argc, char** argv)
+{
+    Sprite s1;
+    Sprite s2 = {10,10,'$'};
+    s1.x = 10;
+    s1.y = 20;
+    s1.sym = '*';
+    cout << "Printing s1" << endl;
+    cout << s1.x<< endl;
+    cout << s1.y << endl;
+    cout << s1.sym << endl;
+    cout << "Printing s2" << endl;
+    cout << s2.x << endl;
+    cout << s2.y << endl;
+    cout << s2.sym << endl;
+    return 0;
+}

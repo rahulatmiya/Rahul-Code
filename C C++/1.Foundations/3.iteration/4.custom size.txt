@@ -1,0 +1,39 @@
+#include "stdafx.h"
+
+using namespace System;
+
+void SleepingLine(int x, int y, int s);
+void StandingLine(int x, int y, int s);
+
+int main(array<System::String ^> ^args)
+{
+    Console::Clear();
+    SleepingLine(5, 5, 4);
+    StandingLine(10, 10, 4);
+    SleepingLine(7, 7, 7);
+    StandingLine(20, 20, 3);
+    Console::ReadLine();
+    return 0;
+}
+
+void SleepingLine(int x, int y, int s)
+{
+    int i = 0;
+    while (i < s)
+    {
+        Console::SetCursorPosition(x + i, y);
+        Console::Write("*");
+        i++;
+    }
+}
+
+void StandingLine(int x, int y, int s)
+{
+    int i = 0;
+    do
+    {
+        Console::SetCursorPosition(x, y + i);
+        Console::Write("*");
+        i++;
+    } while (i < s);
+}

@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+char boardView[8][8] = 
+{
+  {'r','n','b','k','q','b','n','r'},
+  {'@','@','@','@','@','@','@','@'},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {' ',' ',' ',' ',' ',' ',' ',' '},
+  {'*','*','*','*','*','*','*','*'},
+  {'R','N','B','K','Q','B','N','R'}
+};
+
+void showBoard();
+
+int main(int argc, char ** argv)
+{
+	cout << "Welcome to the world of Chess" << endl;
+	showBoard();
+  	return 0;
+}
+
+void showBoard()
+{
+  cout << " -------------------------------"<<endl;
+  for(int row = 8 ; row >= 1 ; row--){
+     for(char file = 'a' ; file <= 'h' ; file++ ){
+          
+          cout << "| " <<  boardView[8-row][file - 'a'] << " ";
+     } 
+     cout << "|";
+     if( row != 1 )
+     { 
+       cout<<endl<<"|-------------------------------|"<<endl;
+     }
+  }
+  cout <<endl<<" -------------------------------"<<endl;
+}

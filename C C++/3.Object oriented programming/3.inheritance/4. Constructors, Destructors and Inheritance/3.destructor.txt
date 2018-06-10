@@ -1,0 +1,92 @@
+
+#include <iostream>
+
+using namespace std;
+
+class Sprite
+{
+
+  protected:
+  
+    int x;
+    int y;
+    char sym;
+
+  public:
+    
+    Sprite(int x, int y, char sym)
+    {
+        cout << "Sprite's Parameterized Constructor called" << endl;
+        this->x = x; this->y = y; this->sym = sym;
+    }
+
+    void init(int x, int y, char sym)
+    {
+        this->x = x;
+        this->y = y;
+        this->sym = sym;
+    }
+
+    void print()
+    {
+        cout << "x= " << x << endl;
+        cout << "y= " << y << endl;
+        cout << "sym= " << sym << endl << endl;
+    }
+
+    ~Sprite()
+    { 
+        cout << "Destructor of Sprite" << endl; 
+    }
+
+};
+
+
+class VLine : public Sprite
+{
+
+    int size;
+
+  public:
+
+    VLine() :Sprite(10, 20, '$')
+    {
+
+        cout << "VLine's Default Constructor called" << endl;
+        x = 10; y = 20; sym = '$'; size = 30;
+    }
+
+    void print()
+    {
+        cout << "x= " << x << endl;
+        cout << "y= " << y << endl;
+        cout << "sym= " << sym << endl;
+        cout << "size= " << size << endl << endl;
+    }
+
+    void init(int x, int y, char sym, int size)
+    {
+        Sprite::init(x, y, sym);
+        this->size = size;
+    }
+
+    ~VLine()
+    { 
+        cout << "Destructor of VLine" << endl; 
+    }
+
+};
+
+void client()
+{
+    Sprite s1(1, 2, '*');
+    VLine v1;
+    s1.print();
+    v1.print();
+}
+
+int main(int argc, char** argv)
+{
+    client();
+    return 0;
+}

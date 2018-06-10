@@ -1,0 +1,12 @@
+
+using while loop
+#Exploring While Loop
+ echo "Exploring While Loop" 
+i=0 while [ $i -lt 5 ] 
+do 
+echo "The value of i is $i" i=$[ $i + 1 ] 
+done 
+while (( $i < 10 )) do 
+echo "The value of i is $i" ((i = $i + 1 ))
+ done 
+echo "Thankyou for using While Loop" 

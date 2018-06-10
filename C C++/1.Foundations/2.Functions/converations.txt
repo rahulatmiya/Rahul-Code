@@ -1,0 +1,104 @@
+
+Wanderer 
+
+What is a Function ?
+
+
+StoryTeller
+
+ A function is a programmatic construct which encapsulates a sequence of instructions and has a well defined responsibility. A function is created by writing a function definition. To avail its service a function has to be triggered via a function call.
+
+
+
+
+Wanderer 
+
+What is a Function ?
+
+
+StoryTeller
+
+ A function is a programmatic construct which encapsulates a sequence of instructions and has a well defined responsibility. A function is created by writing a function definition. To avail its service a function has to be triggered via a function call.
+
+
+Wanderer
+
+What is a Function Prototype?
+
+
+StoryTeller
+
+C complier expects that function definition of a given function must precede it's  call. If the condition is not meet the compiler generates error. There are two scenarios when a function call may precede the definition. 
+
+    When Function calling the given function is written above the given function.
+    When the given function is in another file. 
+
+To prevent error in both these scenario we write the given function's header above the call site. This function header with an ending semicolon is referred to as a function declaration or function prototype.
+
+
+
+
+
+
+
+Wanderer
+
+What are benefits of using a Function?
+
+
+StoryTeller
+
+There are several benefits of using a function.
+
+    Reusability
+    Simplicity
+    Modularity
+    Debuggability
+    Maintainability
+    Delegatability.
+
+
+
+
+
+
+
+
+
+Wanderer  
+
+What are different ways of passing arguments to a Function?
+
+
+StoryTeller 
+
+There are three different ways of passing arguments to a  function.
+
+    Pass By Value
+    Pass By Reference
+    Pass By Address.
+
+
+
+
+
+
+
+
+
+Wanderer 
+
+What are different ways of achieving inter-function communication?
+
+
+StoryTeller
+
+Functions can communicate with each other using 
+
+    Global Variables
+    Arguments
+    Return values
+
+
+
+

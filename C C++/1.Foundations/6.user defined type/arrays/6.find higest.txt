@@ -1,0 +1,31 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace System;
+using namespace std;
+
+void printArray(int *p);
+void displayArray(int c[4]);
+
+int main(array<System::String ^> ^args){
+         int a[4] = { 11, 22, 33, 44 };
+         int b[4] = { 4, 78, 9, -53 };
+         printArray(a);
+         printArray(b);
+         displayArray(a);
+         displayArray(b);
+         printArray(a);
+         printArray(b);
+}
+void printArray(int *p){
+         for (int i = 0; i < 4; i++){
+               cout << p[i] << endl;
+         }
+}
+void displayArray(int c[4]){
+          for (int i = 0; i < 4; i++){
+                 if (c[i] < 0){
+    c[i] = 0;
+                 }
+                 cout << c[i] << endl;
+        }
+}

@@ -1,0 +1,49 @@
+#include <cstdlib>
+#include<iostream>
+using namespace std;
+
+void print();
+void read();
+void bubblesort();
+
+int main(int argc, char** argv) {
+    read();
+    print();
+    bubblesort();
+    print();
+    return 0;
+}
+
+void print() {
+    cout << "Enter the 5 nos\n";
+    int a[5];
+    for (int i = 0; i < 5; i++) {
+        cout << a[i] << "\n";
+    }
+}
+
+void read() {
+    cout << "Reading the value\n";
+    int a[5];
+    for (int i = 0; i < 5; i++) {
+        cin >> a[i];
+
+    }
+}
+
+void bubblesort() {
+    int a[5];
+    for (int k = 5; k > 1; k--) {
+        for (int l = 1; l < k; l++) {
+            if (a[l - 1] > a[l]) {
+                swap(a[l - 1], a[l]);
+            }
+        }
+    }
+}
+
+void swap(int v1, int v2) {
+    int temp = v1;
+    v1 = v2;
+    v2 = temp;
+}

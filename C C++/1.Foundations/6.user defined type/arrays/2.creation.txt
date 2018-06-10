@@ -1,0 +1,19 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace System;
+using namespace std;
+
+int main(array<System::String ^> ^args)
+{
+        int a[4];
+
+        for (int i = 0; i < 4; i++){
+                a[i] = i + 1;
+        }
+
+        for (int i = 0; i < 4; i++){
+                cout << "a[" << i << "]=" << a[i] << endl;
+        }
+
+         return 0;
+}

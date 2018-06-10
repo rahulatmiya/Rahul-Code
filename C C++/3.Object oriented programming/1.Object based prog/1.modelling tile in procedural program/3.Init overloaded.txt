@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+struct Tile{
+	char file;
+	int row;
+};
+
+void print(Tile t);
+void read(Tile *t);
+void init(Tile *t);
+void init(Tile *t , char file, int row);
+bool validFile(char file);
+bool validRow(int row);
+
+int main(int argc, char ** argv)
+{
+	Tile t1, t2;
+	cout << "Welcome to the world of Chess" << endl;
+	cout << "Initializing values for tile t1" << endl;
+	init(&t1);
+	cout << "Printing values of tile t1" << endl;
+	print(t1);
+	cout << "Initializing values for tile t2" << endl;
+	init(&t2,'h',2);
+	cout << "Printing values of tile t2" << endl;
+	print(t2);
+   	cout << "Reading values for tile t1" << endl;
+	read(&t1);
+	cout << "Reading values for tile t2" << endl;
+	read(&t2);
+	cout << "Printing values of tile t1" << endl;
+	print(t1);
+	cout << "Printing values of tile t2" << endl;
+	print(t2);
+  	return 0;
+}
+
+void print(Tile t)
+{
+	cout << "file = " << t.file << endl;
+	cout << "row = " << t.row << endl;
+}
+
+void read(Tile *t)
+{
+	do
+	{
+		cout << "Enter file " << endl;
+		cin >> t->file;
+	}while ( !validFile(t->file) );  
+	do
+	{
+		cout << "Enter row " << endl;
+		cin >> t->row;
+	}while ( !validRow(t->row) );
+}
+
+void init(Tile *t)
+{
+	t->file = 'a';
+	t->row = 1;
+}
+
+void init(Tile *t , char file, int row)
+{
+	if( validFile(file) && validRow(row) ){
+		t->file = file;
+		t->row = row;
+	} 
+	else init(t);
+}
+
+
+bool validFile(char file)
+{
+	return ( file >= 'a' && file <= 'h' );
+}
+
+bool validRow(int row)
+{
+	return ( row >= 1 && row <= 8 );
+}

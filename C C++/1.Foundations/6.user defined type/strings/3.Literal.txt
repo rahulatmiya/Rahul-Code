@@ -1,0 +1,20 @@
+#include "iostream"
+using namespace std;
+
+char ch[] = "Hello World";
+
+int main(int argc, char** argv)
+{
+    int i = 0;
+    cout << "Printing the array" << endl;
+    for (i = 0; i<11; i++)
+    {
+        cout << "a[" << i << "]=" << ch[i] << endl;
+    }
+    cout << "ch = ";
+    for (i = 0; i<11; i++)
+    {
+        cout << ch[i];
+    }
+    return 0;
+}

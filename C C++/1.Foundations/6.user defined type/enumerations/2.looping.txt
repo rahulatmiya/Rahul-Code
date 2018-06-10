@@ -1,0 +1,22 @@
+#include <iostream>
+
+
+using namespace std;
+
+/* Creating type Weekdays and initializing it's elements*/
+
+enum Weekdays { SUN = 1, MON = 3, TUE = 5, WED = 7, 
+               THU = 9, FRI = 11, SAT = 13};
+
+
+int main(int argc, char** argv)
+{
+    printf("Welcome to Enumerations\n");
+
+
+    for (Weekdays i = SUN; i <= 13; i =(Weekdays)(i + 2)){
+        cout << i << endl;
+    }
+    
+    return 0;
+}

@@ -1,0 +1,18 @@
+#ifndef PIECEENUM_H_
+#define PIECEENUM_H_
+enum PieceEnum {
+	WHITE_PAWN='*',
+	WHITE_BISHOP='B',
+	WHITE_KNIGHT='N',
+	WHITE_ROOK='R',
+	WHITE_QUEEN='Q',
+	WHITE_KING='K',
+	BLACK_PAWN='@',
+	BLACK_BISHOP='b',
+    BLACK_KNIGHT='n',
+	BLACK_ROOK='r',
+	BLACK_QUEEN='q',
+	BLACK_KING='k',
+	EMPTY=' '
+};
+#endif /* PIECEENUM_H_ */

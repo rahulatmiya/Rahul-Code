@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+
+int main(int argc, char** argv)
+{
+    cout << "Entering Main" << endl;
+    struct Point {
+        int x;
+        int y;
+    };
+    Point p1 = { 1, 1 };
+    Point p2 = { 2, 2 };
+    Point *p;
+    p = &p1;
+    Point *q = &p2;
+    cout << p->x << endl;
+    cout << p->y << endl;
+    cout << q->x << endl;
+    cout << q->y << endl;
+    p->x = 56;
+    cout << p1.x << endl;
+    cout << "Leaving Main" << endl;
+}

@@ -1,0 +1,11 @@
+
+Executing same statement several times
+
+
+# Stage2 
+echo "Welcome to the World of Bash Script" 
+echo "Doing Work"
+echo "Doing Work" 
+echo "Doing Work" 
+echo "Doing Work" 
+echo "Thank you for using Bash Script" 

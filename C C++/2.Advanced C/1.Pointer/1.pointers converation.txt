@@ -1,0 +1,79 @@
+1.Question
+
+Wanderer : 
+
+What is a Pointer ?
+
+StoryTeller :
+
+Pointer is a special type of variable
+
+2.Question
+
+Wanderer : 
+
+What is so special about this pointer variable?
+
+StoryTeller :
+
+Like other variables, pointer stores a value. Also, like other variables, we can load a value in the pointer and read it back when needed. However, pointer is different from other variables in the way it treats that value. Pointer treats its value as a number that represents a memory location(address), and this perception that it has, makes it very special. 
+
+3.question
+
+Wanderer : 
+
+Can you elaborate on concept of Memory Location ?
+
+StoryTeller :
+
+Ok, You can think of memory in terms of its Conceptual Model.The Physical Model ( actual memory architecture ) can be very different from the Conceptual Model. However, what you need to know is the Conceptual Model.
+
+Conceptual Memory Model
+Think of memory as a collection of bytes.The first byte is said to be at location 0, the second byte is at location 1 and so on. In the figure above you can observe a byte at location 2 holding value 45. This figure shows a memory block having 10 bytes with the first byte at location 0 and  the last byte at location 9. Memory location of a byte is also considered as its Memory Address.
+
+4.question
+
+Wanderer : 
+What does pointer gain by treating its value as a memory location ?
+
+StoryTeller :
+ Pointer can touch memory at that location. It can read and write to memory at that location.
+
+Pointer working on memory model
+The figure shows a pointer holding value 2. This pointer treats 2 as a memory address and can touch memory at this address. You can read 45 from memory location 2 using this pointer. However, you need to a special operator to do so. 
+The name pointer is a label for value 2.
+The expression *pointer represent 45. The operator *  is called de-reference operator. 
+The statement pointer = 2; loads 2 in the pointer. Whereas statement *pointer = 72; loads value 72 at location 2.
+The statement pointer = 2; tells the pointer to load 2 in itself.
+The statement *pointer = 72; tells the pointer to load 72, not in itself, but at a memory location that it holds. 
+
+5.question
+
+Wanderer : 
+
+How does pointer interpret the data at the target location ? 
+
+StoryTeller :
+
+Good question. It's all 1's and 0's everywhere in memory. Hence, a pointer needs to be told how it must interpret the data at the target location. Let's say our pointer is pointing to memory location 2. Let's further assume that our pointer is told to look at it's target location as having character value. If we now ask our pointer to read the value at it's target location it will read one byte and interpret it as character. On the other hand if we told our pointer to look at it's target location as having float value it will read 4 bytes starting at location 2 and will interpret it as float.
+
+
+6.question
+
+Wanderer : 
+
+How do you inform the pointer about the target type ? 
+
+StoryTeller :
+
+As a developer you take this decision when you create the pointer. A pointer is told about how to look at it's target type at the time of it's birth. 
+
+int *p;
+
+The statement written above results in creation of pointer 'p'. This pointer is told that the target that it will point to will be an integer. Infact, the pointer is not really bothered about what actually is present at the location. It will always believe that the location has integer. It is quiet possible that the content at the target is float or even garbage. However , our pointer will always believe that the content at the target location is an integer.
+
+int z = 1; // Create a variable z and load 1 in it.
+int *p; // Create a variable p . This variable is a pointer variable, who is told that its duty is to point to integers.
+p = &z; // Store memory location of variable z in p. This means that the pointer is now holding the address of target variable z.
+*p = 3; // This statement will change value of target variable z to 3.
+

@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+struct Sprite
+{
+    int x;
+    int y;
+    char sym;
+};
+void printSprite(Sprite  s);
+int main(int argc, char** argv)
+{
+    Sprite s1;
+    s1.x = 10;
+    s1.y = 20;
+    s1.sym = '*';
+    cout << "Printing s1"<<endl;
+    printSprite(s1);
+    cout << "Reading s1" << endl;
+    cout << "Please enter value for member x" << endl;
+    cin >> s1.x;
+    cout << "Please enter value for member y" << endl;
+    cin >> s1.y;
+    cout << "Please enter value for member sym" << endl;
+    cin >> s1.sym;
+    printSprite(s1);
+    return 0;
+}
+void printSprite(Sprite  s)
+{
+    cout << "x=" << s.x << endl;
+    cout << "y=" << s.y << endl;
+    cout << "sym=" << s.sym << endl;
+    cout << endl;
+}

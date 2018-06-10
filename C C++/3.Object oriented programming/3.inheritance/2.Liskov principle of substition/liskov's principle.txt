@@ -1,0 +1,82 @@
+#include <iostream>
+
+using namespace std;
+
+
+  //////////////////
+ //  Base Class  //
+//////////////////
+
+class c1
+{
+public:
+    int a;
+    int b;
+};
+
+
+  /////////////////////
+ //  Derived Class  //
+/////////////////////
+
+class c2 : public c1
+{
+public:
+    int c;
+    int d;
+};
+
+
+  /////////////////////////
+ //  Class C1’s Client  //
+/////////////////////////
+
+void printc1(c1 *p)
+{
+    cout << "Entering print c1" << endl;
+    cout << "a = " << p->a << endl;
+    cout << "b = " << p->b << endl;
+    cout << "Leaving print c1" << endl;
+}
+
+  /////////////////////////
+ //  Class C2’s Client  //
+/////////////////////////
+
+void printc2(c2 *p)
+{
+    cout << "Entering print c2" << endl;
+    cout << "a = " << p->a << endl;
+    cout << "b = " << p->b << endl;
+    cout << "c = " << p->c << endl;
+    cout << "d = " << p->d << endl;
+    cout << "Leaving print c2" << endl;
+}
+
+  /////////////
+ //  Admin  //
+/////////////
+
+int main(int argc, char** argv)
+{
+    cout << "Welcome to Liskov's Principle Of Substitution" << endl << endl;
+    c1 obj1;
+    obj1.a = 1;
+    obj1.b = 2;
+    printc1(&obj1);
+
+    c2 obj2;
+    obj2.a = 10;
+    obj2.b = 20;
+    obj2.c = 30;
+    obj2.d = 40;
+    printc2(&obj2);
+
+      //////////////////////////
+     //  Liskov’s Principle  //
+    //////////////////////////
+
+    printc1(&obj2);
+
+    return 0;
+}

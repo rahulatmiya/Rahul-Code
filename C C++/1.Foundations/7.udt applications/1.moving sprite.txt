@@ -1,0 +1,58 @@
+#include "stdafx.h"
+#include <iostream>
+#include "stdio.h"
+using namespace System::Threading;
+using namespace std;
+using namespace System;
+ 
+// Reading 5 positions. Storing X coordinates in array x and Y coordinates in array y
+ 
+const int MAX = 5;
+int x[MAX];
+int y[MAX];
+ 
+struct Sprite
+{
+    int x;
+    int y;
+    char sym;
+};
+ 
+Sprite s1 = { 5, 5, '*'};
+ 
+void Show(Sprite s)
+{
+    Console::SetCursorPosition(s.x,s.y);
+    putchar(s.sym);
+}
+void Hide(Sprite s)
+{
+    Console::SetCursorPosition(s.x,s.y);
+    putchar(' ');
+}
+ 
+int main(array<System::String ^> ^args)
+{
+ 
+ cout<<"Enter Positions"<<endl;
+ for(int i=0 ; i < MAX ; i++)
+ {
+     cout << "Position "<< i << endl;
+     cout << "Enter x coordinate "<<endl;
+     cin >> x[i];
+     cout << "Enter y coordinate "<<endl;
+     cin >> y[i];
+ }
+ Console::Clear();
+ Show(s1);
+ for(int i=0;i<MAX;i++)
+ {
+     Thread::Sleep(1000);
+     Hide(s1);
+     s1.x = x[i];
+     s1.y = y[i];
+     Show(s1);
+ }
+ Console::ReadLine();
+ return 0;
+}

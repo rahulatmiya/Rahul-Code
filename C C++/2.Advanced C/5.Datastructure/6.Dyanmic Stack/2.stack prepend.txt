@@ -1,0 +1,104 @@
+#include "stdafx.h"
+#include "iostream"
+#include "stdio.h"
+using namespace System;
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node * next;
+
+    Node(int x)
+    {
+        data = x;
+    }
+};
+
+class LinkedList
+{
+public:
+    Node * head;
+
+    Node* createNode(int x)
+    {
+        Node* t = (Node*)malloc(sizeof(Node));
+        t->data = x;
+        t->next = NULL;
+        return t;
+    }
+
+    LinkedList()
+    {
+        head = NULL;
+    }
+
+    void insertNode(int x)
+    {
+        Node *temp = createNode(x);
+        if (head == NULL)
+        {
+            head = temp;
+        }
+        else
+        {
+            temp->next = head;
+            head = temp;
+        }
+    }
+
+    void printList()
+    {
+        Node*p = head;
+        if (head == NULL)
+        {
+            cout << "List is empty";
+            return;
+        }
+
+        while (p != NULL)
+        {
+            cout << p->data << endl;
+            p = p->next;
+        }
+    }
+
+    int deleteNode()
+    {
+        int temp = 0;
+        if (head == NULL)
+        {
+            cout << "Cannot delete because the list is empty";
+            return -1;
+        }
+        if (head->next == NULL)
+        {
+            temp = head->data;
+            head = NULL;
+            return temp;
+        }
+        else
+        {
+            temp = head->data;
+            head = head->next;
+        }
+        return temp;
+    }
+
+};
+
+
+
+int main(array<System::String ^> ^args)
+{
+    Console::WriteLine(L"Hello World");
+    LinkedList ll;
+    ll.insertNode(10);
+    ll.insertNode(20);
+    ll.insertNode(30);
+    ll.printList();
+    ll.deleteNode();
+    ll.printList();
+    return 0;
+}

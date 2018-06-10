@@ -1,0 +1,96 @@
+#include <iostream>
+using namespace std;
+
+int stk[10];
+int sp = 10;
+
+void push(int v);
+int pop();
+void print();
+void flush();
+int peek();
+
+int test1();
+int test2();
+
+int main(int argc, char** argv)
+{
+    Console::Clear();
+    test1() && test2() ? cout << "Test1 Successful" << endl : cout << "Test1 failed" << endl;
+    Console::ReadLine();
+    return 0;
+}
+void push(int v)
+{
+
+    if (sp == 0)
+    {
+        cout << "\n Stack overflow." << endl;
+    }
+    else
+    {
+        sp = sp - 1;
+        stk[sp] = v;
+    }
+}
+int pop()
+{
+    if (sp == 10)
+    {
+        cout << "\nStack underflow" << endl;
+        return -1;
+    }
+    else
+    {
+        sp = sp + 1;
+        return stk[sp - 1];
+    }
+}
+
+void print()
+{
+    cout << "\nPrinting Stack." << endl;
+    if (sp == 10)
+    {
+        cout << "Nothing to Print." << endl;
+    }
+    else
+    {
+        for (int i = sp; i<10; i++)
+        {
+            cout << stk[i] << endl;
+        }
+    }
+}
+void flush()
+{
+    sp = 10;
+}
+
+int peek()
+{
+    return stk[sp];
+}
+
+int test1()
+{
+
+    flush();
+    push(20);
+    int v = pop();
+    return (v == 20);
+}
+
+int test2()
+{
+    flush();
+    int y = pop();
+    if (y == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}

@@ -1,0 +1,69 @@
+#include "stdafx.h"
+#include "iostream"
+ 
+using namespace System;
+using namespace std;
+ 
+int a[5];
+void print(int v[5]);
+void read(int v[5]);
+int findHighest(int v[5],int s);
+void swap(int *v1, int *v2);
+ 
+int main(array<System::String ^> ^args)
+{
+    cout << "Finding Highest" << endl;
+ // Reading array values from keyboard
+ read(a);
+ // Print Array
+ print(a);
+ int index;
+ for(int k = 5 ; k >= 1 ; k--)
+ {
+   index = findHighest(a,k);
+   swap(&a[index],&a[k-1]);
+ }
+ // Printing Sorted Array
+ print(a);
+ Console::ReadLine();
+    return 0;
+}
+ 
+void swap(int* v1, int* v2)
+{
+ int temp = *v1;
+ *v1 = *v2;
+ *v2 = temp;
+}
+ 
+void read(int v[5])
+{
+ cout << "Reading values from Keyboard" << endl;
+ for(int i=0 ; i<5 ; i++){
+  cout << "a["<<i<<"]=";
+  cin >> a[i];
+ }
+}
+ 
+void print(int v[5])
+{
+ cout << "Printing Arrays" << endl;
+ for(int i=0 ; i<5 ; i++){
+  cout << a[i] <<  endl;
+ }
+}
+ 
+int findHighest(int v[5],int s)
+{
+ int max = v[0];
+ int index = 0;
+ for(int j=1 ; j<s ; j++)
+ {
+  if( v[j] > max )
+  {
+   max = v[j];
+   index = j;
+  }
+ }
+ return index;
+}

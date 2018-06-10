@@ -1,0 +1,86 @@
+#include <iostream>
+
+using namespace std;
+
+struct Sprite{
+    int x;
+    int y;
+    char sym;
+};
+
+enum Bounds { MINX = 1, MAXX = 80, MINY = 1, MAXY = 40 };
+void print(Sprite* p);
+void read(Sprite *p);
+void init(Sprite *p);
+void init(Sprite *p, int v1, int v2, char c);
+void move(Sprite *p, int v1, int v2);
+
+int main(int argc, char** argv)
+{
+    Sprite s1, s2;
+    cout << "Welcome to the world of Sprites" << endl;
+    cout << "Initializing sprites" << endl;
+    init(&s1);
+    init(&s2, 3, 4, '$');
+    cout << "Printing initial values of sprites" << endl;
+    print(&s1);
+    print(&s2);
+    cout << "Reading values for sprite s1" << endl;
+    read(&s1);
+    cout << "Reading values for sprite s2" << endl;
+    read(&s2);
+    cout << "Printing values of sprite s1" << endl;
+    print(&s1);
+    cout << "Printing values of sprite s2" << endl;
+    print(&s2);
+    cout << "Moving Sprite s1 and s2" << endl;
+    move(&s1, 30, 30);
+    move(&s2, 12, 12);
+    cout << "Printing new locations of s1 and s2" << endl;
+    print(&s1);
+    print(&s2);
+    return 0;
+}
+
+void print(Sprite*  p)
+{
+    cout << "x = " << p->x << endl;
+    cout << "y = " << p->y << endl;
+    cout << "sym = " << p->sym << endl;
+}
+
+void read(Sprite *p)
+{
+    cout << "Enter x " << endl;
+    cin >> p->x;
+    cout << "Enter y " << endl;
+    cin >> p->y;
+    cout << "Enter sym" << endl;
+    cin >> p->sym;
+}
+
+void init(Sprite *p, int v1, int v2, char c)
+{
+    if (v1 >= MINX && v1 <= MAXX && v2 >= MINY && v2 <= MAXY)
+    {
+        p->x = v1;
+        p->y = v2;
+        p->sym = c;
+    }
+}
+
+void init(Sprite *p)
+{
+    p->x = 0;
+    p->y = 0;
+    p->sym = '*';
+}
+
+void move(Sprite *p, int v1, int v2)
+{
+    if (v1 >= MINX && v1 <= MAXX && v2 >= MINY && v2 <= MAXY)
+    {
+        p->x = v1;
+        p->y = v2;
+    }
+}

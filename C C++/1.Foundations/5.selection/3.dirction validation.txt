@@ -1,0 +1,50 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+int main(array<System::String ^> ^args)
+{
+    char direction = ' ';
+    while (direction != 'q'){
+        cout << "Please give me Direction..." << endl;
+        cout << " a for West  " << endl
+             << " w for North " << endl
+             << " d for East  " << endl
+             << " s for South " << endl
+             << " q for Quit  " << endl<<endl;
+        direction = Console::ReadKey(true).KeyChar;
+        if (direction == 'a'){
+            cout << endl
+                << "Thankyou You suggested West"
+         << endl<<endl;
+        }
+        if (direction == 'w'){
+            cout << endl
+                << "Thankyou You suggested North"
+                << endl<<endl;
+        }
+        if (direction == 'd'){
+            cout << endl
+                << "Thankyou You suggested East"
+                << endl<<endl;
+        }
+        if (direction == 's'){
+            cout << endl
+                << "Thankyou You suggested South"
+                << endl<<endl;
+        }
+        if (direction == 'q'){
+            cout << "Appreciate your time and effort...thanks"
+                 << endl
+                 << endl;
+        }
+        if (direction != 'a' && direction != 'w' && direction != 'd' 
+           && direction != 's' && direction != 'q'){
+            cout << endl
+                 << "Wrong Direction"
+                 << endl<<endl;
+        }
+    }
+}

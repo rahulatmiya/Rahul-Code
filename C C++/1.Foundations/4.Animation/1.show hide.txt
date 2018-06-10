@@ -1,0 +1,21 @@
+#include "stdafx.h"
+#include <stdio.h>
+
+using namespace System;
+using namespace System::Threading;
+
+int main(array<System::String ^> ^args)
+{
+    Console::Clear();
+
+    //show
+    Console::SetCursorPosition(5, 5);
+    putchar('*');
+    //hold
+    Thread::Sleep(3000);
+    //hide
+    Console::SetCursorPosition(5, 5);
+    putchar(' ');
+
+    Console::ReadLine();
+}

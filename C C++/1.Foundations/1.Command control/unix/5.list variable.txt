@@ -1,0 +1,16 @@
+listing variable
+
+#stage 5
+echo "Welcome to the World of Bash Script" 
+echo "Loop1" list="1 2 3 4 5" 
+for i in $list
+ do
+ echo "Doing Work$i"
+ done 
+echo "Loop2" 
+list=$list" 6 7 8"
+ for i in $list 
+do 
+echo "Doing Work$i" 
+done 
+echo "Thank you for using Bash Script"

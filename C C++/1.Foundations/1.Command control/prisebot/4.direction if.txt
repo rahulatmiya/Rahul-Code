@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+      
+    puts("This is Prisebot at your service :)");
+    puts("Master please provide direction...");
+    char ch = getchar();
+    puts("Thankyou... Spaceship heading towards ...");
+    if(ch == 'n') puts("North");
+    if(ch == 'w') puts("West");
+    if(ch == 'e') puts("East");
+    if(ch == 's') puts("South");
+    puts("All Clear... Prisebot taking control... whooosh");
+    
+}

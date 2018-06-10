@@ -1,0 +1,38 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+int main(int argc, char** argv)
+{
+    cout << "Allocating Integer on Heap" << endl;
+    int* p = (int*)malloc(sizeof(int));
+    *p = 10;
+    cout << "Variable allocated and inizialized to ";
+    cout << *p << endl;
+ }
+
+***************
+  Stage2
+***************
+
+#include "iostream"
+#include <stdlib.h>
+using namespace std;
+ 
+int main(int argc, char** argv)
+{
+ cout << "Allocating integer of Heap" << endl;
+ long *p = ( long * )malloc(sizeof(long));
+ if( p == NULL)
+ {
+  cout << "Sorry Heap Manager could not allocated Memory" << endl;
+  exit(-1);
+ }
+ cout << "Memory Block for long int allocated " << endl;
+ cout << "The number of bytes allocated are " << sizeof(long) << endl;
+ cout << "Value 34 being stored in target variable "<< endl;
+ *p = 34;
+ cout << "Value stored in target variable "<< *p << endl;
+  cout << "Address stored in pointer is "<< p << endl;
+ cout << "Successfully allocated long integer in Heap" << endl;
+ return 0;
+}

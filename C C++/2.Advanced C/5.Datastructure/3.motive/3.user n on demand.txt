@@ -1,0 +1,76 @@
+// FindHighest.cpp : main project file.
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+struct Node{
+    int v;
+    Node *next;
+};
+
+Node *head = NULL;
+Node* CreateNode(int v);
+void InsertNode(Node *n);
+void PrintList();
+
+int main(array<System::String ^> ^args)
+{
+    Console::WriteLine("Finding Highest form N numbers entered by User. User must enter -1 to indicate end");
+    
+    int n = 0 ;
+    cout << "Enter Number" << endl;
+    cin >> n;
+    while(n != -1){
+        InsertNode(CreateNode(n));
+        cout << "Enter Number " << endl;
+        cin >> n;
+    }
+    cout << "Printing List" << endl;
+    PrintList();
+    Node *traveller = head;
+    int max = INT_MIN;
+    while (traveller != NULL){
+        if (max < traveller->v){
+            max = traveller->v;
+        }
+        traveller = traveller->next;
+    }
+    cout << "Highest number is " << max << endl;
+    Console::ReadLine();
+    return 0;
+}
+
+Node* CreateNode(int v){
+    Node * temp = (Node *)malloc(sizeof(Node));
+    temp->v = v;
+    temp->next = NULL;
+    return temp;
+}
+
+void InsertNode(Node *n){
+    if (head == NULL){
+        head = n;
+        return;
+    }
+    Node * traveller = head;
+    while (traveller->next != NULL){
+        traveller = traveller->next;
+    }
+    traveller->next = n;
+}
+
+void PrintList(){
+    if (head == NULL) {
+        cout << "List Empty " << endl;
+        return;
+    }
+    Node *traveller = head;
+    while (traveller != NULL){
+        cout << traveller->v << endl;
+        traveller = traveller->next;
+    }
+}
+

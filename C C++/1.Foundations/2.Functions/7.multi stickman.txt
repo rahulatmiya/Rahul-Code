@@ -1,0 +1,65 @@
+#include "stdafx.h"
+#include "stdio.h"
+#include "iostream"
+using namespace System;
+using namespace std;
+
+void SleepingLine(int x, int y);
+void StandingLine(int x, int y);
+void StickMan(int x, int y, char c);
+
+int main(array<System::String ^> ^args)
+{
+    Console::Clear();
+    StickMan(10,10,'@');
+    StickMan(20, 20, '$');
+    Console::ReadLine();
+    return 0;
+}
+
+void SleepingLine(int x, int y,char c)
+{
+ Console::SetCursorPosition(x, y);
+    putchar(c);
+    Console::SetCursorPosition(x + 1, y);
+    putchar(c);
+    Console::SetCursorPosition(x + 2, y);
+    putchar(c);
+    Console::SetCursorPosition(x + 3, y);
+    putchar(c);
+}
+
+
+void StandingLine(int x, int y,char c)
+{
+    Console::SetCursorPosition(x, y);
+    putchar(c);
+    Console::SetCursorPosition(x, y + 1);
+    putchar(c);
+    Console::SetCursorPosition(x, y + 2);
+    putchar(c);
+    Console::SetCursorPosition(x, y + 3);
+    putchar(c);
+}
+
+void StickMan(int x,int y,char c)
+{
+    // Head
+    SleepingLine(x,y,c);
+    StandingLine(x+4,y,c);
+    SleepingLine(x,y+3,c);
+    StandingLine(x, y,c);
+    //trunk
+    StandingLine(x+2,y+3,c);
+    //righthand
+    SleepingLine(x-2,y+6,c);
+    //lefthand
+    SleepingLine(x+3, y+6,c);
+    //trunk
+    StandingLine(x+2,y+6,c);
+    SleepingLine(x,y+9,c);
+    //left leg
+    StandingLine(x+4,y+9,c);
+    //right leg
+    StandingLine(x,y+9,c);
+}

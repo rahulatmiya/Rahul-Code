@@ -1,0 +1,10 @@
+
+Using Iteration via for statement 
+
+# Stage3 
+echo "Welcome to the World of Bash Script" 
+for i in 1 2 3 4 5 
+do
+ echo "Doing Work" 
+done 
+echo "Thank you for using Bash Script"

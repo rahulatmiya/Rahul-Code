@@ -1,0 +1,33 @@
+#include <iostream>
+
+using namespace std;
+
+void swap(int m, int n);
+
+int main(int argc, char** argv)
+{
+    int i = 10;
+    int j = 20;
+    int *p = &i;
+    int *q = &j;
+    cout << "i = " << i << endl;
+    cout << "j = " << j << endl;
+    cout << "Swapping ..." << endl;
+    swap(i, j);
+    cout << "i = " << i << endl;
+    cout << "j = " << j << endl;
+    Console::ReadLine();
+    return 0;
+}
+
+void swap(int m, int n){
+    cout << "Entering swap" << endl;
+    cout << "m = " << m << endl;
+    cout << "n = " << n << endl;
+    int temp = m;
+    m = n;
+    n = temp;
+    cout << "m = " << m << endl;
+    cout << "n = " << n << endl;   
+ cout << "Leaving swap" << endl;
+}

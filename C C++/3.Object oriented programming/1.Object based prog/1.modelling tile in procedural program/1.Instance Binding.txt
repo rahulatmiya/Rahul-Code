@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+struct Tile{
+	char file;
+	int row;
+};
+
+void printT1();
+void printT2();
+void readT1();
+void readT2();
+
+Tile t1, t2;
+
+int main(int argc, char ** argv)
+{
+	cout << "Welcome to the world of Chess" << endl;
+   	cout << "Reading values for tile t1" << endl;
+	readT1();
+	cout << "Reading values for tile t2" << endl;
+	readT2();
+	cout << "Printing values of tile t1" << endl;
+	printT1();
+	cout << "Printing values of tile t2" << endl;
+	printT2();
+  	return 0;
+}
+
+void printT1()
+{
+	cout << "file = " << t1.file << endl;
+	cout << "row = " << t1.row << endl;
+}
+
+void readT1()
+{
+	cout << "Enter file " << endl;
+	cin >> t1.file;
+	cout << "Enter row " << endl;
+	cin >> t1.row;
+}
+
+void printT2()
+{
+	cout << "file = " << t2.file << endl;
+	cout << "row = " << t2.row << endl;
+}
+
+void readT2()
+{
+	cout << "Enter file " << endl;
+	cin >> t2.file;
+	cout << "Enter row " << endl;
+	cin >> t2.row;
+}

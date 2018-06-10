@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char** argv) {
+      
+    puts("This is Prisebot at your service :)");
+    char askagain;
+    char ch;
+    do
+    {
+        askagain = 'n';
+        puts("Master please provide direction...");
+        ch = getchar();
+        puts("Master you have suggested ...");
+        switch(ch){
+          case 'n' : puts("North");break;
+          case 'w' : puts("West");break;
+          case 'e' : puts("East");break;
+          case 's' : puts("South");break;
+          default  : puts("Wrong Direction");
+                     askagain = 'y';
+                     break;
+       }
+       while(getchar() != '\n');
+    } while( askagain == 'y' );
+    puts("All Clear... Prisebot taking control... whooosh");
+    

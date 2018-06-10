@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+
+
+class Musician{
+	char *name;
+	int age;
+	int rate;
+public:
+	Musician(char*name, int size,int age,int rate)
+    {
+	   this->name= new char[size];
+	   strcpy(this->name,name);
+	   this->age = age;
+	   this->rate = rate;
+    }
+	void bio(){
+		cout << "My name is "<<name<<endl;
+		cout << "My age is "<<age<<endl;
+		cout << "My rate is "<<rate<<endl;
+    }
+	void play(){
+		cout << "My name is "<<name<<endl;
+		cout << "Presenting..."<<"By the River of Babylon"<<endl;
+		cout << "By..."<<"Boney M"<<endl;
+	}
+	~Musician(){
+		delete(name);
+	}
+
+};
+
+class SaxophonePlayer : public Musician{
+	char *type;
+public:
+	SaxophonePlayer(char *type,int tsize,char*name, int size,int age,int rate):
+		Musician(name,size,age,rate)
+	{
+		this->type = new char[tsize];
+		strcpy(this->type,type);
+	}
+	void bio(){
+			Musician::bio();
+			cout << "I Play... " << type << " Saxophone"<<endl;
+		}
+	void play(){
+			cout << "Presenting..."<<"The Moments.."<<endl;
+			cout << "By..."<<"Kenny G."<<endl;
+    }
+	~SaxophonePlayer(){
+		delete(type);
+	}
+
+};
+
+int main(int argc, char **argv){
+	cout << endl<< "Creating and listening to a musician"<<endl;
+    char * n= "Shawn";
+    Musician m(n,6,45,2000);
+    m.bio();
+    m.play();
+    cout<<endl<<"Creating and listening to a Saxophone Player"<<endl;
+    SaxophonePlayer s("Soprano",7,"Tom",4,50,3000);
+    s.bio();
+    s.play();
+}

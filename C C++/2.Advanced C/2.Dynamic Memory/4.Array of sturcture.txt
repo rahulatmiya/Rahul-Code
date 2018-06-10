@@ -1,0 +1,41 @@
+#include "iostream"
+#include <stdlib.h>
+using namespace std;
+struct Point{
+ int x;
+ int y;
+};
+int main(int argc, char** argv)
+{
+ cout << "Allocating an array of points on Heap" << endl;
+ cout << "Please enter the size of array"<<endl;
+ int size;
+ cin >> size;
+ cout << "Allocating memory ...."<<endl;
+ struct Point *p = ( struct Point * )malloc(sizeof(struct Point)*size);
+ if( p == NULL)
+ {
+    cout << "Sorry Heap Manager could not allocated Memory" << endl;
+    exit(-1);
+ }
+ cout << "Memory Block for array of points allocated " << endl;
+ cout << "The number of bytes allocated are " 
+        << sizeof(struct Point) * size << endl;
+ cout << "Populating array "<< endl;
+ for(int i=0 ; i < size ; i++)
+ {
+    p[i].x = i*10;
+    p[i].y = i*20;
+ }
+ cout << "Printing Array "<< endl;
+ for(int i=0 ; i<size ; i++)
+ {
+    cout << "x=" << p[i].x << endl;
+    cout << "y=" << p[i].y << endl;
+ }
+ Console::Beep(4000,2000);
+ cout << "Address stored in pointer is "<< p << endl;
+ cout << "Successfully allocated array of points in Heap" << endl;
+ Console::Beep(5000,2000);
+ return 0;
+}

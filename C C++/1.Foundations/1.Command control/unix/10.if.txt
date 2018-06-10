@@ -1,0 +1,12 @@
+
+
+#Exploring If 
+
+echo "Exploring If statement" 
+read -p 
+"Please enter your bid --> " 
+bid 
+if [ $bid -gt 10 ] 
+then
+ echo "Item Sold" fi
+ echo "Market Closing...Thankyou" 

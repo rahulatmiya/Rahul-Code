@@ -1,0 +1,85 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+
+ref class Point
+{
+    int x;
+    int y;
+    String ^name;
+public:
+    Point(){
+        x = 0;
+        y = 0;
+        name = "";
+    }
+    Point(int x, int y,String ^n){
+        this->x = x;
+        this->y = y;
+        this->name = n;
+        Console::WriteLine("Constructor for {0} completed it's job", name);
+    }
+    void print(){
+        Console::WriteLine("name = {0}", name);
+        Console::WriteLine("x = {0}", x);
+        Console::WriteLine("y = {0}", y);
+    }
+    ~Point(){
+        Console::WriteLine("Destructor for {0} completed it's job", name);
+    }
+};
+
+
+
+Point^ DynamicClient();
+void Client(Point ^p);
+
+int main(array<System::String ^> ^args)
+{
+    
+    cout << "Entering Main" << endl;
+
+    /* Creating a Local Object */
+    Point p2(3, 3,"p2");
+    
+    Client(%p2);
+    cout << "Leaving Main" << endl;
+    Console::ReadLine();
+    return 0;
+}
+
+void Client(Point ^p)
+{
+    cout << "Entering Client" << endl;
+
+    /* Creating a Local Object */
+    Point p3(4, 4,"p3");
+
+    cout << "Printing Local Variable" << endl;
+    p3.print();
+    cout << "Printing object passed as argument" << endl;
+    p->print();
+    cout << "Invoking DynamicClient function and obtaining dynamic object " << endl;
+    Point ^ d = DynamicClient();
+    cout << "Printing Dynamic Object " << endl;
+    d->print();
+
+    /* Deleting Dynamically Allocated Object */
+    delete d;
+
+    cout << "Leaving Client" << endl;
+}
+
+Point^ DynamicClient(){
+    cout << "Entering DynamicClient" << endl;
+
+    /* Creating Dynamic Object */
+    Point ^q = gcnew Point(7, 7, "IamDynamicObject");
+
+    q->print();
+    cout << "Leaving DynamicClient" << endl;
+    return q;
+}

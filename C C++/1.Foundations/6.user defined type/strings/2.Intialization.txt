@@ -1,0 +1,32 @@
+#include "iostream"
+
+using namespace std;
+
+char ch1[5] = { 'h', 'e', 'l', 'l', 'o' };
+char ch2[] = { 'h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd' };
+int main(int argc, char** argv)
+{
+    int i = 0;
+    cout << "Printing the array ch1" << endl;
+    for (i = 0; i<5; i++)
+    {
+        cout << "a[" << i << "]=" << ch1[i] << endl;
+    }
+    cout << "ch1 = ";
+    for (i = 0; i < 5; i++)
+    {
+        cout << ch1[i];
+    }
+    cout << endl;
+    cout << "Printing the array ch2" << endl;
+    for (i = 0; i<11; i++)
+    {
+        cout << "a[" << i << "]=" << ch2[i] << endl;
+    }
+    cout << "ch2 = ";
+    for (i = 0; i<11; i++)
+    {
+        cout << ch2[i];
+    }
+    return 0;
+}

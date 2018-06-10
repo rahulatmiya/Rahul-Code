@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+struct Tile{
+	char file;
+	int row;
+	void print();
+	void read();
+	void init();
+};
+
+void Tile::print()
+{
+	cout << "file = " << this->file << endl;
+	cout << "row = " << this->row << endl;
+}
+
+void Tile::read()
+{
+	cout << "Enter file " << endl;
+	cin >> file;
+	cout << "Enter row " << endl;
+	cin >> row;
+}
+
+void Tile::init()
+{
+   	this->file = 'a';
+   	this->row = 1;
+}
+
+int main(int argc, char ** argv)
+{
+    Tile t1, t2;
+	cout << "Welcome to the world of Chess" << endl;
+	cout << "Initializing values for tile t1" << endl;
+	t1.init();
+	cout << "Printing values of tile t1" << endl;
+	t1.print();
+	cout << "Initializing values for tile t2" << endl;
+	t2.init();
+	cout << "Printing values of tile t2" << endl;
+	t2.print();
+   	cout << "Reading values for tile t1" << endl;
+	t1.read();
+	cout << "Reading values for tile t2" << endl;
+	t2.read();
+	cout << "Printing values of tile t1" << endl;
+	t1.print();
+	cout << "Printing values of tile t2" << endl;
+	t2.print();
+  	return 0;
+}

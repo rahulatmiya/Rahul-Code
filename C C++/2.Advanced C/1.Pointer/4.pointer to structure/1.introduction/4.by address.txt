@@ -1,0 +1,55 @@
+#include "iostream";
+
+using namespace std;
+
+struct Sprite
+{
+    int x;
+    int y;
+    char sym;
+};
+
+void printSprite(Sprite  s);
+void printSprite(Sprite* s);
+
+int main(int argc, char** argv)
+{
+    Sprite s1 = { 1, 2, '*' };
+    Sprite *p;
+    
+    p = &s1;
+    
+   
+    printSprite(s1);
+    printSprite(&s1);
+
+    
+    printSprite(*p);
+    printSprite(p);
+  p->x = 11;
+    p->y = 22;
+    p->sym = '#';
+
+    
+    printSprite(s1);
+    printSprite(&s1);
+
+    Console::ReadLine();
+    return 0;
+}
+
+void printSprite(Sprite s)
+{
+    cout << "Printing Sprite --  pass by value" << endl;
+    cout << "x = " << s.x << endl;
+    cout << "y = " << s.y << endl;
+    cout << "sym = " << s.sym << endl;
+}
+
+void printSprite(Sprite *q)
+{
+    cout << "Printing Sprite --  pass by address" << endl;
+    cout << "x = " << q->x << endl;
+    cout << "y = " << q->y << endl;
+    cout << "sym = " << q->sym << endl;
+}

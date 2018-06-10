@@ -1,0 +1,14 @@
+
+using until loop
+#Exploring Until Loop 
+echo "Exploring Until Loop"
+ i=0 until [ $i -gt 5 ] 
+do 
+echo "The value of i is $i" 
+i=$[ $i + 1 ]
+ done
+ until (( $i > 10 )) 
+do 
+echo "The value of i is $i" ((i = $i + 1 )) 
+done 
+echo "Thankyou for using Until Loop"

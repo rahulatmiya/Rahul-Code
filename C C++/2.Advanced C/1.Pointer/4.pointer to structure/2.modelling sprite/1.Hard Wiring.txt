@@ -1,0 +1,63 @@
+#include <iostream>
+
+using namespace std;
+
+struct Sprite{
+    int x;
+    int y;
+    char sym;
+};
+
+void printS1();
+void printS2();
+void readS1();
+void readS2();
+
+Sprite s1, s2;
+int main(int argc, char** argv)
+{
+    cout << "Welcome to the world of Sprites" << endl;
+    cout << "Reading values for sprite s1" << endl;
+    readS1();
+    cout << "Reading values for sprite s2" << endl;
+    readS2();
+    cout << "Printing values of sprite s1" << endl;
+    printS1();
+    cout << "Printing values of sprite s2" << endl;
+    printS2();
+    return 0;
+}
+
+void printS1()
+{
+    cout << "x = " << s1.x << endl;
+    cout << "y = " << s1.y << endl;
+    cout << "sym = " << s1.sym << endl;
+}
+
+void readS1()
+{
+    cout << "Enter x " << endl;
+    cin >> s1.x;
+    cout << "Enter y " << endl;
+    cin >> s1.y;
+    cout << "Enter symbol " << endl;
+    cin >> s1.sym;
+}
+
+void printS2()
+{
+    cout << "x = " << s2.x << endl;
+    cout << "y = " << s2.y << endl;
+    cout << "sym = " << s2.sym << endl;
+}
+
+void readS2()
+{
+    cout << "Enter x " << endl;
+    cin >> s2.x;
+    cout << "Enter y " << endl;
+    cin >> s2.y;
+    cout << "Enter symbol " << endl;
+    cin >> s2.sym;
+}

@@ -1,0 +1,89 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+class Point
+{
+    int x;
+    int y;
+    char *name;
+public:
+    Point(){
+        x = 0;
+        y = 0;
+        name = "";
+    }
+    Point(int x, int y,char *n){
+        this->x = x;
+        this->y = y;
+        this->name = n;
+        cout << "Constructor for " << name << " completed it's job" << endl;
+    }
+    void print(){
+
+        cout << "name = " << name << endl;
+        cout << "x = " << x << endl;
+        cout << "y = " << y << endl;
+    }
+    ~Point(){
+        cout << "Destructor for " << name << " called" << endl;
+    }
+};
+
+
+/* Creating Global Object */
+Point p1(1,1,"p1");
+
+Point* DynamicClient();
+void Client(Point *p);
+
+int main(array<System::String ^> ^args)
+{
+    
+    cout << "Entering Main" << endl;
+
+    /* Creating a Local Object */
+    Point p2(3, 3,"p2");
+
+    Client(&p2);
+    cout << "Leaving Main" << endl;
+    Console::ReadLine();
+    return 0;
+}
+
+void Client(Point *p)
+{
+    cout << "Entering Client" << endl;
+
+    /* Creating a Local Object */
+    Point p3(4, 4,"p3");
+
+    cout << "Printing Global Variable" << endl;
+    p1.print();
+    cout << "Printing Local Variable" << endl;
+    p3.print();
+    cout << "Printing object passed as argument" << endl;
+    p->print();
+    cout << "Invoking DynamicClient function and obtaining dynamic object " << endl;
+    Point * d = DynamicClient();
+    cout << "Printing Dynamic Object " << endl;
+    d->print();
+
+    /* Deleting Dynamically Allocated Object */
+    delete d;
+
+    cout << "Leaving Client" << endl;
+}
+
+Point* DynamicClient(){
+    cout << "Entering DynamicClient" << endl;
+
+    /* Creating Dynamic Object */
+    Point *q = new Point(7, 7, "IamDynamicObject");
+
+    q->print();
+    cout << "Leaving DynamicClient" << endl;
+    return q;
+}

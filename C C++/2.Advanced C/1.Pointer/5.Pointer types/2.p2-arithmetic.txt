@@ -1,0 +1,37 @@
+#include <iostream>
+
+
+using namespace std;
+
+
+int main(int argc, char** argv)
+{
+    cout << "Entering Main" << endl;
+    int a[5] = { 10, 11, 12, 13, 14 };
+    int *p = a;
+    /* Incrementing Pointer */
+    cout << "Incrementing Pointer" << endl;
+    for (int i = 0; i < 5; i++){
+        cout << *p << endl;
+        p++;
+    }
+    cout << "Decrementing Pointer" << endl;
+    /* Decrementing Pointer */
+    for (int i = 5; i > 0; i--){
+        p--;
+        cout << *p << endl;
+    }
+
+    cout << "Printing array Using Pointer Expression" << endl;
+    /* Expression */
+    for (int i = 0; i < 5; i++){
+        cout << *(p+i) << endl;
+    }
+
+    cout << "Printing Array using pointer in array notation" << endl;
+    /* Array Notation */
+    for (int i = 0; i < 5; i++){
+        cout << p[i] << endl;
+    }
+    cout << "Leaving Main" << endl;
+}

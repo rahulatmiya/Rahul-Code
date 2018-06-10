@@ -1,0 +1,71 @@
+#include "stdafx.h"
+#include "stdio.h"
+#include "iostream"
+
+using namespace std;
+using namespace System::Threading;
+using namespace System;
+
+void horizontalAnimation(int x, int y, int s);
+void verticalAnimation(int x, int y, int s);
+
+int main(array<System::String ^> ^args)
+{
+    Console::Clear();
+    int m, n, s;
+    cout << "Enter x coordinate for H anim-->";
+    cin >> m;
+    cout << "Enter y coordinate for H anim-->";
+    cin >> n;
+    cout << "Enter steps-->";
+    cin >> s;
+    Console::Clear();
+    cout << "Starting Horizontal Animation...";
+    Thread::Sleep(1000);
+    Console::Clear();
+    horizontalAnimation(m, n, s);
+    Console::Clear();
+    cout << "Enter x coordinate for V anim-->";
+    cin >> m;
+    cout << "Enter y coordinate for V anim-->";
+ cin >> n;
+    cout << "Enter steps-->";
+    cin >> s;
+    Console::Clear();
+    cout << "Starting Vertical Animation...";
+    Thread::Sleep(1000);
+    Console::Clear();
+    verticalAnimation(m, n, s);
+    Console::Clear();
+    cout << " Thankyou, for using this animation program..." << endl;
+    Thread::Sleep(1000);
+}
+
+void horizontalAnimation(int x, int y, int s)
+{
+    do
+    {
+        Console::SetCursorPosition(x, y);
+        putchar('*');
+        Thread::Sleep(500);
+        Console::SetCursorPosition(x, y);
+ putchar(' ');
+        x++;
+        s--;
+    } while (s>0);
+}
+
+void verticalAnimation(int x, int y, int s)
+{
+    int i = 0;
+    do
+    {
+        Console::SetCursorPosition(x, y);
+        putchar('*');
+        Thread::Sleep(500);
+        Console::SetCursorPosition(x, y);
+        putchar(' ');
+        y++;
+        i++;
+    } while (i<s);
+}

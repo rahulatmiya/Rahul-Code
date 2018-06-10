@@ -1,0 +1,207 @@
+#include "stdafx.h"
+#include <stdio.h>
+#include <iostream>
+
+using namespace System;
+using namespace std;
+using namespace System::Threading;
+
+class Sprite
+{
+protected:
+    int x;
+    int y;
+    char ch;
+public:
+    Sprite();
+    Sprite(int x, int y, char ch);
+    virtual void show();
+    virtual void hide();
+    void moveNorth();
+    void moveSouth();
+    void moveEast();
+    void moveWest();
+};
+
+
+
+Sprite::Sprite(){
+    x = 1; y = 1; ch = '*';
+}
+Sprite::Sprite(int x, int y, char ch){
+    this->x = x; this->y = y; this->ch = ch;
+}
+void Sprite::show(){
+    Console::SetCursorPosition(x, y);
+    putchar(ch);
+}
+void Sprite::hide(){
+    Console::SetCursorPosition(x, y);
+    putchar(' ');
+}
+void Sprite::moveNorth(){
+    hide();
+    if (y > 1)  y--;
+    show();
+}
+void Sprite::moveSouth(){
+    hide();
+    if (y < 40) y++;
+    show();
+}
+void Sprite::moveEast(){
+    hide();
+    if (x < 79) x++;
+    show();
+}
+void Sprite::moveWest(){
+    hide();
+    if (x > 1)  x--;
+    show();
+}
+
+
+class Vline : public Sprite
+{
+    int size;
+public:
+    Vline();
+    Vline(int x, int y, char ch, int size);
+    void show();
+    void hide();
+};
+
+Vline::Vline(){
+    size = 5;
+}
+Vline::Vline(int x, int y, char ch, int size) :Sprite(x, y, ch){
+    this->size = size;
+}
+void Vline::show(){
+    for (int i = 0; i < size; i++){
+        Console::SetCursorPosition(x, y + i);
+        putchar(ch);
+    }
+}
+void Vline::hide(){
+    for (int i = 0; i < size; i++){
+        Console::SetCursorPosition(x, y + i);
+        putchar(' ');
+    }
+}
+
+
+void verticalSpriteAnimation(Sprite *s);
+void verticalVlineAnimation(Vline *v);
+void verticalAnimation(Sprite * s);
+void horizontalAnimation(Sprite * s);
+
+int main(array<System::String ^> ^args)
+{
+    Sprite s1(3, 3, '*');
+    Sprite s2(5, 5, '$');
+    Vline v1;
+    Vline v2(10, 10, '&', 5);
+    s1.show();
+    s2.show();
+    v1.show();
+    v2.show();
+    bool first = true;  // if first is true the first object moves or else the second.
+    bool shape = true;  // if shape is true sprite moves or else vline.
+    ConsoleKey k = Console::ReadKey().Key;
+    while (k != ConsoleKey::Q)
+    {
+        switch (k){
+        case ConsoleKey::UpArrow:
+            if (first)
+                if (shape)s1.moveNorth();
+                else v1.moveNorth();
+            else if (shape) s2.moveNorth();
+            else v2.moveNorth(); break;
+        case ConsoleKey::DownArrow:
+            if (first) if (shape) s1.moveSouth();
+            else v1.moveSouth();
+            else if (shape) s2.moveSouth();
+            else v2.moveSouth(); break;
+        case ConsoleKey::RightArrow:
+            if (first) if (shape) s1.moveEast();
+            else v1.moveEast();
+            else if (shape) s2.moveEast();
+            else v2.moveEast(); break;
+        case ConsoleKey::LeftArrow:
+            if (first) if (shape) s1.moveWest();
+            else v1.moveWest();
+            else if (shape) s2.moveWest();
+            else v2.moveWest(); break;
+        case ConsoleKey::F1: first = !first; break;
+        case ConsoleKey::F2: shape = !shape; break;
+        case ConsoleKey::F3: if (first)
+            if (shape)
+                verticalSpriteAnimation(&s1);
+            else
+                verticalVlineAnimation(&v1);
+                             else
+                                 if (shape)
+                                     verticalSpriteAnimation(&s2);
+                                 else
+                                     verticalVlineAnimation(&v2);
+            break;
+        case ConsoleKey::F4: if (first)
+            if (shape)
+                verticalAnimation(&s1);
+            else verticalAnimation(&v1);
+                             else
+                                 if (shape)
+                                     verticalAnimation(&s2);
+                                 else
+                                     verticalAnimation(&v2);
+            break;
+       case ConsoleKey::F5: if (first)
+            if (shape)
+                 horizontalAnimation(&s1);
+            else horizontalAnimation(&v1);
+                             else
+                                 if (shape)
+                                     horizontalAnimation(&s2);
+                                 else
+                                     horizontalAnimation(&v2);
+            break;
+
+    }
+    k = Console::ReadKey().Key;
+}
+return 0;
+}
+
+
+void verticalSpriteAnimation(Sprite *s)
+{
+    for (int i = 0; i < 5; i++){
+        s->moveSouth();
+        Thread::Sleep(200);
+    }
+}
+
+void verticalVlineAnimation(Vline *v)
+{
+    for (int i = 0; i < 5; i++){
+        v->moveSouth();
+        Thread::Sleep(200);
+    }
+}
+
+void verticalAnimation(Sprite * s)
+{
+    for (int i = 0; i < 5; i++){
+        s->moveSouth();
+        Thread::Sleep(200);
+    }
+}
+
+void horizontalAnimation(Sprite * s)
+{
+    for (int i = 0; i < 5; i++){
+        s->moveEast();
+        Thread::Sleep(200);
+    }
+}

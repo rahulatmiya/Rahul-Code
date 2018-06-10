@@ -1,0 +1,17 @@
+
+reading data
+
+echo "Welcome to the World of Bash Script" 
+echo "Please enter list values for Loop1" 
+read list 
+for i in $list
+ do 
+echo "Doing Work$i" 
+done 
+echo "Loop2" 
+list=$list" 6 7 8" 
+for i in $list 
+do
+ echo "Doing Work$i"
+ done
+ echo "Thank you for using Bash Script" 

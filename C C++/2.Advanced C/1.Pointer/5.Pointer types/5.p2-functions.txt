@@ -1,0 +1,269 @@
+
+  /////////////
+ // Stage1  //
+/////////////
+
+#include <iostream>
+
+using namespace std;
+
+void g1(){
+    cout << "I am g1" << endl;
+}
+
+void f1(){
+    cout << "I am f1" << endl;
+}
+
+int main(int argc, char** argv)
+{
+
+    cout << "Entering Main" << endl;
+
+    //  Invoking function g1 directly                           
+   
+    g1();  
+
+    //  Invoking function f1 directly
+       
+    f1();
+
+    // Creating function pointer
+
+    void(*p)();
+
+    // Binding function pointer to f1
+
+    p = &f1;
+
+    // Invoking function indirectly via function pointer
+
+    (*p)();
+
+    // Binding function pointer to g1
+
+    p = &g1;
+
+    // Invoking function indirectly via function pointer
+
+    (*p)();
+
+    cout << "Leaving Main" << endl;
+}
+
+
+
+
+
+
+  /////////////
+ // Stage2  //
+/////////////
+
+#include <iostream>
+
+using namespace std;
+
+void g1(){
+    cout << "I am g1" << endl;
+}
+
+void f1(){
+    cout << "I am f1" << endl;
+}
+
+int m(int v1, int v2){
+    return v1 + v2;
+}
+
+int n(int v1, int v2){
+    return v1 - v2;
+}
+
+
+int main(int argc, char** argv)
+{
+    cout << "Entering Main" << endl;
+    g1();
+    f1();
+    void(*p)();
+    p = &f1;
+    (*p)();
+    p = &g1;
+    (*p)();
+    
+    // Creating function pointer q
+    
+    int(*q)(int, int);
+    
+    // Binding function pointer q to function m
+    
+    q = &m;
+    
+    // Invoking function m indirectly via function pointer
+    
+    cout << (*q)(1, 2) << endl;
+    
+    // Binding function pointer q to function n
+    
+    q = &n;
+    
+    // Invoking function n indirectly via function pointer q
+    
+    cout << (*q)(2, 1) << endl;
+
+    cout << "Leaving Main" << endl;
+}
+
+
+
+
+
+  /////////////
+ // Stage3  //
+/////////////
+
+#include <iostream>
+
+
+using namespace std;
+
+void g1(){
+    cout << "I am g1" << endl;
+}
+
+void f1(){
+    cout << "I am f1" << endl;
+}
+
+int m(int v1, int v2){
+    return v1 + v2;
+}
+
+int n(int v1, int v2){
+    return v1 - v2;
+}
+
+
+int main(int argc, char** argv)
+{
+    cout << "Entering Main" << endl;
+    g1();
+    f1();
+    void(*p)();
+    p = &f1;
+    (*p)();
+    p = &g1;
+    (*p)();
+    int(*q)(int, int);
+    q = &m;
+    cout << (*q)(1, 2) << endl;
+    q = &n;
+    cout << (*q)(2, 1) << endl;
+
+    // Binding pointer p to function f1
+
+    p = f1;
+
+    // Invoking function f1 indirectly via p 
+
+    p();
+
+    // Binding pointer p to function g1
+
+    p = g1;
+
+    // Invoking function g1 indirectly via p
+
+    p();
+
+    // Binding pointer q to function m
+
+    q = m;
+
+    // Invoking function m indirectly via q
+
+    cout << q(3, 4) << endl;
+
+    // Binding pointer q to function n
+
+    q = n;
+
+    // Invoking function n indirectly via q
+
+    cout << q(7, 2) << endl;
+
+    cout << "Leaving Main" << endl;
+}
+
+
+
+
+
+  /////////////
+ // Stage4  //
+/////////////
+
+
+#include <iostream>
+
+using namespace std;
+
+void g1(){
+    cout << "I am g1" << endl;
+}
+
+void f1(){
+    cout << "I am f1" << endl;
+}
+
+int m(int v1, int v2){
+    return v1 + v2;
+}
+
+int n(int v1, int v2){
+    return v1 - v2;
+}
+
+void testarrayoffunctionpointers();
+int main(int argc, char** argv)
+{
+    cout << "Entering Main" << endl;
+    g1();
+    f1();
+    void(*p)();
+    p = &f1;
+    (*p)();
+    p = &g1;
+    (*p)();
+    int(*q)(int, int);
+    q = &m;
+    cout << (*q)(1, 2) << endl;
+    q = &n;
+    cout << (*q)(2, 1) << endl;
+    p = f1;
+    p();
+    p = g1;
+    p();
+    q = m;
+    cout << q(3, 4) << endl;
+    q = n;
+    cout << q(7, 2) << endl;
+    testarrayoffunctionpointers();
+    cout << "Leaving Main" << endl;
+}
+
+
+void k1(){
+    cout << "I am k1" << endl;
+}
+
+void(*a[3])() = { f1, g1, k1 };
+
+void testarrayoffunctionpointers(){
+    cout << "Entering test for array of function pointers" << endl;
+    for (int i = 0; i < 3; i++){
+        a[i]();
+    }
+    cout << "Leaving test for array of function pointers" << endl;
+}

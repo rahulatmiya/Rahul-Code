@@ -1,0 +1,8 @@
+ Illustrate the use of String Interpolation
+
+# Stage4 
+echo "Welcome to the World of Bash Script"
+ for i in 1 2 3 4 5 
+do
+ echo "Doing Work$i"
+ done

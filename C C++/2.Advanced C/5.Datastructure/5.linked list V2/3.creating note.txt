@@ -1,0 +1,47 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+struct Point{
+    int x;
+    int y;
+    struct Point *next;
+};
+
+void printList();
+struct Point* createNode(int x, int y);
+
+struct Point *head = NULL;
+
+int main(void) {
+	printf("Welcome to Linked List \n");
+	head = createNode(1, 2);
+	head->next = createNode(3, 4);
+	head->next->next = createNode(5, 6);
+	printList();
+	return 0;
+
+}
+
+void printList()
+{
+	if (head == NULL){
+		printf("Linked List is Empty");return;
+	}
+	else{
+		struct Point *traveller = head;
+		for (int i = 1; traveller != NULL; i++)
+		{
+		   printf("Node %d ::  x = %d y = %d\n",
+				   i,traveller->x,traveller->y);
+		   traveller = traveller->next;
+		}
+	}
+}
+
+struct Point* createNode(int x, int y){
+	struct Point* node = (struct Point *)malloc(sizeof(struct Point));
+	node->x = x;
+	node->y = y;
+	node->next = NULL;
+	return node;
+}

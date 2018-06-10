@@ -1,0 +1,68 @@
+#include "stdafx.h"
+#include <iostream>
+
+using namespace System;
+using namespace std;
+
+enum Direction { WEST = 'a', SOUTH = 's', NORTH = 'w', 
+                 EAST = 'd', QUIT = 'q' };
+enum BOUNDS { LEFT = 0, RIGHT = 79, TOP = 0, BOTTOM = 40 };
+Direction read();
+
+int main(array<System::String ^> ^args)
+{
+    int x = 5;
+    int y = 5;
+    Console::SetCursorPosition(x, y);
+    putchar('*');
+    Direction d;
+    while ((d = read()) != QUIT){
+
+        Console::SetCursorPosition(x, y);
+        putchar(' ');
+
+        switch (d)
+        {
+
+           case WEST: if (x > LEFT) x = x - 1;  break;
+           case NORTH:if (y > TOP) y = y - 1;  break;
+
+           case EAST: if (x < RIGHT) x = x + 1;  break;
+
+           case SOUTH: if (y < BOTTOM) y = y + 1;  break;
+        }// end switch case
+
+        Console::SetCursorPosition(x, y);
+        putchar('*');
+
+    }// end while loop
+
+}// end main
+
+
+Direction read(){
+    bool flag = true;
+    char direction;
+
+    while (flag){
+        direction = Console::ReadKey(true).KeyChar;
+        switch (direction)
+        {
+
+           case 'A':
+           case 'a': return WEST;  break;
+
+           case 'W':
+           case 'w': return NORTH;  break;
+   case 'D':
+           case 'd': return EAST;  break;
+
+           case 'S':
+           case 's': return SOUTH;  break;
+
+           case 'Q':
+           case 'q': return QUIT;   break;
+
+        }// end switch case
+    }// end while loop
+}

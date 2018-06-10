@@ -1,0 +1,2 @@
+# Stage1 
+echo "Welcome to the World of Bash Script" 

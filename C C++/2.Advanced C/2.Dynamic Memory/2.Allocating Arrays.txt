@@ -1,0 +1,68 @@
+**************
+  Stage1
+**************
+
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+int main(int argc, char** argv)
+{
+    int size;
+    cout << "Allocating Array on Heap" << endl;
+    cout << "Please enter the size of the Array" << endl;
+    cin >> size;
+    int*  p = (int*)malloc(sizeof(int)*size);
+    cout << "Array allocated" << endl;
+
+    cout << "Populating Array" << endl;
+
+    for (int i = 0; i < size;i++)
+    {
+        p[i] = i*100;
+    }
+        
+    cout << "Printing Array" << endl;
+
+    for (int j = 0; j <size; j++)
+    {
+        cout << p[j] << endl;
+    }
+  }
+
+***************
+  Stage2
+***************
+
+#include "iostream"
+#include <stdlib.h>
+using namespace std;
+ 
+int main(int argc, char** argv)
+{
+  cout << "Allocating an array of integers of Heap" << endl;
+  cout << "Please enter the size of array"<<endl;
+ int size;
+ cin >> size;
+ cout << "Allocating memory ...."<<endl;
+ long *p = ( long * )malloc(sizeof(long)*size);
+ if( p == NULL)
+ {
+  cout << "Sorry Heap Manager could not allocated Memory" << endl;
+  exit(-1);
+ }
+ cout << "Memory Block for array of ints allocated " << endl;
+ cout << "The number of bytes allocated are " << sizeof(long) * size << endl;
+  cout << "Populating array "<< endl;
+ for(int i=0 ; i < size ; i++)
+ {
+ p[i] = i*10;
+ }
+ cout << "Printing Array "<< endl;
+ for(int i=0 ; i<size ; i++)
+ {
+ cout << p[i] << endl;
+ }
+ cout << "Address stored in pointer is "<< p << endl;
+ cout << "Successfully allocated array of long integer in Heap" << endl;
+ return 0;
+}

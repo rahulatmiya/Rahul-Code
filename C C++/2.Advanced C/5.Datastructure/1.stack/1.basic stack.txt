@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+int stk[10];
+int sp = 10;
+
+void push(int v);
+int pop();
+void print();
+
+int main(int argc, char** argv)
+{
+    Console::Clear();
+    print();
+    push(10);
+    push(20);
+    push(30);
+    print();
+    int z = pop();
+    cout << "\nValue popped..: " << z << endl;
+    print();
+    pop();
+    pop();
+    int k = pop();
+    return 0;
+}
+void push(int v)
+{
+    cout << "Pushing you value into the stack\n";
+    if (sp == 0)
+    {
+        cout << "\nStack overflow.";
+    }
+    else
+    {
+        sp = sp - 1;
+        stk[sp] = v;
+    }
+
+}
+int pop()
+{
+    cout << "Popping..." << endl;
+    if (sp == 10)
+    {
+        cout << "\nStack underflow";
+        return -1;
+    }
+    else
+    {
+        sp = sp + 1;
+        return stk[sp - 1];
+    }
+}
+
+void print()
+{
+    cout << "\nPrinting Stack." << endl;
+    if (sp == 10)
+    {
+        cout << "Nothing to Print." << endl;
+        return;
+    }
+
+    for (int i = sp; i<10; i++)
+    {
+        cout << stk[i] << endl;
+    }
+
+}

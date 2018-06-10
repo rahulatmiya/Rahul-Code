@@ -1,0 +1,49 @@
+#include "stdafx.h"
+#include <stdio.h>
+
+using namespace System;
+using namespace System::Threading;
+
+int main(array<System::String ^> ^args)
+{
+    int x = 5;
+    int y = 5;
+    Console::Clear();
+
+    //show
+    Console::SetCursorPosition(x, y);
+    putchar('*');
+    //hold
+    Thread::Sleep(3000);
+    //hide
+    Console::SetCursorPosition(x, y);
+    putchar(' ');
+ //move
+    x++;
+    y++;
+
+    //show
+    Console::SetCursorPosition(x, y);
+    putchar('*');
+    //hold
+    Thread::Sleep(3000);
+    //hide
+    Console::SetCursorPosition(x, y);
+    putchar(' ');
+
+
+    //move
+    x++;
+    y++;
+
+    //show
+    Console::SetCursorPosition(x, y);
+    putchar('*');
+    //hold
+    Thread::Sleep(3000);
+    //hide
+    Console::SetCursorPosition(x, y);
+    putchar(' ');
+
+    Console::ReadLine();
+}

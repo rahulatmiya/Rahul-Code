@@ -1,0 +1,21 @@
+#include <iostream>
+#include "Tile.h"
+using namespace std;
+int main(int argc, char ** argv)
+{
+	Tile t1, t2('e',6);
+	cout << "Welcome to the world of Chess" << endl;
+	cout << "Printing values of tile t1" << endl;
+	t1.print();
+	cout << "Printing values of tile t2" << endl;
+	t2.print();
+   	cout << "Reading values for tile t1" << endl;
+	t1.read();
+	cout << "Reading values for tile t2" << endl;
+	t2.read();
+	cout << "Printing values of tile t1" << endl;
+	t1.print();
+	cout << "Printing values of tile t2" << endl;
+	t2.print();
+  	return 0;
+}

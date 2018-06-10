@@ -1,0 +1,28 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+struct Point{
+    int x;
+    int y;
+    struct Point *next;
+};
+
+struct Point *head = NULL;
+
+int main(void) {
+    printf("Welcome to Linked List \n");
+    head = (struct Point *)malloc(sizeof(struct Point));
+    head->x = 1;
+    head->y = 2;
+    head->next = (struct Point *)malloc(sizeof(struct Point));
+    head->next->x = 3;
+    head->next->y = 4;
+    head->next->next = (struct Point *)malloc(sizeof(struct Point));
+    head->next->next->x = 5;
+    head->next->next->y = 6;
+    head->next->next->next = NULL;
+    printf("Node 1 ::  x = %d y = %d\n",head->x,head->y);
+    printf("Node 2 ::  x = %d y = %d\n",head->next->x,head->next->y);
+    printf("Node 3 ::  x = %d y = %d\n",head->next->next->x,head->next->next->y);
+    return 0;
+}

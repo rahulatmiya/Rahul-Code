@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+      
+    puts("This is Prisebot at your service :)");
+    puts("Master please provide direction...");
+    char proceed = 'y';
+    char ch = getchar();
+    puts("Sir you have suggested ...");
+    switch(ch){
+        case 'n' : puts("North");break;
+        case 'w' : puts("West");break;
+        case 'e' : puts("East");break;
+        case 's' : puts("South");break;
+        default  : puts("Wrong Direction");
+                   proceed = 'n';
+                   break;
+    }
+    
+    if(proceed=='y')
+        puts("All Clear... Prisebot taking control... whooosh");
+    else 
+        puts("Not Clear Sir... mission aborted");
+
+}
