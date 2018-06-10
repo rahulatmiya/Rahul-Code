@@ -1,0 +1,21 @@
+
+
+package addition;
+
+import javax.swing.JOptionPane;
+
+
+public class Addition {
+
+   
+    public static void main(String[] args) {
+       String s = JOptionPane.showInputDialog("Enter the first value");
+       int x = Integer.parseInt(s);
+       s = JOptionPane.showInputDialog("Enter the second value");
+       int y = Integer.parseInt(s);
+       int sum = x+y;
+       JOptionPane.showConfirmDialog(null, "The sum is = " + sum);
+               
+    }
+    
+}

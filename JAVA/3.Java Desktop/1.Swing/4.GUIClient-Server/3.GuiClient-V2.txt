@@ -1,0 +1,90 @@
+package guiclient;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+import javax.swing.*;
+import javax.swing.JFrame;
+
+public class GUIClient {
+
+    public static void main(String[] args) throws Exception {
+        Connection c = new Connection("127.0.0.1",9081);
+        ChatWindow f1 = new ChatWindow(c);
+        ChatWindow f2 = new ChatWindow(c);
+        ChatWindow f3 = new ChatWindow(c);
+        ChatWindow f4 = new ChatWindow(c);
+    }
+
+}
+
+
+
+class ChatWindow extends JFrame implements ActionListener
+{
+    JButton b1;
+    JTextArea ta;
+    JTextField tf;
+    JPanel p1;
+    Connection c;
+    public ChatWindow(Connection c){
+        this.c = c;
+        b1 = new JButton("Send");
+        ta = new JTextArea();
+        tf = new JTextField(20);
+        p1 = new JPanel();
+        p1.add(tf);
+        p1.add(b1);
+        add(p1,BorderLayout.SOUTH);
+        add(ta);
+        setSize(400,400);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        b1.addActionListener(this);
+        tf.addActionListener(this);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String str = tf.getText();
+        ta.append(str + "\n");
+        tf.setText("");
+        c.getNos().println(str);
+        if (str.equals("End")) {
+            System.exit(1);
+        }
+    }
+}
+
+class Connection
+{
+    String ip;
+    int port;
+    Socket soc;
+    PrintWriter nos;
+    public Connection(String ip , int port) throws Exception
+    {
+        this.ip = ip;
+        this.port = port;
+        soc = new Socket(ip,port);
+        nos = new PrintWriter(
+                new BufferedWriter(
+                        new OutputStreamWriter(
+                                soc.getOutputStream()
+                        )
+                ), true
+        );
+        
+    }
+    public Socket getSoc() {
+        return soc;
+    }
+    public PrintWriter getNos() {
+        return nos;
+    }
+    
+}

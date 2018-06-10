@@ -1,0 +1,80 @@
+*************************************************************
+Web.xml 
+*************************************************************
+
+    <listener>
+        <description>RequestListener</description>
+        <listener-class>com.rajeshpatkar.Listener1</listener-class>
+    </listener>
+    <listener>
+        <description>RequestAttributeListener</description>
+        <listener-class>com.rajeshpatkar.Listener2</listener-class>
+    </listener>
+
+
+
+***************************************************************
+Listener2
+***************************************************************
+
+package com.rajeshpatkar;
+
+import javax.servlet.ServletRequestAttributeEvent;
+import javax.servlet.ServletRequestAttributeListener;
+
+public class Listener2 implements ServletRequestAttributeListener {
+
+    @Override
+    public void attributeAdded(ServletRequestAttributeEvent srae) {
+        System.out.println(
+                "Attribute "+
+                srae.getName()+
+                " Added to Request Object with value "
+                + srae.getValue()
+        );
+    }
+
+    @Override
+    public void attributeRemoved(ServletRequestAttributeEvent srae) {
+        System.out.println(
+                "Attribute "+
+                srae.getName()+
+                " removed from Request Object it's value is " +
+                srae.getValue()
+        );
+    }
+
+    @Override
+    public void attributeReplaced(ServletRequestAttributeEvent srae) {
+        System.out.println(
+                "Attribute in Request Scope namely "+
+                srae.getName()+
+                " replaced with value "
+                + srae.getValue()
+        );
+    }
+}
+
+
+****************************************************************
+Listener1
+****************************************************************
+
+package com.rajeshpatkar;
+
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+
+public class Listener1 implements ServletRequestListener {
+    static int count = 0;
+    @Override
+    public void requestDestroyed(ServletRequestEvent sre) {
+        System.out.println("Request is about to be destroyed "+ sre.getServletRequest().getAttribute("id"));
+    }
+
+    @Override
+    public void requestInitialized(ServletRequestEvent sre) {
+        System.out.println("Request Object has been created and will be given id "+ count);
+        sre.getServletRequest().setAttribute("id",count++);
+    }
+}

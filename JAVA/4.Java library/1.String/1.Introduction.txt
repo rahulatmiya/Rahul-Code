@@ -1,0 +1,10 @@
+package learningstrings;
+
+public class MyStrings {
+    public static void main(String[] args) {
+        String str1 = new String("Cat");
+        String str2 = new String("Crow");
+        System.out.println(str1);
+        System.out.println(str2);                
+    }
+}

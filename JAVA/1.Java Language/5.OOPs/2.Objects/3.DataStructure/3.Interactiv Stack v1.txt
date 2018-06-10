@@ -1,0 +1,134 @@
+
+package interactivestackv1;
+import javax.swing.JOptionPane;
+
+public class Program{
+
+ public static void main(String[] args) {   
+     new Controller().CommandLoop(new Stack());
+ }
+    
+}
+
+
+
+class Stack {
+    
+    private int[] stk = new int[10];
+    private int st = 10;  
+    
+    void push(int v){
+        if(st == 0){
+            JOptionPane.showConfirmDialog(
+             null,
+             "Stack Overflow"
+            );
+        }
+        else{
+            st = st - 1; 
+            stk[st] = v;
+        }
+    }
+    
+    int pop(){
+        int temp = -1;
+        if(st == 10){
+            JOptionPane.showConfirmDialog(
+             null,
+             "Stack Underflow"
+            );
+        }
+        else{
+            temp = stk[st];
+            st = st + 1;
+        }
+        return temp;
+    }
+    
+    void print(){
+        String str = "";
+        if(st == 10){
+            JOptionPane.showMessageDialog(
+             null,
+             "Stack is Empty, No content to display"
+            );
+        }
+        else{
+            for(int i = st ; i < 10 ; i++){
+               str = str + stk[i] + "::";
+            }
+            JOptionPane.showMessageDialog(
+             null,
+             str
+            );
+        }
+    }
+    
+}
+
+class Controller
+{
+    String read(String s) {
+        String r = JOptionPane.showInputDialog(s);
+        return (r == null) ? "Q" : r;
+    }
+
+    int readValue(String s) {
+        String v1 = JOptionPane
+                .showInputDialog(s);
+        int v = 0;
+        try {
+            v = Integer.parseInt(v1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Invalid Input");
+        }
+        return v;
+    }
+
+    void CommandLoop(Stack s)
+    {
+         boolean flag = true;
+        String ch = "Q";
+        while (flag) {
+            ch = read(" Welcome to Stack\n"
+                    + " P - Push" + "\n"
+                    + " O - Pop" + "\n"
+                    + " D - Display" + "\n"
+                    + " Q - Quit" + "\n"
+            );
+            switch (ch) {
+                case "p":
+                case "P":
+                    s.push(
+                            readValue(
+                             "Enter value to be Pushed"
+                            )
+                    );
+                    break;
+                case "o":
+                case "O":
+                    JOptionPane.showMessageDialog(
+                     null,
+                     "The last value popped is "+
+                     s.pop()
+                    );
+                    break;
+                case "d":
+                case "D":
+                    s.print();
+                    break;
+                case "q":
+                case "Q":
+                    JOptionPane.showMessageDialog(null,
+                            "Thankyou for using Stack");
+                    flag = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null,
+                            "Wrong Command");
+
+            }
+        }
+    }
+}

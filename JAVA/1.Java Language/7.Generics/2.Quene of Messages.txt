@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class LearningQueue {
+    public static void main(String[] args) {
+        System.out.println("Welcome to Message Queue.");
+        Queue q=new Queue();
+        Message m1 = new Message("s1", "d1", "hello");
+        Message m2 = new Message("s2", "d2", "hello123");
+        q.enqueue(m1);
+        q.enqueue(m2);
+        q.print();
+        Message m=q.dequeue();
+        System.out.println("Last item removed :: " + m);
+        q.print();
+    }   
+}
+
+class Queue {
+    ArrayList<Message> al = new ArrayList<>();
+    void enqueue(Message v) {
+        al.add(v);
+    }
+    Message dequeue() {
+        if (al.isEmpty()) {
+            return null;
+        } else {
+            return al.remove(0);
+        }
+    }
+    public void print() {
+        System.out.println("Printing Message Queue");
+           for (Message o : al) {
+           System.out.println(o);
+       }
+    }
+ }
+
+class Message {
+    String source;
+    String dest;
+    String msg;
+    public Message(String source, String dest, String msg) {
+        this.source = source;
+        this.dest = dest;
+        this.msg = msg;
+    }
+    @Override
+    public String toString() {
+        return "Message{" + "source=" + source + ", dest=" + dest + ", msg=" + msg + '}';
+    }
+}

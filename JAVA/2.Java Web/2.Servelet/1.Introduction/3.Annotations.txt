@@ -1,0 +1,74 @@
+*********************************************
+Servlet S3
+*********************************************
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "S3", urlPatterns = {"/S3"}, initParams = {
+    @WebInitParam(name = "message", 
+                  value = "Annotations can be used for configuration parameters"
+    )
+})
+public class S3 extends HttpServlet {
+
+    @Override
+    public void service(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException,
+            IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet S3</title>");
+            out.println("</head>");
+            out.println("<body>");
+            ServletConfig sconfig = getServletConfig();
+            String msg = sconfig.getInitParameter("message");
+            out.println("<h1>Servlet S3 says " + msg + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}
+
+
+*********************************************************
+Web.xml
+*********************************************************
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" 
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>S2</servlet-name>
+        <servlet-class>com.rajeshpatkar.S2</servlet-class>
+        <init-param>
+            <param-name>message</param-name>
+            <param-value>Hello World</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>S2</servlet-name>
+        <url-pattern>/S2</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

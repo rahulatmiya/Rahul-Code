@@ -1,0 +1,241 @@
+//////////////////////////////
+//    Friend
+//////////////////////////////
+
+
+package partyapp;
+
+public class Friend {
+    
+    private static int count=1;
+    private String name;
+    
+    public Friend(String name){
+        this.name = name;
+    }
+    
+    public Friend(){
+        name="Friend"+count++;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public void singASong(){
+        System.out.println(name + " Loves Bill");
+    }
+    
+}
+
+
+//////////////////////////////
+//    Agent
+//////////////////////////////
+
+
+package partyapp;
+
+
+public class Agent extends Friend {
+    
+    private static int count=1;
+    private int contracts;
+    
+    public Agent(){
+        super("agent"+count++);
+        contracts = count;
+    }
+    
+    public Agent(String name, int contracts){
+        super(name);
+        this.contracts = contracts;
+    }
+    
+    public int getContracts(){
+        return contracts;
+    }
+    
+    @Override
+    public void singASong(){
+        System.out.println(
+                getName() +
+                " with "  +
+                contracts +
+                " says Bill is Great"
+        );
+    }
+    
+}
+
+
+
+//////////////////////////////
+//    Partner
+//////////////////////////////
+
+
+package partyapp;
+
+public class Partner extends Agent {
+    
+    private static int count=1;
+    private int revenue;
+
+    public Partner( String name,
+                    int contracts,
+                    int revenue ) 
+    {
+        super(name,contracts);
+        this.revenue = revenue;
+    }
+
+    public Partner() {
+        super("Partner"+count++,count);
+        revenue = count*1000;
+    }
+    
+    @Override
+    public void singASong(){
+        System.out.println(
+                getName() + " with "+ 
+                getContracts() +" contracts and "+
+                revenue+" in revenue says BILL!!!" 
+        );
+    }
+    
+}
+
+
+//////////////////////////////
+//    Bill
+//////////////////////////////
+
+
+
+package partyapp;
+
+public class Bill {
+    
+    private Friend[] f = new Friend[90];
+    private Agent[] a = new Agent[8];
+    private Partner[] p = new Partner[2];
+    
+    public Bill(){
+        for(int i = 0 ; i < f.length ; i++){
+            f[i] = new Friend();
+        }
+        for(int i = 0 ; i < a.length ; i++){
+            a[i] = new Agent();
+        }
+        for(int i = 0 ; i < p.length ; i++){
+            p[i] = new Partner();
+        }
+    }
+    
+    public void interactWithFriends(){
+        for(Friend f : this.f){
+            f.singASong();
+        }
+    }
+    
+     public void interactWithAgents(){
+        for(Agent a : this.a){
+            a.singASong();
+        }
+    }
+     
+    public void interactWithPartners(){
+        for(Partner p : this.p){
+            p.singASong();
+        }
+    }
+    
+    public void setFriends(Friend[] f){
+        int index = 0 ;
+        for(int i = 0;i < this.f.length;i++,index++){
+            f[index] = this.f[i];
+        }
+        for(int i = 0;i < this.a.length; i++,index ++){
+            f[index] = this.a[i];
+        }
+        for(int i = 0;i < this.p.length;i++,index ++){
+            f[index] = this.p[i];
+        }
+    }
+    
+    public void setAgents(Agent[] a){
+        int index = 0 ;
+        for(int i = 0 ;i < this.a.length;i++,index++){
+            a[index] = this.a[i];
+        }
+        for(int i = 0; i < this.p.length;i++,index++){
+            a[index] = this.p[i];
+        }
+    }
+    
+    public void setPartners(Partner[] p){
+        for(int i = 0 ; i < this.p.length ; i++){
+            p[i] = this.p[i];
+        }
+    }
+    
+}
+
+
+//////////////////////////////
+//    Party
+//////////////////////////////
+
+
+package partyapp;
+
+
+class Party {
+   
+    private Friend[] dinningTable = new Friend[100];
+
+    
+    public Party(Bill  b){
+        b.setFriends(dinningTable);
+    }
+    
+    public void sing(){
+        for(Friend f : dinningTable){
+            f.singASong();
+        }
+    }
+    
+}
+
+
+//////////////////////////////
+//    Party App
+//////////////////////////////
+
+
+
+
+package partyapp;
+
+
+public class PartyApp {
+
+    public static void main(String[] args) {
+        
+        System.out.println("Create Bill");
+        Bill bill = new Bill();
+        System.out.println(
+         "Show Bill's Interaction with his Friends"
+        );
+        bill.interactWithFriends();
+        bill.interactWithAgents();
+        bill.interactWithPartners();
+        System.out.println("Party Starts");
+        Party party = new Party(bill);
+        party.sing();
+        System.out.println("Party Ends");
+        
+    }
+    
+}

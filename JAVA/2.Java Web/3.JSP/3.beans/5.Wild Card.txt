@@ -1,0 +1,132 @@
+******************************
+PiggyBankClient.jsp
+******************************
+
+<%@page import="com.rajeshpatkar.PiggyBank"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" 
+              content="text/html; charset=UTF-8">
+        <title>PiggyBank Client</title>
+    </head>
+    <body>
+        <h1>PiggyBank1</h1>
+        <jsp:useBean id="pg1" 
+                     class="com.rajeshpatkar.PiggyBank"/>
+        <h2>Initial State</h2>
+        <h3>Balance</h3>
+        <jsp:getProperty name="pg1" property="balance"/>
+        <h3>Last Transaction</h3>
+        <jsp:getProperty name="pg1" property="lt"/>
+        <jsp:setProperty name="pg1" 
+                         property="deposit"/>
+        <jsp:setProperty name="pg1" 
+                         property="withdraw"/>
+        <h2>Final State</h2>
+        <h3>Balance</h3>
+        <jsp:getProperty name="pg1" property="balance"/>
+        <h3>Last Transaction</h3>
+        <jsp:getProperty name="pg1" property="lt"/>
+        
+        <h1>PiggyBank2</h1>
+        <jsp:useBean id="pg2" 
+                     class="com.rajeshpatkar.PiggyBank"/>
+        <h2>Initial State</h2>
+        <h3>Balance</h3>
+        <jsp:getProperty name="pg2" property="balance"/>
+        <h3>Last Transaction</h3>
+        <jsp:getProperty name="pg2" property="lt"/>
+        <jsp:setProperty name="pg2" 
+                         property="*"/>
+        <h2>Final State</h2>
+        <h3>Balance</h3>
+        <jsp:getProperty name="pg2" property="balance"/>
+        <h3>Last Transaction</h3>
+        <jsp:getProperty name="pg2" property="lt"/>
+    </body>
+</html>
+
+
+******************************
+Index.html
+******************************
+
+ <!DOCTYPE html>
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>RPISE PiggyBank</h1>
+<form action="PiggyBankClient.jsp">
+<label>Deposit</label>
+<br>
+<input type="text" name="deposit" />
+<br>
+<br>
+<label>Withdraw</label>
+<br>
+<input type="text" name="withdraw"/>
+<br>
+<br>
+<input type="submit" value="submit"/>
+</form>
+</body>
+</html>
+
+******************************
+PiggyBank
+******************************
+package com.rajeshpatkar;
+
+public class PiggyBank {
+
+    private int balance;
+    private int lt;
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public int getLt() {
+        return lt;
+    }
+
+    @Override
+    public String toString() {
+        return "PiggyBank{" + "balance=" +
+                balance + ", lt=" + lt + '}';
+    }
+
+    public PiggyBank() {
+    }
+
+    public void setDeposit(int v) {
+        deposit(v);
+    }
+
+    public void setWithdraw(int v) {
+        withdraw(v);
+    }
+
+    public String getStatement() {
+        return toString();
+    }
+
+    public void deposit(int v) {
+        balance = balance + v;
+        lt = v;
+    }
+
+    public void withdraw(int v) {
+        if (balance >= v) {
+            balance = balance - v;
+            lt = -v;
+        }
+    }
+
+}

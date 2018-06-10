@@ -1,0 +1,64 @@
+package trywithresources;
+
+import java.io.*;
+
+public class TryWithResources {
+
+    public static void main(String[] args) {
+           m1();
+           m2();
+    }
+
+    static void m1() {
+        System.out.println("m1 Opening Connection to a File");
+        PrintWriter fos = null;
+        BufferedReader fis = null;
+        try {
+            fos = new PrintWriter(
+                    new BufferedWriter(
+                            new FileWriter("D:\\output.txt",true)
+                    ), true
+            );
+            fis = new BufferedReader(
+                    new FileReader("D:\\input.txt")
+            );
+            String str = fis.readLine();
+            while (str != null) {
+                System.out.println(str);
+                fos.println(str);
+                str = fis.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println("IOException Caught");
+        } finally {
+            fos.close();
+        }
+
+    }
+
+    static void m2() {
+        System.out.println("m2 Opening Connection to a File");
+        BufferedReader fis = null;
+        try
+        ( PrintWriter fos = new PrintWriter(
+                              new BufferedWriter(
+                               new FileWriter("D:\\output.txt",true)
+                              ), true
+                            )
+        ) 
+        {
+            fis = new BufferedReader(
+                    new FileReader("D:\\input.txt")
+            );
+            String str = fis.readLine();
+            while (str != null) {
+                System.out.println(str);
+                fos.println(str);
+                str = fis.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println("IOException Caught");
+        } 
+
+    }
+}

@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class LearningQueue {
+    public static void main(String[] args) {
+        System.out.println("Welcome to String Queue.");
+        Queue q=new Queue();
+        q.enqueue("Cat");
+        q.enqueue("Dog");
+        q.print();
+        String str=q.dequeue();
+        System.out.println("Last item removed :: "+str);
+        q.print();
+    }   
+}
+
+class Queue {
+    ArrayList<String> al = new ArrayList<>();
+    void enqueue(String v) {
+        al.add(v);
+    }
+    String dequeue() {
+        if (al.isEmpty()) {
+            return null;
+        } else {
+            return al.remove(0);
+        }
+    }
+    public void print() {
+        System.out.println("Printing String Queue");
+           for (String o : al) {
+           System.out.println(o);
+       }
+    }
+ }

@@ -1,0 +1,23 @@
+
+package learning.arrays;
+
+/*
+ * @author Rajesh Patkar
+ */
+public class LearningArrays {
+
+    public static void main(String[] args) {
+        // Creating array reference
+        int [] a;
+        // Allocating array on heap and binding it to reference.
+        a = new int[10];
+        // Initializing array
+        for(int i = 0; i < 10 ; i++){
+            a[i] = i * 10;
+        }
+        // Printing array
+        for(int j = 0 ; j < 10 ; j++){
+            System.out.println("a["+j+"] = "+a[j]);
+        }  
+    } 
+}

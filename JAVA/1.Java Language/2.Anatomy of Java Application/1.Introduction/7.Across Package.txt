@@ -1,0 +1,40 @@
+*********
+C2.java
+*********
+
+package p2;
+
+public class C2
+{
+    
+    private static void m2()
+    {
+         System.out.println("m2 of C2");
+    }
+    public static void m3()
+    {
+        m2();
+    }
+
+}
+
+***********
+My1.java
+***********
+
+package p1;
+
+class C1 {
+
+    public static void main(String[] args)
+    {
+        System.out.println("Hello World");
+        m1();
+        p2.C2.m3();
+    }
+    static void m1()
+    {
+        System.out.println("m1 of C1");
+    }
+
+}

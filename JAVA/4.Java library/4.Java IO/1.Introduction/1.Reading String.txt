@@ -1,0 +1,18 @@
+package learningjavaio;
+
+import java.io.*;
+
+public class LearningJavaIO {
+
+    public static void main(String[] args)throws Exception {
+        
+        System.out.println("Welcome to JavaIO");
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        System.out.println("Enter Your Name:");
+        String str = br.readLine();
+        System.out.println("Welcome to " + str);
+
+    }
+    
+}

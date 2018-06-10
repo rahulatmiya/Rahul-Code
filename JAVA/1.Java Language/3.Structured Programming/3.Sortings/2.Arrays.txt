@@ -1,0 +1,26 @@
+package com.rajeshpatkar;
+
+import javax.swing.*;
+
+public class ReadNumbers {
+
+    
+    public static void main(String[] args) {
+        
+       int [] a = new int[5]; 
+       int x;
+       String s;
+       for(int i = 0;i<5;i++)
+       {
+          s = JOptionPane.showInputDialog("Enter number " + i);
+          x = Integer.parseInt(s);
+          a[i] = x;
+       }
+       for(int i=0;i<5;i++)
+       {
+           System.out.println(a[i]);
+       }
+       
+    }
+    
+}

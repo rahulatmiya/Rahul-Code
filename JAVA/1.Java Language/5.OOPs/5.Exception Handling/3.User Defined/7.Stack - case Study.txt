@@ -1,0 +1,236 @@
+********************************
+NumberNotPositiveException
+********************************
+
+
+package com.rajeshpatkar;
+
+import java.util.Date;
+
+public class NumberNotPositiveException extends Exception {
+
+    private final int number;
+    private final Date date;
+
+    public NumberNotPositiveException(int number, Date date, String message) {
+        super(message);
+        this.number = number;
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+}
+
+
+
+********************************
+OverflowException
+********************************
+
+package com.rajeshpatkar;
+
+import java.util.Date;
+
+public class OverflowException extends Exception {
+
+    static private int overflowcount;
+    private final int number;
+    private final Date date;
+    private final int id = overflowcount++;
+
+    public OverflowException(int number, Date date, String message) {
+        super(message);
+        this.number = number;
+        this.date = date;
+    }
+
+    public static int getOverflowcount() {
+        return overflowcount;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+}
+
+
+
+********************************
+UnderflowException
+********************************
+
+
+package com.rajeshpatkar;
+
+import java.util.Date;
+
+public class UnderflowException extends Exception {
+
+    private static int underflowcount;
+    private Date date;
+    private int id = underflowcount++;
+
+    public UnderflowException(Date date, String message) {
+        super(message);
+        this.date = date;
+    }
+
+    public static int getUnderflowcount() {
+        return underflowcount;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+}
+
+
+********************************
+Stack
+********************************
+
+package com.rajeshpatkar;
+
+import java.util.Date;
+
+public class Stack {
+
+    int[] stk = new int[10];
+    int st = 10;
+
+    public void push(int v) throws OverflowException, NumberNotPositiveException {
+        if (v < 0) {
+            throw new NumberNotPositiveException(v, new Date(), "Negative Number not allowed in push");
+        }
+        if (st == 0) {
+            throw new OverflowException(v, new Date(), "Overflow , can't push more than 10 values");
+        }
+        stk[--st] = v;
+    }
+
+    public int pop() throws UnderflowException {
+        if (st == 10) {
+            throw new UnderflowException(new Date(), "Underflow - Stack has no elements");
+        }
+        return stk[st++];
+    }
+
+    public void print() {
+        System.out.println("Printing Stack");
+        if (st == 10) {
+            System.out.println("Stack Empty");
+        } else {
+            for (int i = st; i < 10; i++) {
+                System.out.println(stk[i]);
+            }
+        }
+    }
+
+    public void flush() {
+        st = 10;
+    }
+}
+
+
+
+********************************
+Main
+********************************
+
+
+package stackwithexceptions;
+
+import com.rajeshpatkar.NumberNotPositiveException;
+import com.rajeshpatkar.OverflowException;
+import com.rajeshpatkar.Stack;
+import com.rajeshpatkar.UnderflowException;
+
+public class StackWithExceptions {
+
+    public static void main(String[] args) {
+        Stack s1 = new Stack();
+        test1(s1);
+        s1.print();
+        test2(s1);
+        s1.print();
+        test3(s1);
+        s1.print();
+    }
+
+    private static void test1(Stack s1) {
+        System.out.println("Entering test1");
+        s1.flush();
+        try{
+            s1.pop();
+        }
+        catch(UnderflowException e){
+            System.out.println(e.getMessage());
+            System.out.println("Id "+e.getId());
+            System.out.println("Date "+e.getDate());
+        }
+        System.out.println("Leaving test1");
+    }
+
+    private static void test2(Stack s1) {
+        System.out.println("Entering test2");
+        s1.flush();
+        for(int j = 0 ; j < 11; j++){
+            try {
+                s1.push(j*10);
+            } catch (OverflowException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Id "+e.getId());
+                System.out.println("Date "+e.getDate());
+                System.out.println("Number "+e.getNumber());
+            } catch (NumberNotPositiveException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Number "+ e.getNumber());
+                System.out.println("Date "+e.getDate());
+            }
+        }
+        System.out.println("Leaving test2");
+    }
+    
+    private static void test3(Stack s1) {
+        System.out.println("Entering test3");
+        s1.flush();
+        int k = 3;
+        for(int j = 0 ; j < 6 ; j++){
+            try {
+                s1.push(k-j);
+            } catch (OverflowException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Id "+e.getId());
+                System.out.println("Date "+e.getDate());
+                System.out.println("Number "+e.getNumber());
+            } catch (NumberNotPositiveException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Number "+ e.getNumber());
+                System.out.println("Date "+e.getDate());
+            }
+        }
+        System.out.println("Leaving test3");
+    }
+    
+}

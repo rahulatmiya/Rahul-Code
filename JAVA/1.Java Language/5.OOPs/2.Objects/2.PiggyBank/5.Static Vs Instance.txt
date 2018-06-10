@@ -1,0 +1,95 @@
+package com.rajeshpatkar;
+
+
+public class StaticvsInstance {
+
+    public static void main(String[] args) {
+        PiggyBank pg1 = new PiggyBank();
+        pg1.deposit(200);
+        pg1.withdraw(40);
+        PiggyBank pg2 = new PiggyBank("Shashi",545);
+        pg2.deposit(300);
+        pg2.withdraw(145);
+        PiggyBank pg3 = new PiggyBank("Saurabh");
+        pg3.deposit(35);
+        pg3.deposit(33);
+        int c = PiggyBank.getCount();
+        int tt = pg1.getTotalTransactions() 
+                  + pg2.getTotalTransactions()
+                  + pg3.getTotalTransactions();
+        System.out.println("Total Instances of PiggyBank :: "+ c);
+        System.out.println("Total Transaction in all accounts :: "+ tt);
+    }
+
+}
+
+class PiggyBank{
+    
+    private static int count;
+    private int totalTransactions;
+    
+    static{
+        System.out.println("Welcome to PiggyBank Service");
+    }
+    
+    private String name="tom";
+    private int balance=100;
+    private int lt=100;
+    
+    {
+        System.out.println("An Instance of PiggyBank Created");
+    }
+    
+    PiggyBank(){
+        name = "Ravi";
+        count++;
+    }
+    PiggyBank(String name,int amount){
+        this.name = name;
+        this.balance = amount;
+        lt = amount;
+        count++;
+    }
+    PiggyBank(String name){
+        this(name,300);
+    }
+    void deposit(int v) {
+        balance = balance + v;
+        lt = v;
+        totalTransactions++;
+        statement();
+    }
+
+    void withdraw(int v) {
+        if (balance >= v) {
+            balance = balance - v;
+            lt = -v;
+            totalTransactions++;
+        } else {
+            System.out.println("Cannot Withdraw more” 
+                                          +”than the Balance");
+        }
+        statement();
+    }
+
+    void statement() {
+        System.out.println("Acount Name "+name);
+        System.out.println("Balance = " + balance
+                                       + "\n" 
+                                       + "Last Transaction = " 
+                                       + lt);
+        System.out.println("Total Transactions in "
+                            +name
+                            +" :: "
+                            +totalTransactions);
+        System.out.println("Count = "+count);
+    }
+    
+    static int getCount(){
+        return count;
+    }
+    
+    int getTotalTransactions(){
+        return totalTransactions;
+    }
+}

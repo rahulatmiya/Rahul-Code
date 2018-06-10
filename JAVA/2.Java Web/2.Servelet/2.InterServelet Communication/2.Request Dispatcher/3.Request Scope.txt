@@ -1,0 +1,413 @@
+****************************************************
+Servlet E3
+****************************************************
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E3", urlPatterns = {"/E3"})
+public class E3 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E3</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E3 </p>");
+            RequestDispatcher rd = request.getRequestDispatcher("E4");
+            for(int i=0;i<=3;i++){
+               request.setAttribute("count",i); 
+               rd.include(request, response);
+            }
+            out.println("<p> E3 prints count = "+request.getAttribute("count")+"</p>");
+            out.println("<p> E3 prints  x = "+request.getAttribute("x")+"</p>");
+            out.println("<p> Leaving Servlet E3 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E3"+e);
+        }
+        finally{
+            out.close();
+        }
+    }
+}
+
+
+
+****************************************************
+Servlet E4
+****************************************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E4", urlPatterns = {"/E4"})
+public class E4 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E4</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E4 </p>");
+            int c = 0;
+            Integer i = (Integer)request.getAttribute("count");
+            if(i!=null) c = i.intValue();
+            RequestDispatcher rd;
+            for(int j=0 ; j <= c ; j++){
+                request.setAttribute("x", "Hello "+ j);
+                rd = request.getRequestDispatcher("E"+(j%2+1));
+                rd.include(request, response);
+            }
+            out.println("<p> Leaving Servlet E4 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E4");
+        }
+    }
+}
+
+
+
+
+****************************************************
+Servlet E1
+****************************************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E1", urlPatterns = {"/E1"})
+public class E1 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E1</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E1 </p>");
+            out.println("E1 prints count = "+request.getAttribute("count"));
+            RequestDispatcher rd = request.getRequestDispatcher("E2");
+            rd.include(request, response);
+            out.println("<p> Leaving Servlet E1 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E1");
+        }
+    }
+}
+
+
+
+
+****************************************************
+Servlet E2
+****************************************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E2", urlPatterns = {"/E2"})
+public class E2 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E2</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E2 </p>");
+            out.println("E2 prints x = "+request.getAttribute("x"));
+            out.println("<p> Leaving Servlet E2 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E2");
+        }
+    }
+}****************************************************
+Servlet E3
+****************************************************
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E3", urlPatterns = {"/E3"})
+public class E3 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E3</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E3 </p>");
+            RequestDispatcher rd = request.getRequestDispatcher("E4");
+            for(int i=0;i<=3;i++){
+               request.setAttribute("count",i); 
+               rd.include(request, response);
+            }
+            out.println("<p> E3 prints count = "+request.getAttribute("count")+"</p>");
+            out.println("<p> E3 prints  x = "+request.getAttribute("x")+"</p>");
+            out.println("<p> Leaving Servlet E3 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E3"+e);
+        }
+        finally{
+            out.close();
+        }
+    }
+}
+
+
+
+****************************************************
+Servlet E4
+****************************************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E4", urlPatterns = {"/E4"})
+public class E4 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E4</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E4 </p>");
+            int c = 0;
+            Integer i = (Integer)request.getAttribute("count");
+            if(i!=null) c = i.intValue();
+            RequestDispatcher rd;
+            for(int j=0 ; j <= c ; j++){
+                request.setAttribute("x", "Hello "+ j);
+                rd = request.getRequestDispatcher("E"+(j%2+1));
+                rd.include(request, response);
+            }
+            out.println("<p> Leaving Servlet E4 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E4");
+        }
+    }
+}
+
+
+
+
+****************************************************
+Servlet E1
+****************************************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E1", urlPatterns = {"/E1"})
+public class E1 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E1</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E1 </p>");
+            out.println("E1 prints count = "+request.getAttribute("count"));
+            RequestDispatcher rd = request.getRequestDispatcher("E2");
+            rd.include(request, response);
+            out.println("<p> Leaving Servlet E1 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E1");
+        }
+    }
+}
+
+
+
+
+****************************************************
+Servlet E2
+****************************************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "E2", urlPatterns = {"/E2"})
+public class E2 extends HttpServlet {
+    @Override
+    public void service(HttpServletRequest request, 
+                        HttpServletResponse response)
+                        throws ServletException, 
+                        IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet E2</title>"); 
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<p> Entering Servlet E2 </p>");
+            out.println("E2 prints x = "+request.getAttribute("x"));
+            out.println("<p> Leaving Servlet E2 </p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        catch(Exception e){
+            System.out.println("Exception in Servlet E2");
+        }
+    }
+}

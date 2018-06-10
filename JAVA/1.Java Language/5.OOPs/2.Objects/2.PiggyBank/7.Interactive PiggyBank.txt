@@ -1,0 +1,118 @@
+package interactivepiggybank;
+
+import javax.swing.JOptionPane;
+
+public class Program{
+
+    public static void main(String[] args) {
+        PiggyBank pg1 = new PiggyBank();
+        View v1 = new View();
+        Controller c = new Controller(pg1);
+        c.setView(v1);
+        c.eventloop();
+    }
+
+}
+
+class PiggyBank {
+
+    private int balance;
+    private int lt;
+
+    void deposit(int v) {
+        balance = balance + v;
+        lt = v;
+    }
+
+    void withdraw(int v) {
+        if (balance >= v) {
+            balance = balance - v;
+            lt = -v;
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Cannot Withdraw more than the Balance"
+            );
+        }
+    }
+
+     void statement() {
+        JOptionPane.showMessageDialog(null, "Balance = " + balance
+                + "\n" + "Last Transaction = " + lt);
+    }
+}
+
+class Controller {
+    View v;
+    PiggyBank pg;
+    void eventloop() {
+        boolean flag = true;
+        String ch = "Q";
+        while (flag) {
+            ch = read(" Welcome to PiggyBank\n"
+                    + " D - Deposit" + "\n"
+                    + " W - Withdraw" + "\n"
+                    + " S - Statement" + "\n"
+                    + " Q - Quit" + "\n"
+            );
+            switch (ch) {
+                case "d":
+                case "D":
+                    pg.deposit(
+                            readValue("Enter Amount to be Deposited")
+                    );
+                    break;
+                case "w":
+                case "W":
+                    pg.withdraw(
+                            readValue("Enter Amount to be Withdrawn")
+                    );
+                    break;
+                case "s":
+                case "S":
+                    pg.statement();
+                    break;
+                case "q":
+                case "Q":
+                    v.write("Thankyou for using PiggyBank");
+                    flag = false;
+                    break;
+                default:
+                    v.write("Wrong Command");
+
+            }
+        }
+    }
+
+    String read(String s) {
+        String r = JOptionPane.showInputDialog(s);
+        return (r == null) ? "Q" : r;
+    }
+
+    int readValue(String s) {
+        String v1 = JOptionPane
+                .showInputDialog(s);
+        int val = 0;
+        try {
+            val = Integer.parseInt(v1);
+        } catch (Exception e) {
+            v.write("Invalid Input");
+        }
+        return val;
+    }
+    
+    void setView(View v){
+        this.v = v;
+    }
+    
+    Controller(PiggyBank pg){
+        this.pg = pg;
+    }
+
+}
+
+class View{
+    void write(String s){
+      JOptionPane.showMessageDialog(null, s);   
+    }
+}

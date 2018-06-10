@@ -1,0 +1,126 @@
+package proceduralprogrammingqueue;
+
+import javax.swing.JOptionPane;
+
+public class ProceduralProgrammingQueue {
+
+    static int[] q;
+    static int last = 0;
+    static int first = 0;
+    static int size;
+    static int count;
+
+    public static void main(String[] args) {
+        
+        boolean flag = true;
+        String ch = "Q";
+        size = readValue(" Welcome to Queue\n"
+                    + "Enter the size of Queue\n" );
+        q = new int[size];
+        while (flag) {
+            ch = read(" Welcome to Queue\n"
+                    + " E - Enqueue" + "\n"
+                    + " D - Dequeue" + "\n"
+                    + " S - Show Content" + "\n"
+                    + " Q - Quit" + "\n"
+            );
+            switch (ch) {
+                case "e":
+                case "E":
+                    enqueue(
+                            readValue(
+                             "Enter value to be Enqueued"
+                            )
+                    );
+                    break;
+                case "d":
+                case "D":
+                    JOptionPane.showMessageDialog(
+                     null,
+                     "The last value dequeued is "+
+                     dequeue()
+                    );
+                    break;
+                case "s":
+                case "S":
+                    print();
+                    break;
+                case "q":
+                case "Q":
+                    JOptionPane.showMessageDialog(null,
+                            "Thankyou for using Queue");
+                    flag = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null,
+                            "Wrong Command");
+
+            }
+        }
+    }
+
+    static String read(String s) {
+        String r = JOptionPane.showInputDialog(s);
+        return (r == null) ? "Q" : r;
+    }
+
+    static int readValue(String s) {
+        String v1 = JOptionPane
+                .showInputDialog(s);
+        int v = 0;
+        try {
+            v = Integer.parseInt(v1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Invalid Input");
+        }
+        return v;
+    }
+
+    static void enqueue(int v) {
+        if (count == size) {
+            JOptionPane.showConfirmDialog(
+                    null,
+                    "Queue Full"
+            );
+        } else {
+            count++;
+            q[last] = v;
+            last = (last + 1 ) % size;
+        }
+    }
+
+    static int dequeue() {
+        int temp = -1;
+        if (count == 0) {
+            JOptionPane.showConfirmDialog(
+                    null,
+                    "Queue Empty"
+            );
+        } else {
+            temp = q[first];
+            first = (first + 1 )% size;
+            count--;
+        }
+        return temp;
+    }
+
+    static void print() {
+        String str = "";
+        if (count == 0) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Queue is Empty"
+            );
+        } else {
+            for (int i = 0; i < count; i++) {
+                str = str + q[(first + i)%size] + "::";
+            }
+            JOptionPane.showMessageDialog(
+                    null,
+                    str
+            );
+        }
+    }
+
+}

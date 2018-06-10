@@ -1,0 +1,49 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Learning Exceptions</title>
+    </head>
+    <body>
+        <h1> Learning Exceptions - Nested try and finally </h1>
+         <%
+             boolean flag1 = false;
+             boolean flag2 = true;
+             try
+             {
+                out.println("<p> Entering outer try </p>");
+                 try
+                 {
+                out.println("<p>Entering inner try</p>");
+                 if(flag1){
+                   int a = 1;  int b = 2;  int c = 0;
+                   a = b/c;
+                 }
+                 out.println("<p>Median</p>");
+                 if(flag2){
+                     int [] arr = new int[10];
+                     arr[45] = 90;
+                 }
+                 out.println("<p>Leaving try </p>");
+             } 
+             catch(ArithmeticException e){
+                 out.println("<p>ArithmeticException Caught</p>");
+             }
+             finally{
+                 out.println("<p>Finally of inner try called</p>");
+             }
+            out.println("<p>Leaving outer try</p>");
+          }
+          catch(ArrayIndexOutOfBoundsException e){
+              out.println("<p>Catch of outer try executed</p>");
+          }
+          finally
+          {
+             out.println("<p> finally of outer try executed</p>");        
+          }
+        %>          
+        <h3> Good bye </h3>
+    </body>
+</html>
+

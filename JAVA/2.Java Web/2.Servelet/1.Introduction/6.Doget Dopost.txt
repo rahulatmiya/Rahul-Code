@@ -1,0 +1,160 @@
+************************
+Servlet S6
+************************
+
+package com.rajeshpatkar;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "S6", urlPatterns = {"/S6"}, initParams = {
+    @WebInitParam(name = "getstore",
+            value = "D:/getlog.txt"
+    ),
+    @WebInitParam(name = "poststore",
+            value = "D:/postlog.txt"
+    )
+})
+public class S6 extends HttpServlet {
+
+    PrintWriter getfos;
+    PrintWriter postfos;
+
+    @Override
+    public void init(ServletConfig sc) {
+        try {
+            String filename = sc.getInitParameter("getstore");
+            getfos = new PrintWriter(
+                    new BufferedWriter(
+                            new FileWriter(filename)
+                    ), true
+            );
+            filename = sc.getInitParameter("poststore");
+            postfos = new PrintWriter(
+                    new BufferedWriter(
+                            new FileWriter(filename)
+                    ), true
+            );
+        } catch (Exception e) {
+            System.out.println("Error Initializing Servlet S6");
+        }
+    }
+
+    public void doGet(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException,
+            IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet S6</title>");
+            out.println("</head>");
+            out.println("<body>");
+            int c = 5;
+            String msg = "Hello";
+            String message = request.getParameter("msg");
+            if (message != null) {
+                msg = message;
+                getfos.println(new Date() + " Message =" + msg);
+            }
+            String count = request.getParameter("count");
+            if (count != null) {
+                c = Integer.parseInt(
+                        request.getParameter("count")
+                );
+                getfos.println(new Date() + " Count =" + c);
+            }
+            out.println("<h1>Servlet S6 in GET Response says... </h1>");
+            for (int i = 0; i < c; i++) {
+                out.println("<p> " + msg + "</p>");
+            }
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    public void doPost(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException,
+            IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet S6</title>");
+            out.println("</head>");
+            out.println("<body>");
+            int c = 5;
+            String msg = "Hello";
+            String message = request.getParameter("msg");
+            if (message != null) {
+                msg = message;
+                postfos.println(new Date() + " Message =" + msg);
+            }
+            String count = request.getParameter("count");
+            if (count != null) {
+                c = Integer.parseInt(
+                        request.getParameter("count")
+                );
+                postfos.println(new Date() + " Count =" + c);
+            }
+            out.println("<h1>Servlet S6 in POST Response says... </h1>");
+            for (int i = 0; i < c; i++) {
+                out.println("<p> " + msg + "</p>");
+            }
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    @Override
+    public void destroy() {
+        getfos.close();
+        postfos.close();
+    }
+}
+
+
+***************************
+index.html
+***************************
+<!DOCTYPE html>
+<!--
+ © Rajesh Patkar Institute Of Software Engineering.
+   Codeparatus by Rajesh Patkar. 
+-->
+<html>
+    <head>
+        <title>Message Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>   
+         <form method="POST" action="http://localhost:8080/LearningServlets/S6">
+                <label for="msg" > Message :: </label>
+                <input type="text" name="msg" size="20"/>
+                <br>
+                <label for="count" > Count :: </label>
+                <input type="text" name="count" size="20"/>
+                <br>
+                <input type="submit" value="Go"/>
+            </form>
+        </div>
+    </body>
+</html>

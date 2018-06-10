@@ -1,0 +1,27 @@
+
+package valuetypereferencetype;
+import javax.swing.*;
+
+public class ValueTypeReferenceType {
+
+    
+    public static void main(String[] args) {
+        
+        
+        JOptionPane.showMessageDialog(
+          null, 
+          "Hello World!!!"
+        );
+        
+        String str = "Mumbai";
+        
+        JOptionPane.showMessageDialog(null, str);
+        
+        int i = 10;
+        
+        JOptionPane.showMessageDialog(null,"i = "+i);
+
+        
+    }
+    
+}

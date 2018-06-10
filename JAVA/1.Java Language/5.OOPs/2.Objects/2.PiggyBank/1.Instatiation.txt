@@ -1,0 +1,49 @@
+package com.rajeshpatkar;
+
+import javax.swing.JOptionPane;
+
+public class InstantiableModules {
+
+    public static void main(String[] args) {
+        PiggyBank pg1 = new PiggyBank();
+        pg1.deposit(200);
+        pg1.withdraw(40);
+        pg1.statement();
+        PiggyBank pg2 = new PiggyBank();
+        pg2.deposit(300);
+        pg2.withdraw(145);
+        pg2.statement();
+    }
+
+}
+
+class PiggyBank{
+    
+    private int balance;
+    private int lt;
+
+    void deposit(int v) {
+        balance = balance + v;
+        lt = v;
+    }
+
+    void withdraw(int v) {
+        if (balance >= v) {
+            balance = balance - v;
+            lt = -v;
+        } else {
+            JOptionPane.showMessageDialog(
+                   null, 
+                  "Cannot Withdraw more than the Balance"
+            );
+        }
+    }
+
+    void statement() {
+        JOptionPane.showMessageDialog(
+               null, 
+               "Balance = " + balance
+               + "\n" + "Last Transaction = " + lt
+        );
+    }
+}

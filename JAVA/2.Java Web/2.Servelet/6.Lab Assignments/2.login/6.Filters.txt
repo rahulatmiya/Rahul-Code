@@ -1,0 +1,537 @@
+*************************
+Gatekeeper
+*************************
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+@WebFilter(filterName = "GateKeeper", urlPatterns = {"/*"},
+           dispatcherTypes = {DispatcherType.REQUEST})
+public class GateKeeper implements Filter {
+    
+    private FilterConfig filterConfig = null;
+    
+    public GateKeeper() {
+    }    
+    
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain)
+            throws IOException, ServletException {
+        
+        HttpSession session;
+        session = ((HttpServletRequest)request).getSession(false);
+        String servletName =((HttpServletRequest)request).
+                              getServletPath();
+        if(session == null && !servletName.equals("/Login")){
+            request.setAttribute("redirect", servletName.substring(1));
+            request.getRequestDispatcher("Login").
+                    forward(request, response);
+        }
+        if(
+                session != null && 
+                session.getAttribute("username") == null && 
+                !servletName.equals("/Login") && 
+                !servletName.equals("/Authenticator")
+          )
+        {
+                request.setAttribute("redirect",
+                        servletName.substring(1));
+                request.getRequestDispatcher("Login")
+                        .forward(request, response);
+        }   
+        try {
+            chain.doFilter(request, response);
+        } catch (Throwable t) {
+        }
+    }
+
+    public FilterConfig getFilterConfig() {
+        return (this.filterConfig);
+    }
+
+    public void setFilterConfig(FilterConfig filterConfig) {
+        this.filterConfig = filterConfig;
+    }
+
+    public void init(FilterConfig filterConfig) {        
+        this.filterConfig = filterConfig;
+    }
+
+    @Override
+    public void destroy() {
+    }   
+}
+
+
+*************************
+Login
+*************************
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
+public class Login extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request, 
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("username") != null) {
+            request.getRequestDispatcher("Welcome").
+                    forward(request, response);
+        }
+        String redirect = (String) request.getAttribute("redirect");
+        if ( redirect != null ) session.setAttribute("redirect", redirect);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Login</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Rpise Login</h1>");
+            out.println("<form action='Authenticator'>"
+                    + "  <div style='padding:30px'>"
+                    + "  <label>Username</label>"
+                    + "  <input type='text' size='30' name='username'/>"
+                    + "  <br>"
+                    + "  <br>"
+                    + "  <label>Password</label>"
+                    + "  <input type='password' size='30' "
+                    + "  name='password'/>"
+                    + "  <br>"
+                    + "  <br>"
+                    + "  <input type='submit' value='Go'/>"
+                    + "  </div>"
+                    + "  </form>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}
+
+
+
+*************************
+Authenticator
+*************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+@WebServlet(name = "Authenticator", urlPatterns = {"/Authenticator"})
+public class Authenticator extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        if (session.getAttribute("username") != null) {
+            request.getRequestDispatcher("Welcome").
+                    forward(request, response);
+        } else {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            if (username.equals("tom") && password.equals("cat")) {
+                session.setAttribute("username", username);
+                String redirect = (String)
+                                          session.getAttribute("redirect");
+                if (redirect != null) {
+                    session.removeAttribute("redirect");
+                    request.getRequestDispatcher(redirect).
+                            forward(request, response);
+                } else {
+                    request.getRequestDispatcher("Welcome").
+                            forward(request, response);
+                }
+            } else {
+                request.getRequestDispatcher("Login").
+                        forward(request, response);
+            }
+        }
+    }
+}
+
+
+*************************
+Welcome
+*************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Welcome", urlPatterns = {"/Welcome"})
+public class Welcome extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Welcome</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h2>Welcome to RPISE " 
+                        +session.getAttribute("username")+
+                        "</h2>");
+            out.println("<ol>");
+            for(int i=1; i<=5; i++){
+                out.println("<li>"+ "<a href='Service"+ i + "'>" + 
+                                            ("Service" + i) + 
+                                     "</a>"+ "</li>");
+            }
+            out.println("</ol>");
+            out.println("<a href='Logout'>Logout</a>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}
+
+
+*************************
+Logout
+*************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
+public class Logout extends HttpServlet {
+ 
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession(false);
+        if(session != null)
+        {
+            session.invalidate();    
+        }
+        request.getRequestDispatcher("Login")
+                    .forward(request, response);
+    }
+}
+
+
+
+*************************
+Service1
+*************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Service1", urlPatterns = {"/Service1"})
+public class Service1 extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Welcome</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h2>Welcome to RPISE " 
+                        +session.getAttribute("username")+
+                        "</h2>");
+            out.println("<ol>");
+            out.println("<li> This is Service1 </li>");
+            out.println("</ol>");
+            out.println("<a href='Welcome' style='padding:20px'>
+                               Back </a>");
+            out.println("<a href='Logout' style='padding:20px'> 
+                               Logout </a>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}
+
+
+
+*************************
+Service2
+*************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Service2", urlPatterns = {"/Service2"})
+public class Service2 extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Welcome</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h2>Welcome to RPISE " 
+                        +session.getAttribute("username")+
+                        "</h2>");
+            out.println("<ol>");
+            out.println("<li> This is Service2 </li>");
+            out.println("</ol>");
+            out.println("<a href='Welcome' style='padding:20px'> 
+                               Back </a>");
+            out.println("<a href='Logout' style='padding:20px'> 
+                               Logout </a>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}
+
+
+*************************
+Service3
+*************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Service3", urlPatterns = {"/Service3"})
+public class Service3 extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Welcome</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h2>Welcome to RPISE " 
+                        +session.getAttribute("username")+
+                        "</h2>");
+            out.println("<ol>");
+            out.println("<li> This is Service3 </li>");
+            out.println("</ol>");
+            out.println("<a href='Welcome' style='padding:20px'> 
+                               Back </a>");
+            out.println("<a href='Logout' style='padding:20px'> 
+                               Logout </a>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}
+
+
+*************************
+Service4
+*************************
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Service4", urlPatterns = {"/Service4"})
+public class Service4 extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Welcome</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h2>Welcome to RPISE " 
+                        +session.getAttribute("username")+
+                        "</h2>");
+            out.println("<ol>");
+            out.println("<li> This is Service4 </li>");
+            out.println("</ol>");
+            out.println("<a href='Welcome' style='padding:20px'> 
+                              Back </a>");
+            out.println("<a href='Logout' style='padding:20px'> 
+                              Logout </a>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}
+
+
+*************************
+Service5
+*************************
+
+
+package com.rajeshpatkar;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name = "Service5", urlPatterns = {"/Service5"})
+public class Service5 extends HttpServlet {
+
+    @Override
+    public void service(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Welcome</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h2>Welcome to RPISE " 
+                        +session.getAttribute("username")+
+                        "</h2>");
+            out.println("<ol>");
+            out.println("<li> This is Service5 </li>");
+            out.println("</ol>");
+            out.println("<a href='Welcome' style='padding:20px'> 
+                              Back </a>");
+            out.println("<a href='Logout' style='padding:20px'> 
+                              Logout </a>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+}

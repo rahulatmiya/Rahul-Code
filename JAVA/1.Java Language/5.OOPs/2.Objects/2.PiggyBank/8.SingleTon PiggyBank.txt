@@ -1,0 +1,82 @@
+**********************************
+main
+**********************************
+
+package piggybanksingleton;
+
+import com.rajeshpatkar.PiggyBank;
+
+
+public class PiggyBankSingleton {
+
+    
+    public static void main(String[] args) {
+        
+        PiggyBank pg1 = PiggyBank.getPiggyBankInstance();
+        pg1.deposit(1000);
+        pg1.withdraw(300);
+        pg1.statement();
+        PiggyBank pg2 = PiggyBank.getPiggyBankInstance(30);
+        pg2.deposit(300);
+        pg2.withdraw(50);
+        pg2.statement();
+        pg1.statement();
+    }
+    
+}
+
+
+**********************************
+PiggyBank
+**********************************
+
+
+package com.rajeshpatkar;
+
+
+public class PiggyBank {
+    
+    private static PiggyBank pg;
+    
+    private int balance;
+    private int lt;
+    
+    private PiggyBank(){
+        
+    }
+    
+    private PiggyBank(int v){
+        balance = v;
+        lt = v;
+    }
+    
+    public void deposit(int v){
+        balance = balance + v;
+        lt = v;
+    }
+    
+    public void withdraw(int v){
+        if(balance >= v){
+          balance -= v;
+          lt = -v;
+        }
+    }
+    
+    public void statement(){
+        System.out.println("PiggyBank Statement");
+        System.out.println("balance = "+ balance);
+        System.out.println("lt = "+ lt);
+    }
+    
+    public static PiggyBank getPiggyBankInstance(){
+        return getPiggyBankInstance(0);
+    }
+    
+    public static PiggyBank getPiggyBankInstance(int v){
+        if(pg==null){
+            pg = new PiggyBank(v);
+        }
+        return pg;
+    }    
+    
+}

@@ -1,0 +1,24 @@
+
+package valuetypereferencetype;
+
+
+public class ValueTypeReferenceType {
+
+    
+    public static void main(String[] args) {
+        
+        /* value type */
+        
+        int i = 1;
+        
+        System.out.println(" i = " + i);
+        
+        /* reference type */
+        
+        String str = "Hello";
+        
+        System.out.println("str = " + str);
+        
+    }
+    
+}

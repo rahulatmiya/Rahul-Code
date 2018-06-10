@@ -1,0 +1,107 @@
+********************************
+animals.tld
+********************************
+
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>animals</short-name>
+    <uri>/WEB-INF/tlds/animals</uri>
+    <tag>
+        <name>Cat</name>
+        <tag-class>com.rajeshpatkar.Cat</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>times</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
+    </tag>
+</taglib>
+
+
+
+********************************
+Cat.java
+********************************
+
+/*
+ *  © Rajesh Patkar Institute Of Software Engineering.
+ *    Codeparatus by Rajesh Patkar. 
+ */
+package com.rajeshpatkar;
+
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.JspFragment;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
+
+public class Cat extends SimpleTagSupport {
+
+    private int times = 5;
+
+    @Override
+    public void doTag() throws JspException {
+        JspWriter out = getJspContext().getOut();
+        try {
+            for (int i = 0; i < times; i++) {
+                out.println("<p> Meow </p>");
+            }
+            JspFragment f = getJspBody();
+            if (f != null) {
+                f.invoke(out);
+            }
+        } catch (java.io.IOException ex) {
+            throw new JspException("Error in Cat tag", ex);
+        }
+    }
+
+    public void setTimes(int times) {
+        this.times = times;
+    }
+
+}
+
+********************************
+Index.jsp
+********************************
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="/WEB-INF/tlds/animals.tld" prefix="a" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Learning JSTL</title>
+    </head>
+    <body>
+        <h1>Learning JSTL at Rajesh Patkar Institute</h1>
+        <c:choose>
+            <c:when test="${param['count'] eq null}">
+                <c:set var="i" value="3"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="i" value="${param['count']}"/>
+            </c:otherwise>
+        </c:choose>
+        <c:if test="${i<5}">
+            <c:out value="User Entered Count Lesser that 5"/>
+        </c:if>
+        <c:if test="${i>=5}">
+            <c:out value="User Entered Count Greater that 5"/>
+        </c:if>   
+        <br>
+        <c:out value="Count is ${i}"/>
+        <br>
+        <h2> Iteration </h2>
+        <c:forEach begin="0" end="${i-1}" var="j">
+            <h2> Cat Says </h2>
+            <a:Cat times="${j}"/>
+            <h2> Iteration ${j} completed </h2>
+        </c:forEach>
+    </body>
+</html>

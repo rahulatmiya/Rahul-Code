@@ -1,0 +1,36 @@
+The first if compares two strings that have different contents, so the result of the comparison is as expected. 
+The second if statement compares strings that have the same content and hence the output shows that 
+the strings are equal.
+
+This leads to conclusion that the content of strings are being compared when we use equals method.
+
+
+
+package learningstrings;
+
+public class MyStrings {
+    public static void main(String[] args) {
+        String str1 = new String("Cat");
+        String str2 = new String("Crow");
+        String str3 = new String("Cat");
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        if(str1.equals(str2))
+        {
+            System.out.println("Strings are equal");
+        }
+        else
+        {
+            System.out.println("Strings are not equal");
+        }
+        if(str1.equals(str3))
+        {
+            System.out.println("Strings are equal");
+        }
+        else
+        {
+            System.out.println("Strings are not equal");
+        }
+    }
+}

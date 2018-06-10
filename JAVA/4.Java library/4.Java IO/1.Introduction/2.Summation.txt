@@ -1,0 +1,28 @@
+package learningjavaio;
+
+import java.io.*;
+
+public class LearningJavaIO {
+
+    public static void main(String[] args) throws Exception {
+
+        System.out.println("Welcome to JavaIO");
+
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+
+        System.out.println("Enter Number1: ");
+        String str1 = br.readLine();
+        System.out.println("Enter Number2: ");
+        String str2 = br.readLine();
+
+        int no1 = Integer.parseInt(str1);
+        int no2 = Integer.parseInt(str2);
+
+        int sum = no1 + no2;
+
+        System.out.println("sum = " + sum);
+
+    }
+
+}

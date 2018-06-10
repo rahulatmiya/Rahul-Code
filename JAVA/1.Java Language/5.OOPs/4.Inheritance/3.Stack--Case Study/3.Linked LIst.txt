@@ -1,0 +1,147 @@
+***************************************************************
+Admin
+***************************************************************
+
+public class StackCaseStudy {
+    public static void main(String[] args) {
+      AStack s1 = new AStack();
+      Client1.useAStack(s1);
+      s1.print();
+      LStack s2 = new LStack();
+      Client2.useLStack(s2);
+      s2.print();
+    }
+}
+
+
+***************************************************************
+LStack Client
+***************************************************************
+
+public class Client2 {
+    public static void useLStack(LStack s){
+        
+        s.push(10);
+        System.out.println("Client2 pushed 10");
+        
+        s.push(20);
+        System.out.println("Client2 pushed 20");
+        
+        s.push(30);
+        System.out.println("Client2 pushed 30");
+        
+        System.out.println("Client2 popped "+s.pop());
+    }
+}
+
+
+****************************************************************
+LStack
+****************************************************************
+
+public class LStack {
+    private Node head;
+    public void push(int v){
+        head = new Node(v,head);
+    }
+    public int pop(){
+        if(head==null) return -1;
+        Node t = head;
+        head = head.getNext();
+        return t.getV();
+    }
+    public void print(){
+        System.out.println("Printing LStack");
+        Node t = head;
+        while(t != null){
+            System.out.println(t.getV());
+            t = t.getNext();
+        }
+    }
+}
+
+
+***************************************************************
+Node
+***************************************************************
+
+public class Node {
+    private final int v;
+    private final Node next;
+
+    public Node(int v, Node next) {
+        this.v = v;
+        this.next = next;
+    }
+
+    public int getV() {
+        return v;
+    }
+
+    public Node getNext() {
+        return next;
+    }  
+}
+
+
+***************************************************************
+AStack Client
+***************************************************************
+
+public class Client1 {
+    public static void useAStack(AStack s){
+        
+        s.push(10);
+        System.out.println("Client1 pushed 10");
+        
+        s.push(20);
+        System.out.println("Client1 pushed 20");
+        
+        s.push(30);
+        System.out.println("Client1 pushed 30");
+        
+        System.out.println("Client1 popped "+s.pop());
+    }
+}
+
+
+***************************************************************
+AStack
+***************************************************************
+
+public class AStack {
+
+    int[] stk = new int[10];
+    int sp = 10;
+
+    public void push(int v) {
+        if (sp == 0) {
+            System.out.println("Stack Overflow");
+        } else {
+            sp = sp - 1;
+            stk[sp] = v;
+        }
+    }
+
+    public int pop() {
+        int temp = -1;
+        if (sp == 10) {
+            System.out.println("Stack Underflow");
+        } else {
+            temp = stk[sp];
+            sp = sp + 1;
+        }
+        return temp;
+    }
+
+    public void print() {
+        System.out.println("Printing AStack");
+        if (sp == 10) {
+            System.out.println("Stack is Empty");
+            return;
+        }
+        for (int i = sp; i < 10; i++) {
+            System.out.println(stk[i]);
+        }
+    }
+}

@@ -1,0 +1,116 @@
+package com.rajeshpatkar;
+
+
+public class MultipleTransactions {
+
+    public static void main(String[] args) {
+        PiggyBank pg1 = new PiggyBank();
+        pg1.deposit(200);
+        pg1.withdraw(40);
+        PiggyBank pg2 = new PiggyBank("Shashi",545);
+        pg2.deposit(300);
+        pg2.withdraw(145);
+        PiggyBank pg3 = new PiggyBank("Saurabh");
+        pg3.deposit(35);
+        pg3.deposit(33);
+        int c = PiggyBank.getCount();
+        int tt = pg1.getTotalTransactions()
+                 + pg2.getTotalTransactions()
+                 + pg3.getTotalTransactions();
+        System.out.println("Total Instances of PiggyBank :: "+ c);
+        System.out.println
+                ("Total Transaction in all accounts :: "+ tt);
+    }
+
+}
+
+class PiggyBank{
+    
+    private static int count;
+    private int totalTransactions;
+    
+    static{
+        System.out.println("Welcome to PiggyBank Service");
+    }
+    
+    private String name;
+    private int balance;
+    final private int[] lt = new int[10];
+    
+    {
+        System.out.println("An Instance of PiggyBank Created");
+    }
+    
+    PiggyBank(){
+        name = "Ravi";
+        balance = 100;
+        addTransaction(100);
+        count++;
+    }
+    PiggyBank(String name,int amount){
+        this.name = name;
+        this.balance = amount;
+        addTransaction(amount);
+        count++;
+    }
+    PiggyBank(String name){
+        this(name,300);
+    }
+    void deposit(int v) {
+        balance = balance + v;
+        addTransaction(v);
+        statement();
+    }
+
+    void withdraw(int v) {
+        if (balance >= v) {
+            balance = balance - v;
+            addTransaction(-v);
+        } else {
+            System.out.println
+                   ("Cannot Withdraw more than the Balance");
+        }
+        statement();
+    }
+
+    void statement() {
+        System.out.println("Acount Name "+name);
+        System.out.println("Balance = " + balance);
+        System.out.println("Total Transactions in "
+                            +name
+                            +" :: "
+                            +totalTransactions);
+        printTransaction();
+        System.out.println("Count = "+count);
+    }
+    
+    static int getCount(){
+        return count;
+    }
+    
+    int getTotalTransactions(){
+        return totalTransactions;
+    }
+    
+    private void addTransaction(int v){
+        if(totalTransactions > 9){
+            for(int i = 0 ; i < 9 ; i++ )
+            {
+                lt[i]= lt[i+1];
+            }
+            lt[9] = v;
+            
+        }
+        else{
+            lt[totalTransactions]=v;
+        }
+        totalTransactions++;
+    }
+    
+    private void printTransaction(){
+        int c = totalTransactions > 9 ? 9 : totalTransactions-1; 
+        for(int i=0; i <= c ; i++){
+            System.out.println("transaction number "+i+ " = "+lt[i]);
+        }
+    }
+}

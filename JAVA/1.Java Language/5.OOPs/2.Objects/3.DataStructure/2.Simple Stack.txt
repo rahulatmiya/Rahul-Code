@@ -1,0 +1,81 @@
+
+package simplestack;
+import javax.swing.JOptionPane;
+
+public class Program {
+
+
+    public static void main(String[] args) {
+        JOptionPane.showMessageDialog(
+         null,
+         "Welcome to Stack"
+        );
+        Stack s1 = new Stack();
+        s1.print();
+        s1.push(10);
+        s1.push(20);
+        s1.push(30);
+        s1.print();
+        int z = s1.pop();
+        s1.print();
+        JOptionPane.showMessageDialog(
+         null,
+         "Last value Popped is "+z
+        );
+    }
+    
+}
+
+class Stack {
+    
+    private int[] stk = new int[10];
+    private int st = 10;  
+    
+    void push(int v){
+        if(st == 0){
+            JOptionPane.showConfirmDialog(
+             null,
+             "Stack Overflow"
+            );
+        }
+        else{
+            st = st - 1; 
+            stk[st] = v;
+        }
+    }
+    
+    int pop(){
+        int temp = -1;
+        if(st == 10){
+            JOptionPane.showConfirmDialog(
+             null,
+             "Stack Underflow"
+            );
+        }
+        else{
+            temp = stk[st];
+            st = st + 1;
+        }
+        return temp;
+    }
+    
+    void print(){
+        String str = "";
+        if(st == 10){
+            JOptionPane.showMessageDialog(
+             null,
+             "Stack is Empty, No content to display"
+            );
+        }
+        else{
+            for(int i = st ; i < 10 ; i++){
+               str = str + stk[i] + "::";
+            }
+            JOptionPane.showMessageDialog(
+             null,
+             str
+            );
+        }
+    }
+    
+}

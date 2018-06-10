@@ -1,0 +1,82 @@
+*****************************************************
+C2.java
+*****************************************************
+
+package p1;
+
+
+class c1
+{
+    public static void main(String [] args)
+    {
+        System.out.println("Entering main");
+        p2.c3.m4();
+        m1();
+        System.out.println("Leaving main");
+    }
+    static void m1()
+    {
+        System.out.println("Entering m1");
+        p2.p3.c4.m7();
+        System.out.println("Leaving m1");
+    }
+}
+
+
+public class c2
+{
+    public static void m2()
+    {
+        System.out.println("Entering m2");
+        m3();
+        System.out.println("Leaving m2");
+    }
+    static void m3()
+    {
+        System.out.println("Entering m3");
+        System.out.println("Leaving m3");
+    }
+}
+
+
+*****************************************************
+C3.java
+*****************************************************
+
+package p2;
+public class c3
+{
+    public static void m4()
+    {
+        System.out.println("Entering m4");
+        m5();
+        System.out.println("Leaving m4");
+    }
+    static void m5()
+    {
+        System.out.println("Entering m5");
+        p1.c2.m2();
+        p2.p3.c4.m6();
+        System.out.println("Leaving m5");
+    }
+}
+
+
+*****************************************************
+C4.java
+*****************************************************
+
+package p2.p3;
+public class c4
+{
+    public static void m6()
+    {
+       System.out.println("Entering m6");
+       System.out.println("Leaving m6");
+    }
+    public static void m7()
+    {
+       System.out.println("Entering m7");
+       System.out.println("Leaving m7");
+    }
+}

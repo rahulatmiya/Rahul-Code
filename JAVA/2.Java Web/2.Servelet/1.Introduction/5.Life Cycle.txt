@@ -1,0 +1,79 @@
+package com.rajeshpatkar;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "S5", urlPatterns = {"/S5"}, initParams = {
+    @WebInitParam(name = "filename",
+            value = "D:/log.txt"
+    )
+})
+public class S5 extends HttpServlet {
+
+    PrintWriter fos;
+
+    @Override
+    public void init(ServletConfig sc) {
+        try {
+            String filename = sc.getInitParameter("filename");
+            fos = new PrintWriter(
+                    new BufferedWriter(
+                            new FileWriter(filename)
+                    ), true
+            );
+        } catch (Exception e) {
+            System.out.println("Error Initializing Servlet S5");
+        }
+    }
+
+    @Override
+    public void service(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException,
+            IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet S5</title>");
+            out.println("</head>");
+            out.println("<body>");
+            int c = 5;
+            String msg = "Hello";
+            String message = request.getParameter("msg");
+            if (message != null) {
+                msg = message;
+                fos.println(new Date()+" Message ="+msg);
+            }
+            String count = request.getParameter("count");
+            if (count != null) {
+                c = Integer.parseInt(
+                        request.getParameter("count")
+                );
+                fos.println(new Date()+" Count ="+ c);
+            }
+            out.println("<h1>Servlet S5 says... </h1>");
+            for (int i = 0; i < c; i++) {
+                out.println("<p> " + msg + "</p>");
+            }
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    @Override
+    public void destroy() {
+        fos.close();
+    }
+}

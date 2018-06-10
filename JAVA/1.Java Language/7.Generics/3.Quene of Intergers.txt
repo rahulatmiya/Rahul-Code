@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class LearningQueue {
+    public static void main(String[] args) {
+        System.out.println("Welcome to Integer Queue.");
+        Queue q=new Queue();
+        q.enqueue(10);
+        q.enqueue(20);
+        q.print();
+        int v =q.dequeue();
+        System.out.println("Last item removed :: "+v);
+        q.print();
+    }   
+}
+
+class Queue {
+    ArrayList<Integer> al = new ArrayList<>();
+    void enqueue(Integer v) {
+        al.add(v);
+    }
+    Integer dequeue() {
+        if (al.isEmpty()) {
+            return null;
+        } else {
+            return al.remove(0);
+        }
+    }
+    public void print() {
+        System.out.println("Printing Integer Queue");
+           for (Integer o : al) {
+           System.out.println(o);
+       }
+    }
+ }

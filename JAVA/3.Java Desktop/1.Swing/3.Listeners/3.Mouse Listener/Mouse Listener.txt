@@ -1,0 +1,93 @@
+package swingeventdrivenprogramming;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+public class SwingEventDrivenProgramming
+{
+
+
+    public static void main(String[] args)
+    {
+        JFrame f1 = new JFrame("Host");
+        f1.setLocation(500,1);
+        JButton b1 = new JButton("send");
+        b1.setName("JButton");
+        JTextArea ta1 = new JTextArea(10, 10);
+        ta1.setName("JTextArea");
+        JTextField tf1 = new JTextField(10);
+        tf1.setName("JtextField");
+        JPanel p1 = new JPanel();
+        
+        JFrame eventLog = new JFrame("Event Logger");
+        
+        JTextArea ta = new JTextArea(10, 10);
+        JScrollPane scroll = new JScrollPane(ta);
+//         
+        
+        p1.add(tf1);
+        p1.add(b1);
+        f1.add(p1,BorderLayout.SOUTH);
+        f1.add(ta1);
+        
+        eventLog.add(scroll);
+        
+        eventLog.setVisible(true);
+        eventLog.setSize(500, 500);
+        f1.setSize(300, 300);
+        f1.setVisible(true);
+        
+        f1.addMouseListener(new MListener(ta));
+        ta1.addMouseListener(f1.getMouseListeners()[0] );
+        tf1.addMouseListener(f1.getMouseListeners()[0] );
+        b1.addMouseListener(f1.getMouseListeners()[0] );
+        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    }
+    
+}
+
+class MListener implements MouseListener
+{
+
+    MListener(JTextArea a)
+    {
+        this.ta = a;
+    }
+
+    JTextArea ta ;
+    @Override
+    public void mouseClicked(MouseEvent e)
+    {
+        System.out.println("mouse clicked at "+e.getX()+","+e.getY());
+        ta.append("mouse clicked on "+e.getComponent().getName()+"\n");
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e)
+    {
+        ta.append("mouse pressed at "+e.getX()+","+e.getY());
+        ta.append(" mouse pressed on "+e.getComponent().getName()+"\n");
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e)
+    {
+        ta.append("mouse released on "+e.getComponent().getName()+"\n");
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e)
+    {
+        ta.append("mouse Entered on "+e.getComponent().getName()+"\n");
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e)
+    {
+        ta.append("mouse Exited on "+e.getComponent().getName()+"\n");
+    }
+    
+}

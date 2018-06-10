@@ -1,0 +1,72 @@
+**********************************************************************************
+Client
+**********************************************************************************
+
+public class LearningInterface {
+    public static void main(String[] args) {
+        Satellite s1 = new Satellite();
+        client1(s1);
+        FibreOptic s2 = new FibreOptic();
+        client2(s2);
+        client3(s1);
+        client3(s2);
+    }
+    public static void client1(Satellite s){
+        s.send("client1's message");
+        System.out.println("client1 received..."+s.receive());
+    }   
+
+    public static void client2(FibreOptic s) {
+           s.send("client2's message");
+           System.out.println("client2 received..."+s.receive());
+    }
+    
+    public static void client3(Communication s){
+           s.send("client3's message");
+           System.out.println("client3 received..."+s.receive());
+    }
+}
+
+
+**********************************************************************************
+Communication Service
+**********************************************************************************
+
+public interface Communication {
+    void send(String s);
+    String receive();
+}
+
+
+**********************************************************************************
+Satellite
+**********************************************************************************
+
+public class Satellite implements Communication{
+    @Override
+    public void send(String s){
+        System.out.println("Sending Data "+ s + " using Satellite");
+    }
+    @Override
+    public String receive(){
+        System.out.println("Receiving Data using Satellite");
+        return "satellite data received";
+    }
+}
+
+
+**********************************************************************************
+Fibre Optic
+**********************************************************************************
+
+public class FibreOptic implements Communication{
+    @Override
+    public void send(String s){
+        System.out.println("Sending Data " + s + " using FibreOptic Cable");
+    }
+    @Override
+    public String receive(){
+        System.out.println("Receiving Data using FibreOptic Cable");
+        return "FibreOptic data received";
+    }
+}

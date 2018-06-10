@@ -1,0 +1,70 @@
+*********************
+Server
+*********************
+
+package server;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server {
+
+    public static void main(String[] args) throws IOException {
+        System.out.println("Server Signing ON");
+        ServerSocket ss = new ServerSocket(9081);
+        Socket soc = ss.accept();
+        BufferedReader nis = new BufferedReader(
+                                new InputStreamReader(
+                                        soc.getInputStream()
+                                )
+        );
+        String str = nis.readLine();
+        while(!str.equals("End"))
+        { 
+            System.out.println("Server Recived = " + str);
+            str =  nis.readLine();
+        }
+        System.out.println("Server Signing OFF");
+    }
+    
+}
+
+
+*********************
+Client
+*********************
+
+package client;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Client {
+
+    public static void main(String[] args) throws IOException {
+        System.out.println("Client Signing ON");
+        Socket soc = new Socket("127.0.0.1", 9081);
+        PrintWriter pw = new PrintWriter(
+                new BufferedWriter(
+                      new OutputStreamWriter(
+                          soc.getOutputStream()
+                      )
+                ),true
+        );
+        for (int i = 0; i < 5; i++) {
+            pw.println("Hello" + i);
+        }
+        pw.println("End");
+        System.out.println("Client Signing OFF");
+    }
+
+}

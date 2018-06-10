@@ -1,0 +1,50 @@
+
+package com.rajeshpatkar;
+
+
+public class Program {
+    
+    public static void main(String[] args) {
+        
+        System.out.println("Welcome to Counter Module");
+        
+        Counter c1 = new Counter();
+        c1.increment();
+        c1.increment();
+        System.out.println("Counter1 = "
+                            +c1.getCount());
+        c1.decrement();
+        System.out.println("Counter1 = "
+                           +c1.getCount());
+        
+        Counter c2 = new Counter();
+        c2.increment();
+        c2.increment();
+        System.out.println("Counter2 = "
+                            +c2.getCount());
+        c2.decrement();
+        c2.decrement();
+        System.out.println("Counter3 = "
+                           +c2.getCount());
+        
+    }
+    
+}
+
+class Counter{ 
+    
+    int count;
+    
+    void increment(){
+        if(count < 100) count++;
+    }
+    
+    void decrement(){
+       if(count > 0)count--;
+    }
+    
+    int getCount(){
+        return count;
+    }
+    
+}

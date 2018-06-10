@@ -1,0 +1,37 @@
+package piggybankmodular;
+
+public class Piggybankmodular {
+
+    public static void main(String[] args) {
+           PiggyBank.deposit(100);
+           PiggyBank.deposit(50);
+           PiggyBank.statement();
+           PiggyBank.withdraw(50);
+           PiggyBank.statement();
+    }
+
+}
+
+class PiggyBank {
+    
+    private static int balance;
+    private static int lt;
+    
+    static void deposit(int v) {
+        balance = balance + v;
+        lt = v;
+    }
+
+    static void withdraw(int v) {
+        if (balance >= v) {
+            balance = balance - v;
+            lt = -v;
+        }
+    }
+
+    static void statement() {
+        System.out.println("Balance = " + balance);
+        System.out.println("Last Transaction = " + lt);
+    }
+
+}

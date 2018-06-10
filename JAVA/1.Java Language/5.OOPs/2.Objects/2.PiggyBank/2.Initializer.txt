@@ -1,0 +1,41 @@
+package com.rajeshpatkar;
+
+public class Initializer {
+
+    public static void main(String[] args) {
+        PiggyBank pg1 = new PiggyBank();
+        pg1.deposit(200);
+        pg1.withdraw(40);
+        pg1.statement();
+        PiggyBank pg2 = new PiggyBank();
+        pg2.deposit(300);
+        pg2.withdraw(145);
+        pg2.statement();
+    }
+
+}
+
+class PiggyBank{
+    private String name="tom";
+    private int balance=100;
+    private int lt=100;
+    void deposit(int v) {
+        balance = balance + v;
+        lt = v;
+    }
+
+    void withdraw(int v) {
+        if (balance >= v) {
+            balance = balance - v;
+            lt = -v;
+        } else {
+            System.out.println("Cannot Withdraw more than the Balance");
+        }
+    }
+
+    void statement() {
+        System.out.println("Acount Name "+name);
+        System.out.println("Balance = " + balance
+                + "\n" + "Last Transaction = " + lt);
+    }
+}

@@ -1,0 +1,52 @@
+String literals are allocated in string pool. When a new String literal is created in the program the
+ systems checks for the presence of a 
+similar string literal and avoids duplicate allocation. This leads to sharing of strings literals 
+across several references
+
+The following program illustrates this fact, as str1 and str3 share same String literal, although be 
+separate definitions. 
+
+package learningstrings;
+
+public class MyStrings {
+    public static void main(String[] args) {
+        String str1 = "Cat";
+        String str2 = "Crow";
+        String str3 = "Cat";
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        if(str1 == str2)
+        {
+            System.out.println("Strings are equal - handle comparison");
+        }
+        else
+        {
+            System.out.println("Strings are not equal - handle comparison");
+        }
+        if(str1 == str3)
+        {
+            System.out.println("Strings are equal - handle comparison");
+        }
+        else
+        {
+            System.out.println("Strings are not equal - handle comparison");
+        }
+        if(str1.equals(str2))
+        {
+            System.out.println("Strings are equal");
+        }
+        else
+        {
+            System.out.println("Strings are not equal");
+        }
+        if(str1.equals(str3))
+        {
+            System.out.println("Strings are equal");
+        }
+        else
+        {
+            System.out.println("Strings are not equal");
+        }
+    }
+} 

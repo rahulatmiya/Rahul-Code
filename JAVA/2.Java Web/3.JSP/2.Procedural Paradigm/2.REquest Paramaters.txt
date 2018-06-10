@@ -1,0 +1,65 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            fieldset{
+                border-color: #ffffff;
+                background-color: #f3ffff;
+                border-style: dashed;
+                width: 600px;
+            }
+            legend{
+                
+                background-color: yellow;
+                color: black;
+                padding:7px;
+                height: 15px;
+                border-top-right-radius: 8px;
+                border-top-left-radius:8px;
+                box-shadow: 3px 3px 1px #888888;
+                margin-left:-10px;
+            }
+            legend:hover{
+                background-color: black;
+                color: white;
+                padding:7px;
+                height: 15px;
+                border-color: black;
+                border-top-right-radius: 8px;
+                border-top-left-radius:8px;
+                box-shadow: 5px 5px 3px #888888;                
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Using request object</h1>
+        <fieldset>
+            <legend> Reading query string </legend>
+            <label>
+                <%
+                     int c = 3;
+                     String msg = request.getParameter("msg");
+                     String count = request.getParameter("count");
+                     if(msg == null)
+                     {
+                         msg = "Default Message";
+                     }
+                     if(count != null)
+                     {
+                         c = Integer.parseInt(count);
+                     }
+                     for(int j = 0;j<c;j++)
+                     {
+                         out.println(msg + "<br>");
+                     }
+                %>
+            </label>
+        </fieldset>
+        <br>
+        </fieldset>
+    </body>
+</html>

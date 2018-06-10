@@ -1,0 +1,38 @@
+*****************
+one.jsp
+*****************
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<html>
+    <head>
+        <title>one.jsp</title>
+    </head>
+    <body>
+        <h1>Entering one</h1>
+        <%
+            application.setAttribute("msg1","message from one");
+        %>
+        <jsp:include page="two.jsp"></jsp:include>
+        <%= application.getAttribute("msg2")%> 
+        <h1>Leaving one</h1>
+    </body>
+</html>
+
+*****************
+two.jsp
+*****************
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>two.jsp</title>
+    </head>
+    <body>
+        <h1>Entering two</h1>
+        ${applicationScope.msg1}
+        <%
+            application.setAttribute("msg2", "message from two");
+        %>       
+        <h1>Leaving two</h1>
+    </body>
+</html>

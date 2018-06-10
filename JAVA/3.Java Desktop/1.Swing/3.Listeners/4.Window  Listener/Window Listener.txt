@@ -1,0 +1,96 @@
+package swingeventdrivenprogramming;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SwingEventDrivenProgramming
+{
+
+
+    public static void main(String[] args)
+    {
+        JFrame f1 = new JFrame("Host");
+        JButton b1 = new JButton("send");
+        b1.setName("JButton");
+        JTextArea ta1 = new JTextArea(10, 10);
+        ta1.setName("JTextArea");
+        JTextField tf1 = new JTextField(10);
+        tf1.setName("JtextField");
+        JPanel p1 = new JPanel();
+        JFrame eventLog = new JFrame("Event Logger");
+        JTextArea ta = new JTextArea(10, 10);
+        JScrollPane scroll = new JScrollPane(ta);
+        
+        p1.add(tf1);
+        p1.add(b1);
+        f1.add(p1,BorderLayout.SOUTH);
+        f1.add(ta1);
+        
+        eventLog.add(scroll);
+        
+        eventLog.setVisible(true);
+        eventLog.setSize(500, 500);
+        f1.setSize(300, 300);
+        f1.setLocation(500,1);
+        f1.setVisible(true);
+        
+
+        f1.addWindowListener(new WListener(ta));
+        eventLog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    }
+    
+}
+
+class WListener implements WindowListener
+{
+    WListener(JTextArea a)
+    {
+        this.ta = a;
+    }
+
+    JTextArea ta = new JTextArea();
+    @Override
+    public void windowOpened(WindowEvent e)
+    {
+        ta.append("Window Opened \n");
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e)
+    {
+        ta.append("Window Closing \n");
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e)
+    {
+        ta.append("Window Closed \n");
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e)
+    {
+        ta.append("Window minimized\n");
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e)
+    {
+        ta.append("Window restored \n");
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e)
+    {
+        ta.append("Window Activated \n");
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e)
+    {
+        ta.append("Window Deactivated \n");
+    }
+    
+}

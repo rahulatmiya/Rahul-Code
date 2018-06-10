@@ -1,0 +1,89 @@
+******************************
+Action1
+******************************
+
+package com.rajeshpatkar.command;
+
+import com.rajeshpatkar.action.Action;
+import java.io.PrintWriter;
+
+public class Action1 implements Action{
+
+    @Override
+    public void execute(PrintWriter out) {
+       out.println("This is is Action1");
+       for(int i=0;i<5;i++){
+           out.println("Action1 "+i);
+       }
+       out.println("Action1 Ends");
+    }
+    
+}
+
+******************************
+Action2
+******************************
+
+package com.rajeshpatkar.command;
+
+import com.rajeshpatkar.action.Action;
+import java.io.PrintWriter;
+
+public class Action2 implements Action{
+
+    @Override
+    public void execute(PrintWriter out) {
+       out.println("This is is Action2");
+       for(int i=0;i<5;i++){
+           out.println("Action2 "+i);
+       }
+       out.println("Action2 Ends");
+    }
+    
+}
+
+******************************
+Action3
+******************************
+
+package com.rajeshpatkar.command;
+
+import com.rajeshpatkar.action.Action;
+import java.io.PrintWriter;
+
+public class Action3 implements Action{
+
+    @Override
+    public void execute(PrintWriter out) {
+       out.println("This is is Action3");
+       out.println("<html>");
+       out.println("<head>");
+       out.println("</head>");
+       out.println("<body>");
+       out.println("<h1> Header </h1>");
+       out.println("</body>");
+       out.println("Action3 Ends");
+    }
+    
+}
+
+******************************
+DefaultAction
+******************************
+
+package com.rajeshpatkar.command;
+
+import com.rajeshpatkar.action.Action;
+import java.io.PrintWriter;
+
+public class DefaultAction implements Action{
+
+    @Override
+    public void execute(PrintWriter out) {
+       out.println("This is is Default Action");
+       out.println("The action you desired is not yet implemented.");
+       out.println("Sorry...");
+       out.println("Default Action Ends");
+    }
+    
+}

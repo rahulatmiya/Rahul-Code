@@ -1,0 +1,82 @@
+
+package swingeventdrivenprogramming;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SwingEventDrivenProgramming {
+    
+    public static void main(String[] args) {
+        JFrame f1 = new JFrame("Host");
+        f1.setLocation(600,400);
+        JButton b1 = new JButton("send");
+        b1.setName("JButton");
+        JTextArea ta1 = new JTextArea(10, 10);
+        ta1.setName("JTextArea");
+        ta1.setText("Type some message in the TextField Below\n and "
+                + "observe the sequence of generated events \n in event logger");
+        JTextField tf1 = new JTextField(10);
+        tf1.setName("JtextField");
+        JPanel p1 = new JPanel();
+        JFrame eventLog = new JFrame("Event Logger");
+        JTextArea ta = new JTextArea(10, 10);
+        JScrollPane scroll = new JScrollPane(ta);
+        ta.setEditable(false);
+        p1.add(tf1);
+        p1.add(b1);
+        f1.add(p1, BorderLayout.SOUTH);
+        f1.add(ta1);
+        eventLog.add(scroll);
+        eventLog.setVisible(true);
+        eventLog.setSize(500, 500);
+        f1.setSize(300, 300);
+        f1.setVisible(true);
+        A1 a1 = new A1(ta);
+        tf1.addActionListener(a1);
+        tf1.addKeyListener(new KListener(ta));
+        ta1.addKeyListener(tf1.getKeyListeners()[0]);
+        b1.addKeyListener(tf1.getKeyListeners()[0]);
+        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+    }
+    
+}
+
+class KListener implements KeyListener {
+    
+    KListener(JTextArea a) {
+        this.ta = a;
+    }
+    
+    JTextArea ta;
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+        ta.append("key Typed key Code :" + e.getKeyCode() + " Key char : " + e.getKeyChar() + " on " + e.getComponent().getName() + "\n");
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+        ta.append("key pressed key Code :" + e.getKeyCode() + " Key char : " + e.getKeyChar() + " on " + e.getComponent().getName() + "\n");
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent e) {
+        ta.append("key Released key Code :" + e.getKeyCode() + " Key char : " + e.getKeyChar() + " on " + e.getComponent().getName() + "\n");
+    }
+    
+}
+
+
+class A1 implements ActionListener{
+
+    private JTextArea ta;
+    public A1(JTextArea ta) {
+        this.ta = ta;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        ta.append("Action event generated \n");
+    }
+
+}

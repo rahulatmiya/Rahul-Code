@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>This Jsp Intends to use a Scriplet1 </h1>
+        <%
+            out.println("<p>Entering Scriptlet1</p>");
+        %>
+        <h2> Back to Page after completing Scriplet1 </h2>
+        <%
+            out.println("<p>Entering Scriptlet2</p>");
+        %>
+        <h2> Back to Page after completing Scriplet2</h2>
+    </body>
+</html>

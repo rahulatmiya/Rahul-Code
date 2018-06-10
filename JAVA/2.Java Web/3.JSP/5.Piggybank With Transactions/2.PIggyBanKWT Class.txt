@@ -1,0 +1,36 @@
+package com.rpise;
+
+public class PiggyBankWT {
+    private int balance;
+    private int tcount;
+    private int[]  lt = new int[10];
+    public PiggyBankWT(){
+    }
+    public int getBalance(){
+        return balance;
+    }
+    public void setDeposit(int v){
+        deposit(v);
+    }
+    public void setWithdraw(int v){
+        withdraw(v);
+    }
+    public void deposit(int v){
+        balance = balance + v;
+        lt[tcount++%10] = v;         
+    }
+    public void withdraw(int v){
+        if(balance >= v){
+            balance = balance - v;
+            lt[tcount++%10] = -v;   
+        }
+    }
+    public String getStatement(){
+         String statement = "";
+         for(int v : lt){
+             statement = statement + v + ",";
+         }
+         return statement;
+    }
+}
+

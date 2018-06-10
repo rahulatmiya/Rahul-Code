@@ -1,0 +1,19 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Learning Exceptions</title>
+    </head>
+    <body>
+        <h1> Learning Exceptions - ArithmeticException Flow </h1>
+        <%
+              int a = 1;
+              int b = 2;
+              int c = 0;
+              a = b/c;
+              out.println(a);
+        %>      
+        <h3> Good bye </h3>
+    </body>
+</html>

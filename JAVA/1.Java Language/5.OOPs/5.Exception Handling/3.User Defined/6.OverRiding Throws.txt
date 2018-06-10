@@ -1,0 +1,99 @@
+package learningoverridingthrows;
+
+interface I1{
+    void m1() throws E1;
+    void m2() throws E2;
+}
+
+class C1{
+    void g1(){
+        System.out.println("g1 of C1");
+    }
+    void g2() throws E3{
+        System.out.println("g2 of C1");
+    }
+}
+
+class C2 extends C1 implements I1{
+
+    @Override
+    public void m1(){
+        System.out.println("m1 of C2");
+    }
+
+    @Override
+    public void m2() throws E2 {
+        System.out.println("m2 of C2");
+    }
+    
+    @Override
+    void g2() throws E4{
+        System.out.println("g2 of C2");
+    }
+}
+
+public class LearningOverridingThrows {
+
+    public static void main(String[] args) {
+        C1 c1 = new C1();
+        C2 obj = new C2();
+        obj.m1();
+        try {
+          obj.m2();
+        }catch(E2 e){
+            System.out.println("E2 Caught");
+        }
+        obj.g1();
+        try{
+          obj.g2();
+        }catch(E4 e){
+            System.out.println("E4 Caught");
+        }
+        client1(obj);
+        client2(c1);
+        client2(obj);
+    }
+    
+    static void client1(I1 h){
+        try {
+            h.m1();
+        } catch (E1 ex) {
+            System.out.println("E1 caught in client1");
+        }
+        try {
+            h.m2();
+        } catch (E2 ex) {
+            System.out.println("E2 caught in client1");
+        }
+    }
+    
+    static void client2(C1 h){
+        h.g1();
+        try {
+            h.g2();
+        } catch (E3 ex) {
+            System.out.println("E3 caught in client2");
+        }
+    }
+}
+
+class E1 extends Exception {
+    
+}
+
+class E2 extends Exception {
+    
+}
+
+class E3 extends Exception {
+    
+}
+
+class E4 extends E3 {
+    
+}
+
+class E5 extends Exception {
+    
+}
+

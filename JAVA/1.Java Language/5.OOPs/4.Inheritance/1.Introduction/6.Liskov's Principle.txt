@@ -1,0 +1,108 @@
+******************************
+Main
+******************************
+
+package learninginheritance;
+
+import p1.C1;
+import p1.C2;
+
+public class LearningInheritance {
+
+    public static void main(String[] args) {
+        C1 obj1 = new C1(3, 4);
+        C2 obj2 = new C2(22, 33, 44, 55);
+        obj1.m2();
+        obj2.m4();
+        client1(obj1);
+        client2(obj2);
+        client1(obj2);
+    }
+
+    public static void client1(C1 h) {
+        h.m1(1, 2);
+        h.m2();
+    }
+
+    public static void client2(C2 q) {
+        q.m3(10, 20, 20, 20);
+        q.m4();
+    }
+}
+
+
+******************************
+C1
+******************************
+
+package p1;
+
+public class C1 {
+
+    private int a;
+    private int b;
+
+    public C1() {
+        a = 1;
+        b = 1;
+    }
+
+    public C1(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    public void m1(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    public void m2() {
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+    }
+
+    public void g1() {
+        System.out.println("I am g1 of C1");
+    }
+}
+
+
+******************************
+C2
+******************************
+
+package p1;
+
+public class C2 extends C1 {
+
+    private int c;
+    private int d;
+
+    public C2() {
+        c = 1;
+        d = 2;
+    }
+
+    public C2(int a, int b, int c, int d) {
+        super(a, b);
+        this.c = c;
+        this.d = d;
+    }
+
+    public void m3(int a, int b, int c, int d) {
+        m1(a, b);
+        this.c = c;
+        this.d = d;
+    }
+
+    public void m4() {
+        m2();
+        System.out.println("c = " + c);
+        System.out.println("d = " + d);
+    }
+
+    public void g1() {
+        System.out.println("I am g1 of C2");
+    }
+}

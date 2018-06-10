@@ -1,0 +1,129 @@
+package exceptionhandling;
+
+public class Exceptionhandling {
+
+    public static void main(String[] args) throws E3 {
+        System.out.println("Welcome to Exception Handling");
+        System.out.println("Entering Main ");
+        try {
+            System.out.println("Entering try of main");
+            C1.m1();
+            System.out.println("Leaving try of main");
+        } catch (E3 e) {
+            System.out.println("E3 caught with error " + e.getErrorInfo());
+            System.out.println("Getting cause " + e.getCause().getMessage());
+            throw new E3("error4", "msg3", e);
+        } finally {
+            System.out.println("finally of main");
+        }
+        System.out.println("Leaving main");
+    }
+
+}
+
+class C1 {
+
+    public static void m1() throws E3 {
+        System.out.println("Entering  m1 ");
+        C2.m2();
+        System.out.println("Leaving  m1 ");
+    }
+}
+
+class C2 {
+
+    static boolean flag1;
+    static boolean flag2 = true;
+
+    public static void m2() throws E3 {
+        System.out.println("Entering  m2 ");
+        try {
+            System.out.println("Entering try of m2");
+            if (flag1) {
+                E1 e1 = new E1("error1");
+                throw e1;
+            }
+            System.out.println("Median of first try");
+            if (flag2) {
+                throw new E2("error2", "msg1");
+            }
+            System.out.println("Leaving   try of m2");
+        } catch (E1 e) {
+            System.out.println("E1 Caught with error " + e.getErrorInfo());
+        } catch (E2 e) {
+            System.out.println("E2 Caught in m2 with error " + e.getErrorInfo());
+            throw new E3("error3", "msg2", e);
+        } finally {
+            System.out.println("finally of m2");
+        }
+        System.out.println("Leaving  m2 ");
+    }
+}
+
+class E1 extends Exception {
+
+    private String errorInfo;
+
+    public E1(String errorInfo, String message) {
+        super(message);
+        this.errorInfo = errorInfo;
+    }
+
+    public String getErrorInfo() {
+        return errorInfo;
+    }
+
+    public void setErrorInfo(String errorInfo) {
+        this.errorInfo = errorInfo;
+    }
+
+    public E1(String errorInfo) {
+        this.errorInfo = errorInfo;
+    }
+}
+
+class E2 extends Exception {
+
+    private String errorInfo;
+
+    public E2(String errorInfo, String message) {
+        super(message);
+        this.errorInfo = errorInfo;
+    }
+
+    public String getErrorInfo() {
+        return errorInfo;
+    }
+
+    public void setErrorInfo(String errorInfo) {
+        this.errorInfo = errorInfo;
+    }
+
+    public E2(String errorInfo) {
+        this.errorInfo = errorInfo;
+    }
+
+}
+
+class E3 extends Exception {
+
+    private String errorInfo;
+
+    public E3(String errorInfo, String message, Throwable cause) {
+        super(message, cause);
+        this.errorInfo = errorInfo;
+    }
+
+    public String getErrorInfo() {
+        return errorInfo;
+    }
+
+    public void setErrorInfo(String errorInfo) {
+        this.errorInfo = errorInfo;
+    }
+
+    public E3(String errorInfo) {
+        this.errorInfo = errorInfo;
+    }
+
+}

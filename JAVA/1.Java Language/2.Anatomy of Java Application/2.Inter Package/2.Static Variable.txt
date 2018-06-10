@@ -1,0 +1,121 @@
+************************
+C2.java
+************************
+
+package p1;
+
+class C1 {
+
+    public static int i;
+
+    public static void main(String[] args) {
+        System.out.println("Entering main");
+        i++;
+        p2.C3.j++;
+        p2.C3.m4();
+        m1();
+        System.out.println("i = " + i);
+        System.out.println("j = " + p2.C3.j);
+        System.out.println("Leaving main");
+    }
+
+    static void m1() {
+        System.out.println("Entering m1");
+        i++;
+        p2.C3.j++;
+        p2.p3.C4.m7();
+        System.out.println("i = " + i);
+        System.out.println("j = " + p2.C3.j);
+        System.out.println("Leaving m1");
+    }
+
+}
+
+
+public class C2 {
+
+    private static int l;
+
+    public static void m2() {
+        System.out.println("Entering m2");
+        C1.i++;
+        p2.C3.j++;
+        l++;
+        m3();
+        System.out.println("i = " + C1.i);
+        System.out.println("j = " + p2.C3.j);
+        System.out.println("l = " + l);
+        System.out.println("Leaving m2");
+    }
+
+    static void m3() {
+        System.out.println("Entering m3");
+        C1.i++;
+        p2.C3.j++;
+        l++;
+        System.out.println("i = " + C1.i);
+        System.out.println("j = " + p2.C3.j);
+        System.out.println("l = " + l);
+        System.out.println("Leaving m3");
+    }
+}
+
+
+
+************************
+C3.java
+************************
+
+package p2;
+
+public class C3 {
+
+    public static int j;
+
+    public static void m4() {
+        System.out.println("Entering m4");
+        j++;
+        m5();
+        System.out.println("j = " + j);
+        System.out.println("Leaving m4");
+    }
+
+    static void m5() {
+        System.out.println("Entering m5");
+        j++;
+        p1.C2.m2();
+        p2.p3.C4.m6();
+        System.out.println("j = " + j);
+        System.out.println("Leaving m5");
+    }
+}
+
+
+************************
+C4.java
+************************
+
+package p2.p3;
+
+public class C4 {
+
+    static int k;
+
+    public static void m6() {
+        System.out.println("Entering m6");
+        p2.C3.j++;
+        k++;
+        System.out.println("j = " + p2.C3.j);
+        System.out.println("k = " + k);
+        System.out.println("Leaving m6");
+    }
+
+    public static void m7() {
+        System.out.println("Entering m7");
+        p2.C3.j++;
+        k++;
+        System.out.println("j = " + p2.C3.j);
+        System.out.println("k = " + k);
+        System.out.println("Leaving m7");
+    }
+}

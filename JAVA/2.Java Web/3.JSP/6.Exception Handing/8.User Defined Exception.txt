@@ -1,0 +1,145 @@
+Class E1
+
+
+package com.rpise;
+public class E1 extends RuntimeException{
+     int errno;
+     public E1(int errno){
+         this.errno = errno;
+     }
+     public int getErrorno(){
+         return errno;
+     }
+}
+
+
+
+Class E2
+
+
+package com.rpise;
+public class E2 extends RuntimeException{
+     int errno;
+     public E2(int errno){
+         this.errno = errno;
+     }
+     public int getErrorno(){
+         return errno;
+     }
+}
+
+
+
+
+Class CheckingUserDefinedExceptions
+
+
+
+package com.rpise;
+import java.util.StringTokenizer;
+/*
+ * @author Rajesh Patkar
+ */
+public class CheckingUserDefinedExceptions {
+
+    private String output = "";
+    private boolean flag1;
+    private boolean flag2;
+
+    /* ReadOnly Property */
+    public String getOutput() {
+        return output;
+    }
+
+    /* WriteOnly Property */
+    public void setC(String s) {
+        StringTokenizer st = new StringTokenizer(s, ",");
+        flag1 = Boolean.parseBoolean(st.nextToken());
+        flag2 = Boolean.parseBoolean(st.nextToken());
+        output = "";
+        client1();
+    }
+
+    void client1() {
+        output += "<p> Entering Client1 </p>";
+        try {
+            output += "<p>Entering Outer try</p>";
+            client2();
+            output += "<p> Leaving Outer try</p>";
+        } catch (E2 e) {
+            output += "<p> Caught E2 " + e.getErrorno() + "</p>";
+        } finally {
+            output += "<p>In finally of Outer try</p>";
+        }
+        output += "<p> Leaving Client1 </p>";
+    }
+
+    void client2() {
+        output += "<p>Entering Client2</p>";
+        try {
+            output += "<p> Entering Inner try </p>";
+            if (flag1) {
+               /* Instantiate Exception E1 */
+                E1 e1 = new E1(-2);
+                /* throw the exception object so that it propagates until caught */
+                throw e1;
+            }
+            output += "<p>Median</p>";
+            if (flag2) {
+                /* Instantiate Exception E2 and  throw the exception object so that it propagates until caught */
+                throw new E2(5);
+            }
+            output += "<p>Leaving Inner try</p>";
+        } catch (E1 e) {
+            output += "<p> Caught E1" + e.getErrorno() + "</p>";
+        } finally {
+            output += "<p> In finally of inner try </p>";
+        }
+        output += "<p>Leaving Client2</p>";
+    }
+}
+
+
+
+
+
+Index.jsp
+
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Learning Exceptions</title>
+    </head>
+    <body>
+        <h1> Learning Exceptions - throwing UserDefinedException  </h1>
+        <ul> 
+            <h2>Creating  Instance of  CheckingUserDefinedException</h2>
+            <jsp:useBean id="fb" class="com.rpise.CheckingUserDefinedExceptions"/>
+            <li>
+                <h3> flag1 => false  and flag2 => false </h3>
+                <jsp:setProperty name="fb" property="c" value="false,false"/>
+                 <jsp:getProperty name="fb" property="output" />
+            </li>     
+             <li>
+                <h3> flag1 => false  and flag2 => true </h3>
+                  <jsp:setProperty name="fb" property="c" value="false,true"/>
+                 <jsp:getProperty name="fb" property="output" />
+            </li>     
+             <li>
+                <h3> flag1 => true  and flag2 => false </h3>
+                 <jsp:setProperty name="fb" property="c" value="true,false"/>
+                 <jsp:getProperty name="fb" property="output" />
+            </li>     
+             <li>
+                <h3> flag1 => true  and flag2 => true </h3>
+                 <jsp:setProperty name="fb" property="c" value="true,true"/>
+                 <jsp:getProperty name="fb" property="output" />
+            </li>     
+        </ul>
+        <h3> Good bye </h3>
+    </body>
+</html>

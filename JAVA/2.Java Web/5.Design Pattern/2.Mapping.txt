@@ -1,0 +1,131 @@
+*********************************
+frontcontroller.jsp
+*********************************
+
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Date"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%!
+           @Override
+            public void init() {
+                HashMap<Integer, String> hm = 
+                         new HashMap<Integer,String>();
+                hm.put(1, "one.jsp");
+                hm.put(2, "two.jsp");
+                hm.put(3, "three.jsp");
+                getServletContext().setAttribute("map", hm);
+            }
+        %>
+        <h1> Entering Front Controller </h1>
+        <ul> 
+            <li> Time : <%= new Date()%> </li>
+            <li> Value of action is ${param.action} </li> 
+        </ul>
+        <%
+            HashMap<Integer, String> m = 
+                 (HashMap<Integer, String>) 
+                 getServletContext().getAttribute("map");
+            int c = 1;
+            String str = request.getParameter("action");
+            if (str != null) {
+                try {
+                    c = Integer.parseInt(str);
+                } catch (Exception e) {
+                    out.println(e);
+                }
+            }
+            str = m.get(c);
+            if (str != null) {
+        %>
+        <jsp:include page="<%=str%>"/>
+        <%
+            }
+        %> 
+
+        <h1> Leaving Front Controller </h1>
+        <h1> <a href="Welcome.html">Back</a></h1>
+    </body>
+</html>
+
+
+*********************************
+one.jsp
+*********************************
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<html>
+    <head>
+        <title>one.jsp</title>
+    </head>
+    <body>
+        <h1>Entering one</h1>
+        <h1>Leaving one</h1>
+    </body>
+</html>
+
+
+*********************************
+two.jsp
+*********************************
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>two.jsp</title>
+    </head>
+    <body>
+        <h1>Entering two</h1>
+        <h1>Leaving two</h1>
+    </body>
+</html>
+
+
+*********************************
+three.jsp
+*********************************
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>three.jsp</title>
+    </head>
+    <body>
+        <h1>Entering three</h1>
+        <h1>Leaving three</h1>
+    </body>
+</html>
+
+
+*********************************
+Welcome.html
+*********************************
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1> Welcome to JSP Communicator </h1>
+        <ul>
+            <li> <a href="frontcontroller.jsp?action=1">one</a> </li>
+            <li> <a href="frontcontroller.jsp?action=2">two</a> </li>
+            <li> <a href="frontcontroller.jsp?action=1">three</a> </li>
+        </ul>
+    </body>
+</html>
+
+
